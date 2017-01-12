@@ -7,12 +7,15 @@ import edu.wpi.first.wpilibj.Joystick;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	private Joystick leftJoy;
-	private Joystick rightJoy;
+	private static Joystick leftJoy;
+	private static Joystick rightJoy;
 
-	public getLeftY() 
-	{
-		leftJoy.getY();
+	public static double getLeftY() {
+		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
+	}
+
+	public static double getRightY() {
+		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
 	}
 
 	//// CREATING BUTTONS
