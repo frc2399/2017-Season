@@ -14,8 +14,8 @@ public class DriveTrain extends Subsystem {
 	private CANTalon rightBackTalon;
 
 	public DriveTrain() {
-		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_ADDRESS);
-		rightFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_ADDRESS);
+		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
+		rightFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		leftBackTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_BACK_TALON_ADDRESS);
 		rightBackTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS);
 	}

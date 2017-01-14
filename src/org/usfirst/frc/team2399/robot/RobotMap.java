@@ -12,10 +12,10 @@ public class RobotMap {
 	public static final int DRIVETRAIN_FORWARD_LEFT_CONSTANT = 1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT_CONSTANT = 1;
 
-	public static final int DRIVETRAIN_RIGHT_TALON_ADDRESS = 1;
-	public static final int DRIVETRAIN_LEFT_TALON_ADDRESS = 2;
+	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
+	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
 	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 3;
-	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 4;
+	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 2;
 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
