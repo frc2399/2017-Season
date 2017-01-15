@@ -7,8 +7,9 @@ import edu.wpi.first.wpilibj.Joystick;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	private static Joystick leftJoy;
-	private static Joystick rightJoy;
+	
+	private static Joystick leftJoy = new Joystick(RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
+	private static Joystick rightJoy = new Joystick(RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
 
 	public static double getLeftY() {
 		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
