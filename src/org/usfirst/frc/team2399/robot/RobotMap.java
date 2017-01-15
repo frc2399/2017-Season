@@ -13,31 +13,32 @@ public class RobotMap {
 	 */
 
 	/**
-	 * Address for Talons
-	 * Things on the CAN network have addresses. Things on PWM network have
-	 * ports.
+	 * Address for Talons Things on the CAN network have addresses. Things on
+	 * PWM network have ports. TODO: Find correct cantalon once on the robot
 	 */
 
 	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
 	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
 	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 3;
 	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 2;
-	
+	public static final int CLIMBER_TALON_ADDRESS = 2399;
+
 	/**
 	 * Ports for sensors and joysticks
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
-	
+
 	/**
-	 * Forward Constants
-	 * To ensure positive values of motion are what you expect.
+	 * Forward Constants To ensure positive values of motion are what you
+	 * expect.
+	 *
 	 */
 
 	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;
 	public static final int DRIVETRAIN_FORWARD_LEFT_CONSTANT = 1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT_CONSTANT = 1;
-
+	public static final int CLIMBER_FORWARD_CONSTANT = 1;
 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
