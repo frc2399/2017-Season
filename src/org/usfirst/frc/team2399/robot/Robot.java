@@ -18,8 +18,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class Robot extends IterativeRobot {
 
-	public static OI oi;
-	public static DriveTrain driveTrain;
+	/**
+	 * Creates an instance of OI 
+	 */
+	public static OI oi = new OI();
+;
+	
+	/**
+	 * 
+	 */
+	public static DriveTrain driveTrain = new DriveTrain();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -30,7 +38,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 
 		// chooser.addObject("My Auto", new MyAutoCommand());
 
