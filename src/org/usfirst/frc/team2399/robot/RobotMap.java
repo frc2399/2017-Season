@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2399.robot;
 
+import org.usfirst.frc.team2399.robot.subsystems.Climber;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -7,6 +9,11 @@ package org.usfirst.frc.team2399.robot;
  * floating around.
  */
 public class RobotMap {
+
+	/**
+	 * Creates instances of subsystems for use in commands
+	 */
+	
 
 	/**
 	 * ADDRESSES, PORTS, AND CHANNELS
