@@ -37,8 +37,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		CameraServer.getInstance().startAutomaticCapture();
-
+		CameraServer.getInstance().startAutomaticCapture("cam", 0);
 		// new Thread(() -> {
 		// UsbCamera camera = CameraServer.getInstance()
 		// .startAutomaticCapture();
