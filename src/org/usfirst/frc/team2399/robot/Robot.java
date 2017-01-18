@@ -1,8 +1,8 @@
-
 package org.usfirst.frc.team2399.robot;
 
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -19,11 +19,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Robot extends IterativeRobot {
 
 	/**
-	 * Creates an instance of OI 
+	 * Creates an instance of OI
 	 */
-	public static OI oi = new OI();
-;
-	
+	public static OI oi = new OI();;
+
 	/**
 	 * 
 	 */
@@ -38,6 +37,42 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		CameraServer.getInstance().startAutomaticCapture();
+
+		// new Thread(() -> {
+		// UsbCamera camera = CameraServer.getInstance()
+		// .startAutomaticCapture();
+		// camera.setResolution(640, 480);
+		//
+		// CvSink cvSink = CameraServer.getInstance().getVideo();
+		// CvSource outputStream = CameraServer.getInstance().putVideo("Blur",
+		// 640, 480);
+		//
+		// Mat source = new Mat();
+		// Mat output = new Mat();
+		//
+		// Point center = new Point(310.0, 240.0);
+		// Point vStart = new Point(310.0, 230.0);
+		// Point vEnd = new Point(310.0, 250.0);
+		// Point hStart = new Point(300.0, 240.0);
+		// Point hEnd = new Point(320.0, 240.0);
+		//
+		// Scalar color1 = new Scalar(0, 238, 255);
+		// Scalar color2 = new Scalar(255, 0, 195);
+		//
+		// while (true) {
+		//
+		// cvSink.grabFrame(source);
+		//
+		// Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+		// Imgproc.circle(source, center, 10, color1);
+		// Imgproc.line(source, vStart, vEnd, color2);
+		// Imgproc.line(source, hStart, hEnd, color2);
+		//
+		// outputStream.putFrame(output);
+		// }
+		//
+		// }).start();
 
 		// chooser.addObject("My Auto", new MyAutoCommand());
 
