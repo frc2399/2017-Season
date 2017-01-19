@@ -8,13 +8,25 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClimbUp extends Command {
+public class JoyClimb extends Command {
 	
+	
+	/**
+	 * Creates a new instance of climber
+	 * Creates a double for use within methods and constructor
+	 */
 	private Climber climber = Robot.climber;
+	double speed;
 	
-    public ClimbUp() {
+	/**
+	 * @param speed: the speed inputted into the constructor is assigned to the double created above
+	 * requires the climber subsystem to run
+	 * able to be interrupted
+	 */
+    public JoyClimb(double speed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	this.speed = speed;
     	requires(climber);
     	setInterruptible(true);
     }
@@ -23,11 +35,16 @@ public class ClimbUp extends Command {
     protected void initialize() {
     }
 
+    /**
+     * When command is run, climber is set to the inputted speed (see constructor)
+     */
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	climber.setCLimberSpeed(speed);
     	
     }
 
+    //TODO: under what circumstances should this return "true"?
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

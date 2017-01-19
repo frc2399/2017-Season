@@ -23,6 +23,8 @@ public class RobotMap {
 	 * Address for Talons Things on the CAN network have addresses. Things on
 	 * PWM network have ports. TODO: Find correct cantalon once on the robot
 	 */
+	
+	
 
 	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
 	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
@@ -56,4 +58,18 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
+	
+	/**
+	 * Preset Speeds
+	 */
+	
+	/**
+	 * Preset speeds for climber to be used elsewhere in code
+	 * Currently at full speed - may need to be less depending on the mechanism
+	 */
+	//TODO: set actual speeds
+	public static final double CLIMB_UP = 1.0;
+	public static final double CLIMB_DOWN = -1.0;
+	public static final double CLIMB_STOP = 0.0;
+
 }
