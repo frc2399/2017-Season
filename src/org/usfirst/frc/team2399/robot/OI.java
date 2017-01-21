@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2399.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -18,7 +20,10 @@ public class OI {
 	
 	private static Joystick leftJoy = new Joystick(RobotMap.JOYDRIVE_LEFT_STICK_PORT);
 	private static Joystick rightJoy = new Joystick(RobotMap.JOYDRIVE_RIGHT_STICK_PORT);
+	private static Joystick cameraJoy = new Joystick(RobotMap.CAMERA_STICK_PORT);
 	
+	private static Button stopButt = new JoystickButton(cameraJoy, 10);
+
 	/**
 	 * JOYSTICK METHODS
 	 */
@@ -33,6 +38,11 @@ public class OI {
 
 	public static double getRightY() {
 		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
+	}
+	
+	public static boolean isStopButtPressed()
+	{
+		return stopButt.get();
 	}
 
 	//// CREATING BUTTONS

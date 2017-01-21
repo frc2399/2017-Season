@@ -28,6 +28,7 @@ public class RobotMap {
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
+	public static final int CAMERA_STICK_PORT = 2;
 	
 	/**
 	 * Forward Constants
@@ -38,6 +39,8 @@ public class RobotMap {
 	public static final int DRIVETRAIN_FORWARD_LEFT_CONSTANT = 1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT_CONSTANT = 1;
 
+	public static final int IMG_WIDTH = 320;
+	public static final int IMG_HEIGHT = 240;
 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
