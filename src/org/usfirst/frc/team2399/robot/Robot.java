@@ -3,6 +3,7 @@ package org.usfirst.frc.team2399.robot;
 
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,16 +19,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
 
 	public static Climber climber = new Climber();
+	public static Shifter shifter = new Shifter();
 
 	/**
-	 * Creates an instance of OI 
+	 * Creates an instance of OI
 	 */
-	public static OI oi = new OI();
-;
-	
+	public static OI oi = new OI();;
+
 	/**
 	 * 
 	 */

@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2399.robot;
 
-import org.usfirst.frc.team2399.robot.subsystems.Climber;
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -13,7 +11,6 @@ public class RobotMap {
 	/**
 	 * Creates instances of subsystems for use in commands
 	 */
-	
 
 	/**
 	 * ADDRESSES, PORTS, AND CHANNELS
@@ -23,8 +20,6 @@ public class RobotMap {
 	 * Address for Talons Things on the CAN network have addresses. Things on
 	 * PWM network have ports. TODO: Find correct cantalon once on the robot
 	 */
-	
-	
 
 	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
 	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
@@ -37,6 +32,7 @@ public class RobotMap {
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
+	public static final int SHIFTER_SOLENOID_PORT = 379;
 
 	/**
 	 * Forward Constants To ensure positive values of motion are what you
@@ -58,18 +54,25 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
-	
+
 	/**
 	 * Preset Speeds
 	 */
-	
+
 	/**
-	 * Preset speeds for climber to be used elsewhere in code
-	 * Currently at full speed - may need to be less depending on the mechanism
+	 * Preset speeds for climber to be used elsewhere in code Currently at full
+	 * speed - may need to be less depending on the mechanism
 	 */
-	//TODO: set actual speeds
+	// TODO: set actual speeds
 	public static final double CLIMB_UP = 1.0;
 	public static final double CLIMB_DOWN = -1.0;
 	public static final double CLIMB_STOP = 0.0;
+
+	/**
+	 * Timing Constants
+	 */
+
+	// TODO: Figure out what this time should actually be
+	public static final double SHIFT_TIMER = 0.5;
 
 }
