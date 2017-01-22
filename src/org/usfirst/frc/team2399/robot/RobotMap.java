@@ -16,12 +16,17 @@ public class RobotMap {
 	 * Address for Talons
 	 * Things on the CAN network have addresses. Things on PWM network have
 	 * ports.
+	 * TODO: Set actual address
 	 */
 
 	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
 	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
 	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 3;
 	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 2;
+	public static final int SHOOTER_TALON_ADDRESS = 8756;
+	
+
+	
 	
 	/**
 	 * Ports for sensors and joysticks
@@ -32,12 +37,37 @@ public class RobotMap {
 	/**
 	 * Forward Constants
 	 * To ensure positive values of motion are what you expect.
+	 * TODO: Set actual constants
 	 */
 
 	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;
 	public static final int DRIVETRAIN_FORWARD_LEFT_CONSTANT = 1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT_CONSTANT = 1;
+	public static final int SHOOTER_FORWARD_CONSTANT = 1;
 
+	public static final int SHOOTER_ENCODER_FORWARD_CONSTANT = 1;
+	/**
+	 * Constants for calculations
+	 */
+	
+	/**
+	 * Encoder calculations
+	 * Distance per pulse is the amount of distance travelled by the robot per one pulse of the encoder
+	 * TODO: Find actual numbers/figure out how to do this for Talons
+	 */
+	public static final int SHOOTER_ENCODER_COUNT = 920348039;
+	public static final double SHOOTER_GEAR_RATIO = 34023984;
+	public static final double SHOOTER_WHEEL_CIRCUMFERENCE = 203948;
+	public static final double SHOOTER_DISTANCE_PER_PULSE =  SHOOTER_WHEEL_CIRCUMFERENCE
+			* (1 / SHOOTER_GEAR_RATIO) * (1 / SHOOTER_ENCODER_COUNT);
+	
+	/**
+	 * Speed Constants
+	 * TODO: Set actual constant
+	 */
+	
+	public static final double SHOOTER_SPEED_CONSTANT = 1;
+	public static final double SHOOTER_STOP_CONSTANT = 0;
 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
