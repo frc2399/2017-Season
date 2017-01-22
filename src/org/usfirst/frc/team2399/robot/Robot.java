@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2399.robot;
 
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
 	 * 
 	 */
 	public static DriveTrain driveTrain = new DriveTrain();
+	public static GearCollector gearCollector = new GearCollector();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();

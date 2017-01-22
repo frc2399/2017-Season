@@ -1,6 +1,11 @@
 package org.usfirst.frc.team2399.robot;
 
+import org.usfirst.frc.team2399.robot.commands.GearIn;
+import org.usfirst.frc.team2399.robot.commands.GearOut;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -62,4 +67,19 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	
+	private static Button gearOutButt = new JoystickButton(rightJoy, 55);
+	private static Button gearInButt = new JoystickButton(rightJoy, 44);
+	
+	/**
+	 * Presets
+	 */
+	
+	private static GearOut moveGearOut = new GearOut();
+	private static GearIn moveGearIn = new GearIn();
+	
+	public OI(){
+		gearOutButt.whenPressed(moveGearOut);
+		gearInButt.whenPressed(moveGearIn);
+	}
 }

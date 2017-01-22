@@ -28,7 +28,7 @@ public class RobotMap {
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
-	
+	public static final int GEAR_SOLENOID_PORT = 899;
 	/**
 	 * Forward Constants
 	 * To ensure positive values of motion are what you expect.
@@ -37,6 +37,15 @@ public class RobotMap {
 	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;
 	public static final int DRIVETRAIN_FORWARD_LEFT_CONSTANT = 1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT_CONSTANT = 1;
+	
+	public static final boolean GEAR_SOLENOID_OUT_CONSTANT = true;
+	public static final boolean GEAR_SOLENOID_IN_CONSTANT = false;
+	
+	/**
+	 * Timing Constants
+	 */
+	
+	public static final double GEAR_TIMER = 0.5;
 
 
 	// For example to map the left and right motors, you could define the
