@@ -20,16 +20,26 @@ public class GearIn extends Command {
         // eg. requires(chassis);
     }
 
+    /**
+     * Sets the amount of the time the command runs for
+     */
     // Called just before this Command runs the first time
     protected void initialize() {
     	setTimeout(RobotMap.GEAR_TIMER);
     }
 
+    /**
+     * Solenoid is set to the "in" value and the command continues running until the timer runs out
+     */
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	gearCollector.setGearSolenoid(RobotMap.GEAR_SOLENOID_IN_CONSTANT);
     }
 
+    /**
+     * When the time passed exceeds the time established in initialize(), isTimedOut() returns true, 
+     * making isFinished() return true and stopping the command
+     */
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return isTimedOut();

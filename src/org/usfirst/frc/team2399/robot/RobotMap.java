@@ -24,14 +24,14 @@ public class RobotMap {
 	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 2;
 	
 	/**
-	 * Ports for sensors and joysticks
+	 * Ports for sensors, joysticks, and solenoids
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
 	public static final int GEAR_SOLENOID_PORT = 899;
 	/**
 	 * Forward Constants
-	 * To ensure positive values of motion are what you expect.
+	 * To ensure positive/forward values of motion are what you expect.
 	 */
 
 	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;

@@ -72,7 +72,7 @@ public class OI {
 	private static Button gearInButt = new JoystickButton(rightJoy, 44);
 	
 	/**
-	 * Presets
+	 * Presets - sets instances of commands and speeds for use with buttons
 	 */
 	
 	private static GearOut moveGearOut = new GearOut();
