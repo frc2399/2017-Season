@@ -24,7 +24,7 @@ public class Shifter extends Subsystem {
 	 * 
 	 * @param setShifter
 	 */
-	public void setSolenoid(boolean setShifter) {
+	public void setShifterSolenoid(boolean setShifter) {
 		shifterSolenoid.set(setShifter);
 	}
 
@@ -33,7 +33,7 @@ public class Shifter extends Subsystem {
 	 * 
 	 * @return
 	 */
-	public boolean getSolenoid() {
+	public boolean getShifterSolenoid() {
 		return shifterSolenoid.get();
 	}
 
