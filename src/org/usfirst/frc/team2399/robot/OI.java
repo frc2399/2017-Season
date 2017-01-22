@@ -68,6 +68,8 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
+	//TODO: Assign to actual buttons
+	
 	private static Button gearOutButt = new JoystickButton(rightJoy, 55);
 	private static Button gearInButt = new JoystickButton(rightJoy, 44);
 	

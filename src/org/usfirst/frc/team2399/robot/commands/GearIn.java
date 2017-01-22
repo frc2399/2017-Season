@@ -38,7 +38,7 @@ public class GearIn extends Command {
 
     /**
      * When the time passed exceeds the time established in initialize(), isTimedOut() returns true, 
-     * making isFinished() return true and stopping the command
+     *  making isFinished() return true and stopping the command
      */
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

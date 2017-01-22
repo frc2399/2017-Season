@@ -25,6 +25,7 @@ public class RobotMap {
 	
 	/**
 	 * Ports for sensors, joysticks, and solenoids
+	 * TODO: Set actual ports
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
@@ -32,6 +33,7 @@ public class RobotMap {
 	/**
 	 * Forward Constants
 	 * To ensure positive/forward values of motion are what you expect.
+	 * TODO: Set actual values
 	 */
 
 	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;
@@ -43,6 +45,7 @@ public class RobotMap {
 	
 	/**
 	 * Timing Constants
+	 * TODO: Set actual time
 	 */
 	
 	public static final double GEAR_TIMER = 0.5;
