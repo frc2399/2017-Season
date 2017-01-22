@@ -33,7 +33,7 @@ public class ShiftHot extends Command {
 	 */
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		shifter.setSolenoid(false);
+		shifter.setSolenoid(RobotMap.SHIFTER_SOLENOID_HOT_CONTSTANT);
 	}
 
 	/**

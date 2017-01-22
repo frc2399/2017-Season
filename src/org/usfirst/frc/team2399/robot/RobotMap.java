@@ -37,7 +37,7 @@ public class RobotMap {
 
 	/**
 	 * Forward Constants To ensure positive values of motion are what you
-	 * expect.
+	 * expect/Boolean constants to ensure direction of motion is what you'd expect it to be.
 	 *
 	 */
 
@@ -45,6 +45,9 @@ public class RobotMap {
 	public static final int DRIVETRAIN_FORWARD_LEFT_CONSTANT = 1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT_CONSTANT = 1;
 	public static final int CLIMBER_FORWARD_CONSTANT = 1;
+	
+	public static final boolean SHIFTER_SOLENOID_DANGEROUS_CONTSTANT = true;
+	public static final boolean SHIFTER_SOLENOID_HOT_CONTSTANT = false;
 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
