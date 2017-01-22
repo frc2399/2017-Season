@@ -20,8 +20,7 @@ public class Shifter extends Subsystem {
 	}
 
 	/**
-	 * Method Accepts a value of a boolean, the solenoid object gets the value
-	 * boolean as a parameter (Not sure if right explanation)
+	 * Method Accepts a value of a boolean, the solenoid object is then set to that value
 	 * 
 	 * @param setShifter
 	 */
