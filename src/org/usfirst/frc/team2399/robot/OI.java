@@ -57,6 +57,9 @@ public class OI {
 
 	// Climbing buttons - to be used in teleop
 	// TODO: set climbing buttons
+	/**
+	 * Created buttons to change from the Hot speed to the Dangerous speed
+	 */
 	private static Button climbUpButt = new JoystickButton(leftJoy, 86);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 59);
 	private static Button climbStopButt = new JoystickButton(leftJoy, 300);
@@ -68,7 +71,8 @@ public class OI {
 	 */
 
 	/**
-	 * Preset drivetrain gears
+	 * Preset drivetrain gears, Created new instance of command so the buttons
+	 * can refer to them
 	 */
 
 	private static ShiftDangerous shiftToDangerous = new ShiftDangerous();
@@ -102,6 +106,8 @@ public class OI {
 	 * OI Constructor climbUpButt: While held down, go up at the preset speed
 	 * (see above) climbUpButt: While held down, go down at the preset speed
 	 * (see above) climbUpButt: When pressed, stop (emergency stop button)
+	 * shiftToHotButt: When pressed(it will run shiftToHot command)
+	 * shiftToDangerousButt: When pressed(it will run shiftToDangerous command)
 	 */
 	public OI() {
 		climbUpButt.whileHeld(climbUpSpeed);

@@ -13,14 +13,27 @@ public class Shifter extends Subsystem {
 	/**
 	 * TODO: get correct port #
 	 */
+	// Creates a object belonging to the Solenoid class with the port as a
+	// parameter
 	public Shifter() {
 		shifterSolenoid = new Solenoid(RobotMap.SHIFTER_SOLENOID_PORT);
 	}
 
+	/**
+	 * Method Accepts a value of a boolean, the solenoid object gets the value
+	 * boolean as a parameter (Not sure if right explanation)
+	 * 
+	 * @param setShifter
+	 */
 	public void setSolenoid(boolean setShifter) {
 		shifterSolenoid.set(setShifter);
 	}
 
+	/**
+	 * Makes it so we can check if it really set the solenoid to true or false
+	 * 
+	 * @return
+	 */
 	public boolean getSolenoid() {
 		return shifterSolenoid.get();
 	}

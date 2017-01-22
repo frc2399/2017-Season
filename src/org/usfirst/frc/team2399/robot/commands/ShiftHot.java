@@ -7,7 +7,8 @@ import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Created an instance of the Shifter Class which is equal to the instance of
+ * class in Robot
  */
 public class ShiftHot extends Command {
 	private Shifter shifter = Robot.shifter;
@@ -20,18 +21,25 @@ public class ShiftHot extends Command {
 	}
 
 	/**
-	 *
+	 * Sets a timer of how long the solenoid needs to run
 	 */
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		setTimeout(RobotMap.SHIFT_TIMER);
 	}
 
+	/**
+	 * Sets the solenoid to a boolean value of false
+	 */
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		shifter.setSolenoid(false);
 	}
 
+	/**
+	 * Sets the command to return either true or false depending on if the time
+	 * has been complete to alert if it should keep executing or not
+	 */
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		return isTimedOut();

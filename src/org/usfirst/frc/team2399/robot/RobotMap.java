@@ -18,7 +18,8 @@ public class RobotMap {
 
 	/**
 	 * Address for Talons Things on the CAN network have addresses. Things on
-	 * PWM network have ports. TODO: Find correct cantalon once on the robot
+	 * PWM network have ports. TODO: will need to change the ports with the new
+	 * Chassis
 	 */
 
 	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
@@ -28,7 +29,7 @@ public class RobotMap {
 	public static final int CLIMBER_TALON_ADDRESS = 2399;
 
 	/**
-	 * Ports for sensors and joysticks
+	 * Ports for sensors and joysticks, Created a port for the Solenoid
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
@@ -73,6 +74,7 @@ public class RobotMap {
 	 */
 
 	// TODO: Figure out what this time should actually be
+	// Created a constant for how long the solenoid should run
 	public static final double SHIFT_TIMER = 0.5;
 
 }

@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+// Created a instance of Shifter so the Robot can reference that subsystem
 public class Robot extends IterativeRobot {
 
 	public static Climber climber = new Climber();
