@@ -1,6 +1,11 @@
 package org.usfirst.frc.team2399.robot;
 
+
+import org.usfirst.frc.team2399.robot.commands.JoyClimb;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -46,6 +51,23 @@ public class OI {
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
 	// commands the same as any other Button.
+	
+	//Climbing buttons - to be used in teleop
+	//TODO: set climbing buttons
+	private static Button climbUpButt = new JoystickButton(leftJoy, 86);
+	private static Button climbDownButt = new JoystickButton(leftJoy, 59);
+	private static Button climbStopButt = new JoystickButton(leftJoy, 300);
+	
+	/**
+	 * Presets
+	 */
+	
+	//preset speeds
+	
+	//References RobotMap for speed values; to be used to set speed when buttons are pressed
+	private static JoyClimb climbUpSpeed = new JoyClimb(RobotMap.CLIMB_UP);
+	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
+	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
 
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	// Once you have a button, it's trivial to bind it to a button in one of
@@ -62,4 +84,17 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	
+	/**
+	 * OI Constructor
+	 * climbUpButt: While held down, go up at the preset speed (see above)
+	 * climbUpButt: While held down, go down at the preset speed (see above)
+	 * climbUpButt: When pressed, stop (emergency stop button)
+	 */
+	public OI()
+	{
+		climbUpButt.whileHeld(climbUpSpeed);
+		climbDownButt.whileHeld(climbDownSpeed);
+		climbStopButt.whenPressed(climbStopSpeed);
+	}
 }

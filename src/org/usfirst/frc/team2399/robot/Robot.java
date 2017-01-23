@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2399.robot;
 
+import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -17,6 +18,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+
+	public static Climber climber = new Climber();
 
 	/**
 	 * Creates an instance of OI 
