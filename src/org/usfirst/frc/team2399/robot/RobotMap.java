@@ -71,5 +71,17 @@ public class RobotMap {
 	public static final double CLIMB_UP = 1.0;
 	public static final double CLIMB_DOWN = -1.0;
 	public static final double CLIMB_STOP = 0.0;
-
+	
+	/**
+	 * Encoder Constants
+	 */
+	
+	/**
+	 * TODO: Set actual values for constants
+	 */
+	public static final double DISTANCE_P_CONSTANT = 0;
+	public static final double DRIVE_LOOP_HERTZ_CONSTANT = 0;
+	public static final double DISTANCE_DECREMENENT_CONSTANT = 0;
+	public static final double DISTANCE_INCREMENT_CONSTANT = 0;
+	
 }
