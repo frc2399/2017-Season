@@ -26,6 +26,9 @@ public class DriveTrain extends Subsystem {
 		leftBackTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_BACK_TALON_ADDRESS);
 		rightBackTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS);
 		
+		/**
+		 * Sets the type of encoder to be routed through the Talon, as well as what mode the Talon is in
+		 */
 		leftFrontTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
 		rightFrontTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
@@ -33,9 +36,6 @@ public class DriveTrain extends Subsystem {
 		
 		timer.start();
 		
-		/**
-		 * TODO: Figure out how to set distance per pulse
-		 */
 	}
 	
 	public void driveLeft(double leftSpeed) {
@@ -86,7 +86,11 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	/**
-	 * TODO: Write comment
+	 * If the current time is less than the time required to make one rotation of a wheel
+	 * Calculate the error
+	 * Create the pOutput by multiplying the error by the distance P constant
+	 * Set the drivetrain to run at that pOutput
+	 * Reset the timer
 	 */
 	
 	public void moveToLeftDistance()
@@ -133,15 +137,15 @@ public class DriveTrain extends Subsystem {
 	 * Methods to increment, decrement, and get the angle constant
 	 */
 	
-	public void incrementAngleConstant(){
+	public void incrementDistanceConstant(){
 		distancePConstant += RobotMap.DISTANCE_INCREMENT_CONSTANT;
 	}
 	
-	public void decrementAngleConstant(){
+	public void decrementDistanceConstant(){
 		distancePConstant -= RobotMap.DISTANCE_DECREMENENT_CONSTANT;
 	}
 	
-	public double getAngleConstant(){
+	public double getDistanceConstant(){
 		return distancePConstant;
 	}
 	
