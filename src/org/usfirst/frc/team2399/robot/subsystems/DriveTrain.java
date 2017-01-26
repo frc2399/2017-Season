@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
 		 * TODO: Figure out how to set distance per pulse
 		 */
 	}
-
+	
 	public void driveLeft(double leftSpeed) {
 		leftFrontTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
 		leftBackTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
@@ -48,6 +48,10 @@ public class DriveTrain extends Subsystem {
 		rightBackTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
 	}
 
+	/**
+	 * Methods that get the left and right positions of the robot
+	 */
+	
 	//TODO: Is this the right method?
 	public double getLeftPosition(){
 		return leftFrontTalon.getPosition();
@@ -56,6 +60,10 @@ public class DriveTrain extends Subsystem {
 	public double getRightPosition(){
 		return rightFrontTalon.getPosition();
 	}
+	
+	/**
+	 * Methods that get/set the left and right positions of where we want to be
+	 */
 	
 	public void setLeftDesiredPosition(double goalDistance){
 		leftFrontTalon.reset();
@@ -76,6 +84,10 @@ public class DriveTrain extends Subsystem {
 	{
 		return goalDistance;
 	}
+	
+	/**
+	 * TODO: Write comment
+	 */
 	
 	public void moveToLeftDistance()
 	{
@@ -103,6 +115,10 @@ public class DriveTrain extends Subsystem {
 		}	
 	}
 	
+	/**
+	 * Methods that calculate the error in distance from where we are to where we want to be
+	 */
+	
 	public double calculateLeftDistanceError(){
 		return getLeftDesiredDistance() - getLeftPosition();
 		
@@ -112,6 +128,10 @@ public class DriveTrain extends Subsystem {
 		return getRightDesiredDistance() - getRightPosition();
 		
 	}
+	
+	/**
+	 * Methods to increment, decrement, and get the angle constant
+	 */
 	
 	public void incrementAngleConstant(){
 		distancePConstant += RobotMap.DISTANCE_INCREMENT_CONSTANT;
