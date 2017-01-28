@@ -51,6 +51,14 @@ public class RobotMap {
 	 */
 	
 	/**
+	 * P-Loop Constants
+	 */
+	public static final int SHOOTER_SPEED_P_CONSTANT = 0;
+	public static final int SHOOTER_HERTZ_CONSTANT = 0;
+	public static final int SHOOTER_SPEED_DECREMENT_CONSTANT = 0;
+	public static final int SHOOTER_SPEED_INCREMENT_CONSTANT = 0;
+	
+	/**
 	 * Encoder calculations
 	 * Distance per pulse is the amount of distance travelled by the robot per one pulse of the encoder
 	 * TODO: Find actual numbers/figure out how to do this for Talons
@@ -68,6 +76,12 @@ public class RobotMap {
 	
 	public static final double SHOOTER_SPEED_CONSTANT = 1;
 	public static final double SHOOTER_STOP_CONSTANT = 0;
+	
+	/**
+	 * Throttle Constants
+	 */
+	
+	public static final int SHOOTER_THROTTLE_FORWARD_CONSTANT = 1;
 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.

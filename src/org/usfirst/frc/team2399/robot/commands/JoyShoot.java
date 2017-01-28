@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2399.robot.commands;
 
+import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.Robot;
 import org.usfirst.frc.team2399.robot.subsystems.Shooter;
 
@@ -29,7 +30,7 @@ public class JoyShoot extends Command {
     //When the command is run, the shooter is set to this speed
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	shooter.setShooterSpeed(speed);
+    	shooter.setShooterSpeed(speed * OI.getShooterThrottle());
     }
 
     // Make this return true when this Command no longer needs to run execute()

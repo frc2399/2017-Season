@@ -85,4 +85,17 @@ public class OI {
 		shootButt.whileHeld(shooterOn);
 		stopShootButt.whenPressed(shooterStop);
 	}
+	
+	/**
+	 * Throttle Methods
+	 * (throttle +1)/2 sets the throttle range from 0 to 1 rather than
+	 * 	-1 to 1
+	 * TODO: Figure out which joystick we actually want to get this value from
+	 */
+	
+	public static double getShooterThrottle()
+	{
+		double throttle = rightJoy.getThrottle() * RobotMap.SHOOTER_THROTTLE_FORWARD_CONSTANT;
+		return (throttle +1)/2;
+	}
 }
