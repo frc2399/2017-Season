@@ -33,8 +33,8 @@ public class JoyDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		driveTrain.driveLeft(OI.getLeftY());
-		driveTrain.driveRight(OI.getRightY());
+		driveTrain.driveLeftPercent(OI.getLeftY());
+		driveTrain.driveRightPercent(OI.getRightY());
 		driveTrain.moveToAngle();
 	}
 

@@ -15,10 +15,12 @@ public class DriveTrain extends Subsystem {
 	private CANTalon rightFrontTalon;
 	private CANTalon leftBackTalon;
 	private CANTalon rightBackTalon;
+	private CANTalon leftMiddleTalon;
+	private CANTalon rightMiddleTalon;
+	
 	private double goalDistance;
-	private double time;
-	private Timer timer = new Timer();
-	private double distancePConstant = RobotMap.DISTANCE_P_CONSTANT;
+	private double distancePConstant;
+	
 	private double anglePConstant = RobotMap.ANGLE_P_CONSTANT;
 	private double desiredAngle;
 	
@@ -27,40 +29,82 @@ public class DriveTrain extends Subsystem {
 		rightFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		leftBackTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_BACK_TALON_ADDRESS);
 		rightBackTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS);
+		leftMiddleTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS);
+		rightMiddleTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS);
 		
 		/**
 		 * Sets the type of encoder to be routed through the Talon, as well as what mode the Talon is in
 		 */
 		leftFrontTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
 		rightFrontTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		rightFrontTalon.changeControlMode(TalonControlMode.Speed);
 		
-		timer.start();
+		leftMiddleTalon.changeControlMode(TalonControlMode.Follower);
+		leftMiddleTalon.set(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
+		leftBackTalon.changeControlMode(TalonControlMode.Follower);
+		leftBackTalon.set(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
+		rightMiddleTalon.changeControlMode(TalonControlMode.Follower);
+		rightMiddleTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
+		rightBackTalon.changeControlMode(TalonControlMode.Follower);
+		rightBackTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
+		
+		//TODO: Set actual values for these constants
+		leftFrontTalon.setF(0);
+		leftFrontTalon.setP(0);
+		leftFrontTalon.setI(0);
+		leftFrontTalon.setD(0);
+		
+		rightFrontTalon.setF(0);
+		rightFrontTalon.setP(0);
+		rightFrontTalon.setI(0);
+		rightFrontTalon.setD(0);
+	
 		
 	}
 	
-	public void driveLeft(double leftSpeed) {
+	//Look at p.79 for a closed-loop walkthrough
+	//We should put in a method for resetting the calculated values when driver control begins
+	public void driveLeftVelocity(double leftSpeed) {
+		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
+		
 		leftFrontTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
 		leftBackTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
+		leftMiddleTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
 	}
+	
+	public void driveLeftPercent(double leftSpeed) {
+		leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
+		
+		leftFrontTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
+		leftBackTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
+		leftMiddleTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
+	}
+	
 
-	public void driveRight(double rightSpeed) {
+	public void driveRightVelocity(double rightSpeed) {
+		rightFrontTalon.changeControlMode(TalonControlMode.Speed);
+		
 		rightFrontTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
 		rightBackTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
+		rightMiddleTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
+	}
+	
+	public void driveRightPercent(double rightSpeed) {
+		rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
+		
+		rightFrontTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
+		rightBackTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
+		rightMiddleTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
 	}
 
-	/**
-	 * Methods that get the left and right positions of the robot
-	 */
 	
-	//TODO: Is this the right method?
+	
+	//Multiplied by the circumference of the wheel for scaling
 	public double getLeftPosition(){
-		return leftFrontTalon.getPosition();
+		return leftFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE_CONSTANT;
 	}
 	
 	public double getRightPosition(){
-		return rightFrontTalon.getPosition();
+		return rightFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE_CONSTANT;
 	}
 	
 	/**
@@ -68,12 +112,12 @@ public class DriveTrain extends Subsystem {
 	 */
 	
 	public void setLeftDesiredPosition(double goalDistance){
-		leftFrontTalon.reset();
+		leftFrontTalon.setPosition(0);
 		this.goalDistance = goalDistance;
 	}
 	
 	public void setRightDesiredPosition(double goalDistance){
-		rightFrontTalon.reset();
+		rightFrontTalon.setPosition(0);
 		this.goalDistance = goalDistance;
 	}
 	
@@ -87,51 +131,19 @@ public class DriveTrain extends Subsystem {
 		return goalDistance;
 	}
 	
-	/**
-	 * If the current time is less than the time required to make one rotation of a wheel
-	 * Calculate the error
-	 * Create the pOutput by multiplying the error by the distance P constant
-	 * Set the drivetrain to run at that pOutput
-	 * Reset the timer
-	 */
-	
-	public void moveToLeftDistance()
-	{
-		double currentTime = timer.get();
 
-		if (currentTime > RobotMap.DRIVE_LOOP_HERTZ_CONSTANT)
-		{
-			double error = getLeftDesiredDistance() - getLeftPosition();
-			double pOutput = error * distancePConstant;
-			driveLeft(pOutput);
-			timer.reset();
-		}	
-	}
-	
-	public void moveToRightDistance()
-	{
-		double currentTime = timer.get();
-
-		if (currentTime > RobotMap.DRIVE_LOOP_HERTZ_CONSTANT)
-		{
-			double error = getLeftDesiredDistance() - getLeftPosition();
-			double pOutput = error * distancePConstant;
-			driveLeft(pOutput);
-			timer.reset();
-		}	
-	}
 	
 	/**
 	 * Methods that calculate the error in distance from where we are to where we want to be
 	 */
 	
 	public double calculateLeftDistanceError(){
-		return getLeftDesiredDistance() - getLeftPosition();
+		return rightFrontTalon.getError();
 		
 	}
 	
 	public double calculateRightDistanceError(){
-		return getRightDesiredDistance() - getRightPosition();
+		return leftFrontTalon.getError();
 		
 	}
 	
@@ -164,21 +176,19 @@ public class DriveTrain extends Subsystem {
 		desiredAngle = goalAngle;
 	}
 	
-	/**
-	 * Uses the encoder to get the angle
-	 * @return: the angle
-	 *
-	public double getCurrentAngle() {
-		return //TODO: talon code
-	}
-	*/
-	
-	/**
-	 * P loop for driving to a specified angle
-	 */	
 	public void moveToAngle() {
 		//TODO: p loop from getCurrentAngle()
 	}
+	
+	/**
+	 * Questions
+	 * -How do we increment/decrement constants with a Talon? Do we need to?
+	 * -Is there a reason that we can't use the NavX?
+	 * -Close-loop velocity walkthrough on p.79
+	 * 
+	 * To Do
+	 * -Angle methods require position calculations using arcs
+	 */
 	
 		
 }

@@ -30,6 +30,8 @@ public class RobotMap {
 	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
 	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 3;
 	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 2;
+	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 209384;
+	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 2039480;
 	public static final int CLIMBER_TALON_ADDRESS = 2399;
 
 	/**
@@ -86,4 +88,10 @@ public class RobotMap {
 	public static final double DISTANCE_INCREMENT_CONSTANT = 0;
 	public static final double ANGLE_P_CONSTANT = 0;
 	
+	/**
+	 * Calculation Constants
+	 */
+	
+	public static final double DRIVETRAIN_WHEEL_DIAMETER_CONSTANT = 0;
+	public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE_CONSTANT =  DRIVETRAIN_WHEEL_DIAMETER_CONSTANT * Math.PI;
 }
