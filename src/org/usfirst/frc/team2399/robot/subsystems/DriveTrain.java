@@ -7,10 +7,12 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
+	
 	private CANTalon leftFrontTalon;
 	private CANTalon rightFrontTalon;
 	private CANTalon leftBackTalon;
@@ -19,7 +21,6 @@ public class DriveTrain extends Subsystem {
 	private CANTalon rightMiddleTalon;
 	
 	private double goalDistance;
-	private double distancePConstant;
 	
 	private double anglePConstant = RobotMap.ANGLE_P_CONSTANT;
 	private double desiredAngle;
@@ -38,6 +39,11 @@ public class DriveTrain extends Subsystem {
 		leftFrontTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		rightFrontTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
+		/**
+		 * Talons that don't have encoders are set to Follower mode
+		 * The line below that tells them which Talon to follow
+		 * They will go to whichever mode the Talon they're set to follow 
+		 */
 		leftMiddleTalon.changeControlMode(TalonControlMode.Follower);
 		leftMiddleTalon.set(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
 		leftBackTalon.changeControlMode(TalonControlMode.Follower);
@@ -47,7 +53,21 @@ public class DriveTrain extends Subsystem {
 		rightBackTalon.changeControlMode(TalonControlMode.Follower);
 		rightBackTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		
-		//TODO: Set actual values for these constants
+		/**
+		 * If the forward constant is negative (see boolean in RobotMap) reverse the output of
+		 * either the sensor or the motor
+		 */
+		leftFrontTalon.reverseOutput(RobotMap.REVERSE_LEFT_FRONT_MOTOR_OUTPUT_CONSTANT);
+		leftFrontTalon.reverseSensor(RobotMap.REVERSE_LEFT_ENCODER_OUTPUT_CONSTANT);
+		rightFrontTalon.reverseOutput(RobotMap.REVERSE_RIGHT_FRONT_MOTOR_OUTPUT_CONSTANT);
+		rightFrontTalon.reverseSensor(RobotMap.REVERSE_RIGHT_ENCODER_OUTPUT_CONSTANT);
+		
+		/**
+		 * Sets all constants for PID loops
+		 * We won't be using I and D, and they are set to 0 automatically, but
+		 * for clarity and safety's sake, they're set to zero here
+		 * TODO: Set actual values for F and P
+		 */
 		leftFrontTalon.setF(0);
 		leftFrontTalon.setP(0);
 		leftFrontTalon.setI(0);
@@ -61,8 +81,15 @@ public class DriveTrain extends Subsystem {
 		
 	}
 	
-	//Look at p.79 for a closed-loop walkthrough
-	//We should put in a method for resetting the calculated values when driver control begins
+	/**
+	 * Velocity - this is better for programmers due to its precision
+	 * Percent - this is better for drivers because it feels more natural
+	 * TODO: Look at p.79 for a closed-loop walkthrough
+	 * TODO: Create a method for resetting calculated control values when
+	 * driver control (percent mode) begins; look through Talon methods first
+	 * TODO: Does Follower mode apply to speed as well as Control Mode?
+	 * @param leftSpeed
+	 */
 	public void driveLeftVelocity(double leftSpeed) {
 		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
 		
@@ -98,7 +125,11 @@ public class DriveTrain extends Subsystem {
 
 	
 	
-	//Multiplied by the circumference of the wheel for scaling
+	/**
+	 * Gets the current position of the robot
+	 * Multiplied by the circumference of the wheel for scaling
+	 * @return
+	 */
 	public double getLeftPosition(){
 		return leftFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE_CONSTANT;
 	}
@@ -109,6 +140,7 @@ public class DriveTrain extends Subsystem {
 	
 	/**
 	 * Methods that get/set the left and right positions of where we want to be
+	 * setPosition zeros out the encoder data, so that we start at 0
 	 */
 	
 	public void setLeftDesiredPosition(double goalDistance){
@@ -148,28 +180,28 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	/**
-	 * Methods to increment, decrement, and get the angle constant
+	 * Methods to increment, decrement, and get the distance constant
+	 * Method takes in the talon the P constant is being set for, gets the current P, and sets
+	 * the P to the current P + the increment/decrement constant
 	 */
 	
-	public void incrementDistanceConstant(){
-		distancePConstant += RobotMap.DISTANCE_INCREMENT_CONSTANT;
+	public void incrementDistanceConstant(CANTalon currentTalon){
+		double currentPConstant = currentTalon.getP();
+		currentTalon.setP(currentPConstant += RobotMap.DISTANCE_INCREMENT_CONSTANT);
 	}
 	
-	public void decrementDistanceConstant(){
-		distancePConstant -= RobotMap.DISTANCE_DECREMENENT_CONSTANT;
+	public void decrementDistanceConstant(CANTalon currentTalon){
+		double currentPConstant = currentTalon.getP();
+		currentTalon.setP(currentPConstant-= RobotMap.DISTANCE_DECREMENENT_CONSTANT);
 	}
 	
-	public double getDistanceConstant(){
-		return distancePConstant;
-	}
-	
-	@Override
-	protected void initDefaultCommand() {
-		setDefaultCommand(new JoyDrive());
+	public double getDistanceConstant(CANTalon currentTalon){
+		return currentTalon.getP();
 	}
 	
 	/**
 	 * Sets desired angle for driving at an angle
+	 * Currently unfinished
 	 * @param goalAngle
 	 */
 	public void setDesiredAngle(double goalAngle) {
@@ -180,15 +212,10 @@ public class DriveTrain extends Subsystem {
 		//TODO: p loop from getCurrentAngle()
 	}
 	
-	/**
-	 * Questions
-	 * -How do we increment/decrement constants with a Talon? Do we need to?
-	 * -Is there a reason that we can't use the NavX?
-	 * -Close-loop velocity walkthrough on p.79
-	 * 
-	 * To Do
-	 * -Angle methods require position calculations using arcs
-	 */
+	@Override
+	protected void initDefaultCommand() {
+		setDefaultCommand(new JoyDrive());
+	}
 	
-		
+			
 }
