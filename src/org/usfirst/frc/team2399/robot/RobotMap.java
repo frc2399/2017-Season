@@ -78,10 +78,12 @@ public class RobotMap {
 	
 	/**
 	 * TODO: Set actual values for constants
+	 * TODO: Do we need an ANGLE_P_CONSTANT?
 	 */
 	public static final double DISTANCE_P_CONSTANT = 0;
 	public static final double DRIVE_LOOP_HERTZ_CONSTANT = 0;
 	public static final double DISTANCE_DECREMENENT_CONSTANT = 0;
 	public static final double DISTANCE_INCREMENT_CONSTANT = 0;
+	public static final double ANGLE_P_CONSTANT = 0;
 	
 }

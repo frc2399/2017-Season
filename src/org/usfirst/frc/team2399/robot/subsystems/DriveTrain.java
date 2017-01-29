@@ -19,6 +19,8 @@ public class DriveTrain extends Subsystem {
 	private double time;
 	private Timer timer = new Timer();
 	private double distancePConstant = RobotMap.DISTANCE_P_CONSTANT;
+	private double anglePConstant = RobotMap.ANGLE_P_CONSTANT;
+	private double desiredAngle;
 	
 	public DriveTrain() {
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
@@ -153,5 +155,30 @@ public class DriveTrain extends Subsystem {
 	protected void initDefaultCommand() {
 		setDefaultCommand(new JoyDrive());
 	}
-
+	
+	/**
+	 * Sets desired angle for driving at an angle
+	 * @param goalAngle
+	 */
+	public void setDesiredAngle(double goalAngle) {
+		desiredAngle = goalAngle;
+	}
+	
+	/**
+	 * Uses the encoder to get the angle
+	 * @return: the angle
+	 *
+	public double getCurrentAngle() {
+		return //TODO: talon code
+	}
+	*/
+	
+	/**
+	 * P loop for driving to a specified angle
+	 */	
+	public void moveToAngle() {
+		//TODO: p loop from getCurrentAngle()
+	}
+	
+		
 }
