@@ -23,6 +23,7 @@ public class OI {
 	
 	private static Joystick leftJoy = new Joystick(RobotMap.JOYDRIVE_LEFT_STICK_PORT);
 	private static Joystick rightJoy = new Joystick(RobotMap.JOYDRIVE_RIGHT_STICK_PORT);
+	private static Joystick shooterJoy = new Joystick(RobotMap.JOYDRIVE_SHOOTER_STICK_PORT);
 	
 	/**
 	 * JOYSTICK METHODS
@@ -38,6 +39,10 @@ public class OI {
 
 	public static double getRightY() {
 		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
+	}
+	
+	public static double getShooterY(){
+		return shooterJoy.getY()* RobotMap.JOYDRIVE_FORWARD_CONSTANT;
 	}
 
 	//// CREATING BUTTONS
@@ -72,8 +77,8 @@ public class OI {
 	 * Buttons
 	 */
 	
-	private static Button shootButt = new JoystickButton(leftJoy, 17);
-	private static Button stopShootButt = new JoystickButton(leftJoy, 18);
+	private static Button shootButt = new JoystickButton(shooterJoy, 1);
+	private static Button stopShootButt = new JoystickButton(shooterJoy, 3);
 
 	/**
 	 * Presets
@@ -90,12 +95,11 @@ public class OI {
 	 * Throttle Methods
 	 * (throttle +1)/2 sets the throttle range from 0 to 1 rather than
 	 * 	-1 to 1
-	 * TODO: Figure out which joystick we actually want to get this value from
 	 */
 	
 	public static double getShooterThrottle()
 	{
-		double throttle = rightJoy.getThrottle() * RobotMap.SHOOTER_THROTTLE_FORWARD_CONSTANT;
+		double throttle = shooterJoy.getThrottle() * RobotMap.SHOOTER_THROTTLE_FORWARD_CONSTANT;
 		return (throttle +1)/2;
 	}
 }

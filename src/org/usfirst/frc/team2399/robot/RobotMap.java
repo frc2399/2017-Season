@@ -19,10 +19,12 @@ public class RobotMap {
 	 * TODO: Set actual address
 	 */
 
-	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
-	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
-	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 3;
-	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 2;
+	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 7;
+	public static final int DRIVETRAIN_RIGHT_TALON_MIDDLE_ADDRESS = 5;
+	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 10;
+	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 6;
+	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 8;
+	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 9;
 	public static final int SHOOTER_TALON_ADDRESS = 8756;
 	
 
@@ -33,6 +35,7 @@ public class RobotMap {
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
+	public static final int JOYDRIVE_SHOOTER_STICK_PORT = 2;
 	
 	/**
 	 * Forward Constants
@@ -46,6 +49,9 @@ public class RobotMap {
 	public static final int SHOOTER_FORWARD_CONSTANT = 1;
 
 	public static final int SHOOTER_ENCODER_FORWARD_CONSTANT = 1;
+	
+	public static final boolean SHOOTER_ENCODER_REVERSE_OUTPUT_CONSTANT = SHOOTER_ENCODER_FORWARD_CONSTANT == -1;
+	public static final boolean SHOOTER_MOTOR_REVERSE_OUTPUT_CONSTANT = SHOOTER_FORWARD_CONSTANT == -1;
 	/**
 	 * Constants for calculations
 	 */

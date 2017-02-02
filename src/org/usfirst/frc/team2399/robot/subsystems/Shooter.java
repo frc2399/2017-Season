@@ -25,8 +25,9 @@ public class Shooter extends Subsystem {
 		shooterTalon = new CANTalon(RobotMap.SHOOTER_TALON_ADDRESS);
 		shooterTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		shooterTalon.changeControlMode(TalonControlMode.Speed);
-		shooterTalon.reverseOutput(RobotMap.SHOOTER_FORWARD_CONSTANT == -1);
-		shooterTalon.reverseSensor(false);
+		shooterTalon.reverseOutput(RobotMap.SHOOTER_MOTOR_REVERSE_OUTPUT_CONSTANT);
+		shooterTalon.reverseSensor(RobotMap.SHOOTER_ENCODER_REVERSE_OUTPUT_CONSTANT);
+		
 		shooterTalon.setF(0);
 		shooterTalon.setP(0);
 		shooterTalon.setI(0);
@@ -36,7 +37,7 @@ public class Shooter extends Subsystem {
 	// Sets the speed to the inputted speed * the forward constant
 	// Position change/10 ms
 	public void setShooterSpeed(double speed) {
-		shooterTalon.set(speed * RobotMap.SHOOTER_FORWARD_CONSTANT);
+		shooterTalon.set(speed);
 	}
 
 	/**
@@ -58,12 +59,16 @@ public class Shooter extends Subsystem {
 		return goalSpeed;
 	}
 
-// Gets the error from the CANTalon
+    /*
+     * Gets the error from the CANTalon
+     */
 	public double calculateSpeedError() {
 		return shooterTalon.getError();
 	}
 
-// Allows us to Increment and Decrement for accuracy 
+    /*
+     * Allows us to Increment and Decrement for accuracy 
+     */
 	public void incrementSpeedConstant() {
 		double currentPConstant = shooterTalon.getP();
 		shooterTalon.setP(currentPConstant += RobotMap.SHOOTER_SPEED_INCREMENT_CONSTANT);
@@ -78,11 +83,12 @@ public class Shooter extends Subsystem {
 		return shooterSpeedPConstant;
 	}
 
-	// Default is the motor at 0 speed
+	/*
+	 * Default is the motor at 0 speed(non-Javadoc)
+	 * @see edu.wpi.first.wpilibj.command.Subsystem#initDefaultCommand()
+	 */
 	public void initDefaultCommand() {
 		setDefaultCommand(new ShooterStop());
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
 	}
 
 }

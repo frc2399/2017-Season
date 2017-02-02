@@ -1,13 +1,11 @@
 package org.usfirst.frc.team2399.robot.commands;
 
 import org.usfirst.frc.team2399.robot.Robot;
+import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class ShooterStop extends Command {
 	
 	private Shooter shooter = Robot.shooter;
@@ -26,7 +24,7 @@ public class ShooterStop extends Command {
     //When the command is run, the shooter is set to this speed
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	shooter.setShooterSpeed(0);
+    	shooter.setShooterSpeed(RobotMap.SHOOTER_STOP_CONSTANT);
     }
 
     // Make this return true when this Command no longer needs to run execute()
