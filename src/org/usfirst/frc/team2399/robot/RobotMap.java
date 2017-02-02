@@ -60,7 +60,6 @@ public class RobotMap {
 	 * P-Loop Constants
 	 */
 	public static final int SHOOTER_SPEED_P_CONSTANT = 0;
-	public static final int SHOOTER_HERTZ_CONSTANT = 0;
 	public static final int SHOOTER_SPEED_DECREMENT_CONSTANT = 0;
 	public static final int SHOOTER_SPEED_INCREMENT_CONSTANT = 0;
 	
