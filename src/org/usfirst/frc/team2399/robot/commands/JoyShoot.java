@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class JoyShoot extends Command {
 	
-	double speed;
+	private double speed;
 	private Shooter shooter = Robot.shooter;
 
     public JoyShoot(double speed) {
@@ -35,7 +35,7 @@ public class JoyShoot extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

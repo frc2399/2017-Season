@@ -78,7 +78,7 @@ public class OI {
 	 */
 	
 	private static Button shootButt = new JoystickButton(shooterJoy, 1);
-	private static Button stopShootButt = new JoystickButton(shooterJoy, 3);
+
 
 	/**
 	 * Presets
@@ -88,7 +88,7 @@ public class OI {
 
 	public OI(){
 		shootButt.whileHeld(shooterOn);
-		stopShootButt.whenPressed(shooterStop);
+		
 	}
 	
 	/**
