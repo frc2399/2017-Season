@@ -11,19 +11,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class JoyDrive extends Command {
 
-	private OI oi = Robot.oi;
 	private DriveTrain driveTrain = Robot.driveTrain;
 	private double desiredAngle;
 
 	public JoyDrive() {
 		requires(driveTrain);
+		setInterruptible(true);
 	}
 
 	//TODO; needs void?
-	public void DriveAngle(double desiredAngle) {
+	public void setDriveAngle(double desiredAngle) {
 		this.desiredAngle = desiredAngle;
-		requires(driveTrain);
-		setInterruptible(true);
 	}
 	
 	// Called just before this Command runs the first time

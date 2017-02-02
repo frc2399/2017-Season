@@ -15,16 +15,16 @@ public class RobotMap {
 	 * ADDRESSES, PORTS, AND CHANNELS
 	 * Address for Talons Things on the CAN network have addresses. Things on
 	 * PWM network have ports. TODO: Find correct cantalon once on the robot
-	 * TODO: Set actual numbers
+	 * 
 	 */
 	
-	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
-	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
-	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 3;
-	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 2;
-	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 209384;
-	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 2039480;
-	public static final int CLIMBER_TALON_ADDRESS = 2399;
+	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 7;
+	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 10;
+	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 6;
+	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 9;
+	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 8;
+	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 5;
+	public static final int CLIMBER_TALON_ADDRESS = 2;
 
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
@@ -33,7 +33,7 @@ public class RobotMap {
 	 * FORWARD CONSTANTS
 	 * To ensure positive values of motion are what you
 	 * expect.
-	 * TODO: Set actual forward constants
+	 * TODO: Set actual forward constants for encoders
 	 */
 
 	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;
@@ -47,6 +47,7 @@ public class RobotMap {
 	public static final boolean REVERSE_RIGHT_FRONT_MOTOR_OUTPUT_CONSTANT = (DRIVETRAIN_FORWARD_LEFT_CONSTANT == -1);
 	public static final boolean REVERSE_LEFT_ENCODER_OUTPUT_CONSTANT = (DRIVETRAIN_ENCODER_FORWARD_LEFT_CONSTANT == -1);
 	public static final boolean REVERSE_RIGHT_ENCODER_OUTPUT_CONSTANT = (DRIVETRAIN_ENCODER_FORWARD_RIGHT_CONSTANT == -1);
+	
 	/**
 	 * PRESET SPEEDS
 	 * Preset speeds for climber to be used elsewhere in code
@@ -72,5 +73,16 @@ public class RobotMap {
 	
 	public static final double DRIVETRAIN_WHEEL_DIAMETER_CONSTANT = 0;
 	public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE_CONSTANT =  DRIVETRAIN_WHEEL_DIAMETER_CONSTANT * Math.PI;
+	
+	/**
+	 * Speed Soft Limits
+	 * TODO: Set velocity soft limits
+	 */
+	
+	public static final double VELOCITY_LOWER_SOFT_LIMIT = 0;
+	public static final double VELOCITY_UPPER_SOFT_LIMIT = 0;
+	public static final double PERCENT_LOWER_SOFT_LIMIT = 0;
+	public static final double PERCENT_UPPER_SOFT_LIMIT = 1;
+	
 
 }

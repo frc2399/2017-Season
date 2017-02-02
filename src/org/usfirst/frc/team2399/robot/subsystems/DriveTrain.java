@@ -91,36 +91,39 @@ public class DriveTrain extends Subsystem {
 	 * @param leftSpeed
 	 */
 	public void driveLeftVelocity(double leftSpeed) {
-		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
-		
-		leftFrontTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
-		leftBackTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
-		leftMiddleTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
+		if(leftSpeed >= RobotMap.VELOCITY_LOWER_SOFT_LIMIT && leftSpeed <= RobotMap.VELOCITY_UPPER_SOFT_LIMIT)
+		{
+			leftFrontTalon.changeControlMode(TalonControlMode.Speed);
+			leftFrontTalon.set(leftSpeed);
+		}
 	}
 	
 	public void driveLeftPercent(double leftSpeed) {
-		leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
+		if(leftSpeed >= RobotMap.PERCENT_LOWER_SOFT_LIMIT && leftSpeed <= RobotMap.PERCENT_UPPER_SOFT_LIMIT )
+		{
+			leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
 		
-		leftFrontTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
-		leftBackTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
-		leftMiddleTalon.set(leftSpeed * RobotMap.DRIVETRAIN_FORWARD_LEFT_CONSTANT);
+			leftFrontTalon.set(leftSpeed);
+		}
 	}
 	
 
 	public void driveRightVelocity(double rightSpeed) {
-		rightFrontTalon.changeControlMode(TalonControlMode.Speed);
+		if(rightSpeed >= RobotMap.VELOCITY_LOWER_SOFT_LIMIT && rightSpeed <= RobotMap.VELOCITY_UPPER_SOFT_LIMIT)
+		{
+			rightFrontTalon.changeControlMode(TalonControlMode.Speed);
 		
-		rightFrontTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
-		rightBackTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
-		rightMiddleTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
+			rightFrontTalon.set(rightSpeed);
+		}
 	}
 	
 	public void driveRightPercent(double rightSpeed) {
-		rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
+		if(rightSpeed >= RobotMap.PERCENT_LOWER_SOFT_LIMIT && rightSpeed <= RobotMap.PERCENT_UPPER_SOFT_LIMIT )
+		{
+			rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
 		
-		rightFrontTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
-		rightBackTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
-		rightMiddleTalon.set(rightSpeed * RobotMap.DRIVETRAIN_FORWARD_RIGHT_CONSTANT);
+			rightFrontTalon.set(rightSpeed);
+		}
 	}
 
 	
@@ -195,7 +198,7 @@ public class DriveTrain extends Subsystem {
 		currentTalon.setP(currentPConstant-= RobotMap.DISTANCE_DECREMENENT_CONSTANT);
 	}
 	
-	public double getDistanceConstant(CANTalon currentTalon){
+	public double returnDistanceConstant(CANTalon currentTalon){
 		return currentTalon.getP();
 	}
 	
