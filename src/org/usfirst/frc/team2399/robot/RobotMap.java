@@ -16,7 +16,7 @@ public class RobotMap {
 	 * Address for Talons
 	 * Things on the CAN network have addresses. Things on PWM network have
 	 * ports.
-	 * TODO: Set actual address
+	 * TODO: Set actual address for shooter talon
 	 */
 
 	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 7;
@@ -40,7 +40,7 @@ public class RobotMap {
 	/**
 	 * Forward Constants
 	 * To ensure positive values of motion are what you expect.
-	 * TODO: Set actual constants
+	 * TODO: Set actual constants for shooter values
 	 */
 
 	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;
@@ -52,12 +52,14 @@ public class RobotMap {
 	
 	public static final boolean SHOOTER_ENCODER_REVERSE_OUTPUT_CONSTANT = SHOOTER_ENCODER_FORWARD_CONSTANT == -1;
 	public static final boolean SHOOTER_MOTOR_REVERSE_OUTPUT_CONSTANT = SHOOTER_FORWARD_CONSTANT == -1;
+	
 	/**
 	 * Constants for calculations
 	 */
 	
 	/**
 	 * P-Loop Constants
+	 * TODO: Set actual values
 	 */
 	public static final int SHOOTER_SPEED_P_CONSTANT = 0;
 	public static final int SHOOTER_SPEED_DECREMENT_CONSTANT = 0;
@@ -71,12 +73,10 @@ public class RobotMap {
 	public static final int SHOOTER_ENCODER_COUNT = 920348039;
 	public static final double SHOOTER_GEAR_RATIO = 34023984;
 	public static final double SHOOTER_WHEEL_CIRCUMFERENCE = 203948;
-	public static final double SHOOTER_DISTANCE_PER_PULSE =  SHOOTER_WHEEL_CIRCUMFERENCE
-			* (1 / SHOOTER_GEAR_RATIO) * (1 / SHOOTER_ENCODER_COUNT);
 	
 	/**
 	 * Speed Constants
-	 * TODO: Set actual constant
+	 * TODO: Set actual constants
 	 */
 	
 	public static final double SHOOTER_SPEED_CONSTANT = 1;

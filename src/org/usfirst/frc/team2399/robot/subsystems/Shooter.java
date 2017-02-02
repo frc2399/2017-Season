@@ -19,7 +19,10 @@ public class Shooter extends Subsystem {
 	private double shooterSpeedPConstant = RobotMap.SHOOTER_SPEED_P_CONSTANT;
 
 	/**
-	 * The encoder is linked directly to the Talon Sets the PID constants
+	 * The encoder is linked directly to the Talon
+	 * reverseOutput and reverseSensor reverse their respective devices if give a value of "true" (see RobotMap for 
+	 * constants)
+	 * FPID constants are now set through the Talon
 	 */
 	public Shooter() {
 		shooterTalon = new CANTalon(RobotMap.SHOOTER_TALON_ADDRESS);
@@ -34,22 +37,27 @@ public class Shooter extends Subsystem {
 		shooterTalon.setD(0);
 	}
 
-	// Sets the speed to the inputted speed * the forward constant
-	// Position change/10 ms
+	/**
+	 * Sets the speed to the inputted speed 
+	 * @param speed
+	 * Position change/10 ms
+	 */
 	public void setShooterSpeed(double speed) {
 		shooterTalon.set(speed);
 	}
 
 	/**
-	 *
+	 *Gets speed from sensor in ticks/100 ms
+	 *TODO: Does this need to be converted to ft/s for our purposes?
 	 */
-
-	// Gets speed from sensor in ticks/100 ms
 	public double getShooterSpeed() {
 		return shooterTalon.getSpeed();
 	}
 
-//Reset the desired Speed by the position being zero
+    /**
+     * Encoder position is set to zero, speed is set to inputted value
+     * @param goalSpeed
+     */
 	public void setShooterDesiredSpeed(double goalSpeed) {
 		shooterTalon.setPosition(0);
 		this.goalSpeed = goalSpeed;
@@ -67,7 +75,7 @@ public class Shooter extends Subsystem {
 	}
 
     /*
-     * Allows us to Increment and Decrement for accuracy 
+     * Allows us to Increment and Decrement for testing
      */
 	public void incrementSpeedConstant() {
 		double currentPConstant = shooterTalon.getP();

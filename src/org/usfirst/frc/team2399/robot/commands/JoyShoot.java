@@ -33,7 +33,10 @@ public class JoyShoot extends Command {
     	shooter.setShooterSpeed(speed * OI.getShooterThrottle());
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    /**
+     * With whileHeld, command will execute, finish, check if the button is still held, and then
+     * run through the command again if necessary, preventing us from being stuck in a loop
+     */
     protected boolean isFinished() {
         return true;
     }
