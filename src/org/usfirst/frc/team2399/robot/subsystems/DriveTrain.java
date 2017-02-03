@@ -83,7 +83,7 @@ public class DriveTrain extends Subsystem {
 	 * TODO: Create a method for resetting calculated control values when
 	 * driver control (percent mode) begins; look through Talon methods first
 	 * TODO: Does Follower mode apply to speed as well as Control Mode?
-	 * @param leftSpeed
+	 * @param leftSpeed rotations per minute
 	 */
 	public void driveLeftVelocity(double leftSpeed) {
 		if(leftSpeed >= RobotMap.VELOCITY_LOWER_SOFT_LIMIT && leftSpeed <= RobotMap.VELOCITY_UPPER_SOFT_LIMIT)
@@ -161,20 +161,15 @@ public class DriveTrain extends Subsystem {
 		return goalDistance;
 	}
 	
-
-	
 	/**
 	 * Methods that calculate the error in distance from where we are to where we want to be
 	 */
-	
 	public double calculateLeftDistanceError(){
-		return rightFrontTalon.getError();
-		
+		return rightFrontTalon.getError();	
 	}
 	
 	public double calculateRightDistanceError(){
 		return leftFrontTalon.getError();
-		
 	}
 	
 	/**
