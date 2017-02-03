@@ -71,17 +71,21 @@ public class RobotMap {
 	 * CALCULATION CONSTANTS
 	 */
 	
-	public static final double DRIVETRAIN_WHEEL_DIAMETER = 0;
+	/**
+	 * @param DRIVETRAIN_WHEEL_DIAMETER inches
+	 */
+	
+	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
 	public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
 	
 	/**
 	 * Speed Soft Limits
-	 * TODO: Set velocity soft limits
+	 * TODO: Calculate conversion for velocity
 	 */
 	
 	public static final double VELOCITY_LOWER_SOFT_LIMIT = 0;
 	public static final double VELOCITY_UPPER_SOFT_LIMIT = 0;
-	public static final double PERCENT_LOWER_SOFT_LIMIT = 0;
+	public static final double PERCENT_LOWER_SOFT_LIMIT = -1;
 	public static final double PERCENT_UPPER_SOFT_LIMIT = 1;
 	
 
