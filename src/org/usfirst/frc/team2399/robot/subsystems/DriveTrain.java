@@ -7,8 +7,6 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
@@ -21,10 +19,7 @@ public class DriveTrain extends Subsystem {
 	private CANTalon rightMiddleTalon;
 	
 	private double goalDistance;
-	
-	private double anglePConstant = RobotMap.ANGLE_P;
-	private double desiredAngle;
-	
+		
 	public DriveTrain() {
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
 		rightFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
@@ -200,19 +195,6 @@ public class DriveTrain extends Subsystem {
 	
 	public double returnDistanceConstant(CANTalon currentTalon){
 		return currentTalon.getP();
-	}
-	
-	/**
-	 * Sets desired angle for driving at an angle
-	 * Currently unfinished
-	 * @param goalAngle
-	 */
-	public void setDesiredAngle(double goalAngle) {
-		desiredAngle = goalAngle;
-	}
-	
-	public void moveToAngle() {
-		//TODO: p loop from getCurrentAngle()
 	}
 	
 	@Override
