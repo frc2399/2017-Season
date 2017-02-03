@@ -40,7 +40,7 @@ public class Climber extends Subsystem {
 	 */
 	public void setCLimberSpeed(double speed)
 	{
-		climbTalon.set(speed * RobotMap.CLIMBER_FORWARD_CONSTANT);
+		climbTalon.set(speed * RobotMap.CLIMBER_FORWARD);
 	
 	}
 

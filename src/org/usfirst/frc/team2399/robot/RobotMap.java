@@ -36,17 +36,17 @@ public class RobotMap {
 	 * TODO: Set actual forward constants for encoders
 	 */
 
-	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;
-	public static final int DRIVETRAIN_FORWARD_LEFT_CONSTANT = 1;
-	public static final int DRIVETRAIN_FORWARD_RIGHT_CONSTANT = 1;
-	public static final int CLIMBER_FORWARD_CONSTANT = 1;
-	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT_CONSTANT = 1;
-	public static final int DRIVETRAIN_ENCODER_FORWARD_RIGHT_CONSTANT = 1;
+	public static final int JOYDRIVE_FORWARD = -1;
+	public static final int DRIVETRAIN_FORWARD_LEFT = 1;
+	public static final int DRIVETRAIN_FORWARD_RIGHT = 1;
+	public static final int CLIMBER_FORWARD = 1;
+	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT = 1;
+	public static final int DRIVETRAIN_ENCODER_FORWARD_RIGHT = 1;
 	
-	public static final boolean REVERSE_LEFT_FRONT_MOTOR_OUTPUT_CONSTANT = (DRIVETRAIN_FORWARD_LEFT_CONSTANT == -1);
-	public static final boolean REVERSE_RIGHT_FRONT_MOTOR_OUTPUT_CONSTANT = (DRIVETRAIN_FORWARD_LEFT_CONSTANT == -1);
-	public static final boolean REVERSE_LEFT_ENCODER_OUTPUT_CONSTANT = (DRIVETRAIN_ENCODER_FORWARD_LEFT_CONSTANT == -1);
-	public static final boolean REVERSE_RIGHT_ENCODER_OUTPUT_CONSTANT = (DRIVETRAIN_ENCODER_FORWARD_RIGHT_CONSTANT == -1);
+	public static final boolean REVERSE_LEFT_FRONT_MOTOR_OUTPUT = (DRIVETRAIN_FORWARD_LEFT == -1);
+	public static final boolean REVERSE_RIGHT_FRONT_MOTOR_OUTPUT = (DRIVETRAIN_FORWARD_LEFT == -1);
+	public static final boolean REVERSE_LEFT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_LEFT == -1);
+	public static final boolean REVERSE_RIGHT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_RIGHT == -1);
 	
 	/**
 	 * PRESET SPEEDS
@@ -63,16 +63,16 @@ public class RobotMap {
 	 * TODO: Set actual values for constants
 	 */
 	
-	public static final double DISTANCE_DECREMENENT_CONSTANT = 0;
-	public static final double DISTANCE_INCREMENT_CONSTANT = 0;
-	public static final double ANGLE_P_CONSTANT = 0;
+	public static final double DISTANCE_DECREMENT = 0;
+	public static final double DISTANCE_INCREMENT = 0;
+	public static final double ANGLE_P = 0;
 	
 	/**
 	 * CALCULATION CONSTANTS
 	 */
 	
-	public static final double DRIVETRAIN_WHEEL_DIAMETER_CONSTANT = 0;
-	public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE_CONSTANT =  DRIVETRAIN_WHEEL_DIAMETER_CONSTANT * Math.PI;
+	public static final double DRIVETRAIN_WHEEL_DIAMETER = 0;
+	public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
 	
 	/**
 	 * Speed Soft Limits

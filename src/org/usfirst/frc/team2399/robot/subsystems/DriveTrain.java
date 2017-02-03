@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
 	
 	private double goalDistance;
 	
-	private double anglePConstant = RobotMap.ANGLE_P_CONSTANT;
+	private double anglePConstant = RobotMap.ANGLE_P;
 	private double desiredAngle;
 	
 	public DriveTrain() {
@@ -57,10 +57,10 @@ public class DriveTrain extends Subsystem {
 		 * If the forward constant is negative (see boolean in RobotMap) reverse the output of
 		 * either the sensor or the motor
 		 */
-		leftFrontTalon.reverseOutput(RobotMap.REVERSE_LEFT_FRONT_MOTOR_OUTPUT_CONSTANT);
-		leftFrontTalon.reverseSensor(RobotMap.REVERSE_LEFT_ENCODER_OUTPUT_CONSTANT);
-		rightFrontTalon.reverseOutput(RobotMap.REVERSE_RIGHT_FRONT_MOTOR_OUTPUT_CONSTANT);
-		rightFrontTalon.reverseSensor(RobotMap.REVERSE_RIGHT_ENCODER_OUTPUT_CONSTANT);
+		leftFrontTalon.reverseOutput(RobotMap.REVERSE_LEFT_FRONT_MOTOR_OUTPUT);
+		leftFrontTalon.reverseSensor(RobotMap.REVERSE_LEFT_ENCODER_OUTPUT);
+		rightFrontTalon.reverseOutput(RobotMap.REVERSE_RIGHT_FRONT_MOTOR_OUTPUT);
+		rightFrontTalon.reverseSensor(RobotMap.REVERSE_RIGHT_ENCODER_OUTPUT);
 		
 		/**
 		 * Sets all constants for PID loops
@@ -134,11 +134,11 @@ public class DriveTrain extends Subsystem {
 	 * @return
 	 */
 	public double getLeftPosition(){
-		return leftFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE_CONSTANT;
+		return leftFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE;
 	}
 	
 	public double getRightPosition(){
-		return rightFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE_CONSTANT;
+		return rightFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE;
 	}
 	
 	/**
@@ -190,12 +190,12 @@ public class DriveTrain extends Subsystem {
 	
 	public void incrementDistanceConstant(CANTalon currentTalon){
 		double currentPConstant = currentTalon.getP();
-		currentTalon.setP(currentPConstant += RobotMap.DISTANCE_INCREMENT_CONSTANT);
+		currentTalon.setP(currentPConstant += RobotMap.DISTANCE_INCREMENT);
 	}
 	
 	public void decrementDistanceConstant(CANTalon currentTalon){
 		double currentPConstant = currentTalon.getP();
-		currentTalon.setP(currentPConstant-= RobotMap.DISTANCE_DECREMENENT_CONSTANT);
+		currentTalon.setP(currentPConstant-= RobotMap.DISTANCE_DECREMENT);
 	}
 	
 	public double returnDistanceConstant(CANTalon currentTalon){
