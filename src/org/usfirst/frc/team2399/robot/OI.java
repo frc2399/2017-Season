@@ -62,15 +62,15 @@ public class OI {
 	// by subclassing Button you can create custom triggers and bind those to
 	// commands the same as any other Button.
 
-	
-	//Climbing buttons - to be used in teleop
-	//TODO: set climbing buttons
+	/**
+	 * Created buttons to change from the Hot speed to the Dangerous speed
+	 */
 	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
 	private static Button climbStopButt = new JoystickButton(leftJoy, 10);
-	private static Button shiftToHotButt = new JoystickButton(rightJoy, 390);
-	private static Button shiftToDangerousButt = new JoystickButton(rightJoy, 400);
-	
+	private static Button shiftToHotButt = new JoystickButton(rightJoy, 4);
+	private static Button shiftToDangerousButt = new JoystickButton(rightJoy, 5);
+
 
 	/**
 	 * Presets

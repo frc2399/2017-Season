@@ -32,7 +32,7 @@ public class ShiftDangerous extends Command {
 // Sets the Solenoid to a boolean value of true so it goes to the speed of dangerous
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		shifter.setShifterSolenoid(RobotMap.SHIFTER_SOLENOID_DANGEROUS_CONTSTANT);
+		shifter.setShifterDangerousSolenoid(RobotMap.SHIFTER_SOLENOID_DANGEROUS_CONTSTANT);
 	}
 
 	/**

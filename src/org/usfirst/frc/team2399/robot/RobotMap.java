@@ -32,7 +32,8 @@ public class RobotMap {
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
-	public static final int SHIFTER_SOLENOID_PORT = 379;
+	public static final int SHIFTER_HOT_SOLENOID_PORT = 0;
+	public static final int SHIFTER_DANGEROUS_SOLENOID_PORT= 1;
 
 	public static final int GEAR_OUT_SOLENOID_PORT = 2;
 	public static final int GEAR_IN_SOLENOID_PORT = 3;
@@ -51,7 +52,7 @@ public class RobotMap {
 	public static final int CLIMBER_FORWARD_CONSTANT = 1;
 	
 	public static final boolean SHIFTER_SOLENOID_DANGEROUS_CONTSTANT = true;
-	public static final boolean SHIFTER_SOLENOID_HOT_CONTSTANT = false;
+	public static final boolean SHIFTER_SOLENOID_HOT_CONTSTANT = true;
 
 
 
