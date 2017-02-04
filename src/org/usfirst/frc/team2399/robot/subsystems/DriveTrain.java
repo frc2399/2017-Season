@@ -6,7 +6,7 @@ import org.usfirst.frc.team2399.robot.commands.JoyDrive;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import com.kauailabs.navx.frc.AHRS;
+//import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
 	
 	private double goalDistance;
 	
-	private AHRS Navx = new AHRS(SPI.Port.kMXP);
+	//private AHRS Navx = new AHRS(SPI.Port.kMXP);
 		
 	public DriveTrain() {
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
@@ -56,9 +56,9 @@ public class DriveTrain extends Subsystem {
 		 * If the forward constant is negative (see boolean in RobotMap) reverse the output of
 		 * either the sensor or the motor
 		 */
-		leftFrontTalon.reverseOutput(RobotMap.REVERSE_LEFT_FRONT_MOTOR_OUTPUT);
+		
 		leftFrontTalon.reverseSensor(RobotMap.REVERSE_LEFT_ENCODER_OUTPUT);
-		rightFrontTalon.reverseOutput(RobotMap.REVERSE_RIGHT_FRONT_MOTOR_OUTPUT);
+	
 		rightFrontTalon.reverseSensor(RobotMap.REVERSE_RIGHT_ENCODER_OUTPUT);
 		
 		/**
@@ -93,7 +93,7 @@ public class DriveTrain extends Subsystem {
 		if(leftSpeed >= RobotMap.VELOCITY_LOWER_SOFT_LIMIT && leftSpeed <= RobotMap.VELOCITY_UPPER_SOFT_LIMIT)
 		{
 			leftFrontTalon.changeControlMode(TalonControlMode.Speed);
-			leftFrontTalon.set(leftSpeed);
+			leftFrontTalon.set(leftSpeed*RobotMap.DRIVETRAIN_FORWARD_LEFT);
 		}
 	}
 	
@@ -102,7 +102,7 @@ public class DriveTrain extends Subsystem {
 		{
 			leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
 		
-			leftFrontTalon.set(leftSpeed);
+			leftFrontTalon.set(leftSpeed*RobotMap.DRIVETRAIN_FORWARD_LEFT);
 		}
 	}
 	
@@ -112,7 +112,7 @@ public class DriveTrain extends Subsystem {
 		{
 			rightFrontTalon.changeControlMode(TalonControlMode.Speed);
 		
-			rightFrontTalon.set(rightSpeed);
+			rightFrontTalon.set(rightSpeed*RobotMap.DRIVETRAIN_FORWARD_RIGHT);
 		}
 	}
 	
@@ -121,7 +121,7 @@ public class DriveTrain extends Subsystem {
 		{
 			rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
 		
-			rightFrontTalon.set(rightSpeed);
+			rightFrontTalon.set(rightSpeed*RobotMap.DRIVETRAIN_FORWARD_RIGHT);
 		}
 	}
 

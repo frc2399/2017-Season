@@ -42,10 +42,10 @@ public class RobotMap {
 	 * TODO: Set actual values
 	 */
 	public static final int JOYDRIVE_FORWARD = -1;
-	public static final int DRIVETRAIN_FORWARD_LEFT = 1;
+	public static final int DRIVETRAIN_FORWARD_LEFT = -1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT = 1;
 	public static final int CLIMBER_FORWARD = 1;
-	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT = 1;
+	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT = -1;
 	public static final int DRIVETRAIN_ENCODER_FORWARD_RIGHT = 1;
 	public static final int CLIMBER_FORWARD_CONSTANT = 1;
 
@@ -54,8 +54,7 @@ public class RobotMap {
 	public static final boolean GEAR_SOLENOID_OUT_CONSTANT = true;
 	public static final boolean GEAR_SOLENOID_IN_CONSTANT = true;
 	
-	public static final boolean REVERSE_LEFT_FRONT_MOTOR_OUTPUT = (DRIVETRAIN_FORWARD_LEFT == -1);
-	public static final boolean REVERSE_RIGHT_FRONT_MOTOR_OUTPUT = (DRIVETRAIN_FORWARD_LEFT == -1);
+	
 	public static final boolean REVERSE_LEFT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_LEFT == -1);
 	public static final boolean REVERSE_RIGHT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_RIGHT == -1);
 	
