@@ -22,6 +22,8 @@ public class Robot extends IterativeRobot {
 	
 
 	public static Climber climber = new Climber();
+	public static DriveTrain driveTrain = new DriveTrain();
+	public static GearCollector gearCollector = new GearCollector();
 
 	/**
 	 * Creates an instance of OI 
@@ -32,8 +34,7 @@ public class Robot extends IterativeRobot {
 	/**
 	 * 
 	 */
-	public static DriveTrain driveTrain = new DriveTrain();
-	public static GearCollector gearCollector = new GearCollector();
+
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
