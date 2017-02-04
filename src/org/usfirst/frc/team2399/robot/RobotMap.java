@@ -72,9 +72,8 @@ public class RobotMap {
 	 */
 	
 	/**
-	 * @param DRIVETRAIN_WHEEL_DIAMETER inches
+	 * in inches
 	 */
-	
 	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
 	public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
 	

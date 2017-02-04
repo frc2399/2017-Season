@@ -164,11 +164,11 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * Methods that calculate the error in distance from where we are to where we want to be
 	 */
-	public double calculateLeftDistanceError(){
+	public double returnLeftDistanceError(){
 		return rightFrontTalon.getError();	
 	}
 	
-	public double calculateRightDistanceError(){
+	public double returnRightDistanceError(){
 		return leftFrontTalon.getError();
 	}
 	
@@ -195,7 +195,5 @@ public class DriveTrain extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new JoyDrive());
-	}
-	
-			
+	}		
 }

@@ -17,7 +17,7 @@ public class JoyDrive extends Command {
 		requires(driveTrain);
 		setInterruptible(true);
 	}
-	
+
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		
