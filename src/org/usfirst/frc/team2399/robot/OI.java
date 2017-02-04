@@ -33,11 +33,11 @@ public class OI {
 	 * @return the y-value from the Joystick
 	 */
 	public static double getLeftY() {
-		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
+		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 
 	public static double getRightY() {
-		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
+		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 
 	//// CREATING BUTTONS

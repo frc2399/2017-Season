@@ -9,67 +9,83 @@ import org.usfirst.frc.team2399.robot.subsystems.Climber;
  * floating around.
  */
 public class RobotMap {
-
-	/**
-	 * Creates instances of subsystems for use in commands
-	 */
 	
 
 	/**
 	 * ADDRESSES, PORTS, AND CHANNELS
-	 */
-
-	/**
 	 * Address for Talons Things on the CAN network have addresses. Things on
 	 * PWM network have ports. TODO: Find correct cantalon once on the robot
+	 * 
 	 */
 	
-	
+	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 7;
+	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 10;
+	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 6;
+	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 9;
+	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 8;
+	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 5;
+	public static final int CLIMBER_TALON_ADDRESS = 2;
 
-	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 1;
-	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 4;
-	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 3;
-	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 2;
-	public static final int CLIMBER_TALON_ADDRESS = 2399;
-
-	/**
-	 * Ports for sensors and joysticks
-	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
 
 	/**
-	 * Forward Constants To ensure positive values of motion are what you
+	 * FORWARD CONSTANTS
+	 * To ensure positive values of motion are what you
 	 * expect.
-	 *
+	 * TODO: Set actual forward constants for encoders
 	 */
 
-	public static final int JOYDRIVE_FORWARD_CONSTANT = -1;
-	public static final int DRIVETRAIN_FORWARD_LEFT_CONSTANT = 1;
-	public static final int DRIVETRAIN_FORWARD_RIGHT_CONSTANT = 1;
-	public static final int CLIMBER_FORWARD_CONSTANT = 1;
-
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
-
-	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
+	public static final int JOYDRIVE_FORWARD = -1;
+	public static final int DRIVETRAIN_FORWARD_LEFT = 1;
+	public static final int DRIVETRAIN_FORWARD_RIGHT = 1;
+	public static final int CLIMBER_FORWARD = 1;
+	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT = 1;
+	public static final int DRIVETRAIN_ENCODER_FORWARD_RIGHT = 1;
+	
+	public static final boolean REVERSE_LEFT_FRONT_MOTOR_OUTPUT = (DRIVETRAIN_FORWARD_LEFT == -1);
+	public static final boolean REVERSE_RIGHT_FRONT_MOTOR_OUTPUT = (DRIVETRAIN_FORWARD_LEFT == -1);
+	public static final boolean REVERSE_LEFT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_LEFT == -1);
+	public static final boolean REVERSE_RIGHT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_RIGHT == -1);
 	
 	/**
-	 * Preset Speeds
-	 */
-	
-	/**
+	 * PRESET SPEEDS
 	 * Preset speeds for climber to be used elsewhere in code
 	 * Currently at full speed - may need to be less depending on the mechanism
+	 * TODO: set actual speeds
 	 */
-	//TODO: set actual speeds
 	public static final double CLIMB_UP = 1.0;
 	public static final double CLIMB_DOWN = -1.0;
 	public static final double CLIMB_STOP = 0.0;
+	
+	/**
+	 * ENCODER CONSTANTS
+	 * TODO: Set actual values for constants
+	 */
+	
+	public static final double DISTANCE_DECREMENT = 0;
+	public static final double DISTANCE_INCREMENT = 0;
+	public static final double ANGLE_P = 0;
+	
+	/**
+	 * CALCULATION CONSTANTS
+	 */
+	
+	/**
+	 * in inches
+	 */
+	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
+	public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
+	
+	/**
+	 * Speed Soft Limits
+	 * TODO: Calculate conversion for velocity
+	 */
+	
+	public static final double VELOCITY_LOWER_SOFT_LIMIT = 0;
+	public static final double VELOCITY_UPPER_SOFT_LIMIT = 0;
+	public static final double PERCENT_LOWER_SOFT_LIMIT = -1;
+	public static final double PERCENT_UPPER_SOFT_LIMIT = 1;
+	
 
 }

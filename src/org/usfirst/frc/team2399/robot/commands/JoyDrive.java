@@ -11,21 +11,22 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class JoyDrive extends Command {
 
-	private OI oi = Robot.oi;
 	private DriveTrain driveTrain = Robot.driveTrain;
 
 	public JoyDrive() {
 		requires(driveTrain);
+		setInterruptible(true);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		driveTrain.driveLeft(OI.getLeftY());
-		driveTrain.driveRight(OI.getRightY());
+		driveTrain.driveLeftPercent(OI.getLeftY());
+		driveTrain.driveRightPercent(OI.getRightY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
