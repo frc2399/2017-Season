@@ -1,8 +1,9 @@
 package org.usfirst.frc.team2399.robot;
 
+
 import org.usfirst.frc.team2399.robot.commands.GearIn;
 import org.usfirst.frc.team2399.robot.commands.GearOut;
-
+import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -51,6 +52,23 @@ public class OI {
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
 	// commands the same as any other Button.
+	
+	//Climbing buttons - to be used in teleop
+	//TODO: set climbing buttons
+	private static Button climbUpButt = new JoystickButton(leftJoy, 86);
+	private static Button climbDownButt = new JoystickButton(leftJoy, 59);
+	private static Button climbStopButt = new JoystickButton(leftJoy, 300);
+	
+	/**
+	 * Presets
+	 */
+	
+	//preset speeds
+	
+	//References RobotMap for speed values; to be used to set speed when buttons are pressed
+	private static JoyClimb climbUpSpeed = new JoyClimb(RobotMap.CLIMB_UP);
+	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
+	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
 
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	// Once you have a button, it's trivial to bind it to a button in one of
@@ -68,20 +86,24 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
-	//TODO: Assign to actual buttons
-	
-	private static Button gearOutButt = new JoystickButton(rightJoy, 55);
-	private static Button gearInButt = new JoystickButton(rightJoy, 44);
-	
 	/**
 	 * Presets - sets instances of commands and speeds for use with buttons
 	 */
-	
+	private static Button gearOutButt = new JoystickButton(rightJoy, 55);
+	private static Button gearInButt = new JoystickButton(rightJoy, 44);
 	private static GearOut moveGearOut = new GearOut();
 	private static GearIn moveGearIn = new GearIn();
 	
+	/**OI Constructor
+	 * climbUpButt: While held down, go up at the preset speed (see above)
+	 * climbUpButt: While held down, go down at the preset speed (see above)
+	 * climbUpButt: When pressed, stop (emergency stop button)
+	 */
 	public OI(){
 		gearOutButt.whenPressed(moveGearOut);
 		gearInButt.whenPressed(moveGearIn);
+		climbUpButt.whileHeld(climbUpSpeed);
+		climbDownButt.whileHeld(climbDownSpeed);
+		climbStopButt.whenPressed(climbStopSpeed);
 	}
 }
