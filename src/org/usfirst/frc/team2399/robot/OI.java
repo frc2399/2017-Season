@@ -1,8 +1,15 @@
 package org.usfirst.frc.team2399.robot;
 
+
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 import org.usfirst.frc.team2399.robot.commands.ShiftDangerous;
 import org.usfirst.frc.team2399.robot.commands.ShiftHot;
+
+
+
+import org.usfirst.frc.team2399.robot.commands.GearIn;
+import org.usfirst.frc.team2399.robot.commands.GearOut;
+import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -36,11 +43,11 @@ public class OI {
 	 * @return the y-value from the Joystick
 	 */
 	public static double getLeftY() {
-		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
+		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 
 	public static double getRightY() {
-		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD_CONSTANT;
+		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 
 	//// CREATING BUTTONS
@@ -55,16 +62,15 @@ public class OI {
 	// by subclassing Button you can create custom triggers and bind those to
 	// commands the same as any other Button.
 
-	// Climbing buttons - to be used in teleop
-	// TODO: set climbing buttons
-	/**
-	 * Created buttons to change from the Hot speed to the Dangerous speed
-	 */
-	private static Button climbUpButt = new JoystickButton(leftJoy, 86);
-	private static Button climbDownButt = new JoystickButton(leftJoy, 59);
-	private static Button climbStopButt = new JoystickButton(leftJoy, 300);
+	
+	//Climbing buttons - to be used in teleop
+	//TODO: set climbing buttons
+	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
+	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
+	private static Button climbStopButt = new JoystickButton(leftJoy, 10);
 	private static Button shiftToHotButt = new JoystickButton(rightJoy, 390);
 	private static Button shiftToDangerousButt = new JoystickButton(rightJoy, 400);
+	
 
 	/**
 	 * Presets
@@ -103,13 +109,21 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 
 	/**
-	 * OI Constructor climbUpButt: While held down, go up at the preset speed
-	 * (see above) climbUpButt: While held down, go down at the preset speed
-	 * (see above) climbUpButt: When pressed, stop (emergency stop button)
-	 * shiftToHotButt: When pressed(it will run shiftToHot command)
-	 * shiftToDangerousButt: When pressed(it will run shiftToDangerous command)
+	 * Presets - sets instances of commands and speeds for use with buttons
 	 */
-	public OI() {
+	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
+	private static Button gearInButt = new JoystickButton(rightJoy, 2);
+	private static GearOut moveGearOut = new GearOut();
+	private static GearIn moveGearIn = new GearIn();
+	
+	/**OI Constructor
+	 * climbUpButt: While held down, go up at the preset speed (see above)
+	 * climbUpButt: While held down, go down at the preset speed (see above)
+	 * climbUpButt: When pressed, stop (emergency stop button)
+	 */
+	public OI(){
+		gearOutButt.whenPressed(moveGearOut);
+		gearInButt.whenPressed(moveGearIn);
 		climbUpButt.whileHeld(climbUpSpeed);
 		climbDownButt.whileHeld(climbDownSpeed);
 		climbStopButt.whenPressed(climbStopSpeed);
