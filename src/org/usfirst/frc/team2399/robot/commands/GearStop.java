@@ -9,40 +9,29 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearOut extends Command {
+public class GearStop extends Command {
 	
 	private GearCollector gearCollector = Robot.gearCollector;
-
-    public GearOut() {
+	
+    public GearStop() {
     	requires(gearCollector);
     	setInterruptible(true);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        
     }
 
-    /**
-     * Sets the amount of the time the command runs for
-     */
     // Called just before this Command runs the first time
     protected void initialize() {
-    	setTimeout(RobotMap.GEAR_TIMER);
     }
 
-    /**
-     * Solenoid is set to the "out" value and the command continues running until the timer runs out
-     */
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	gearCollector.setGearOutSolenoid(RobotMap.GEAR_SOLENOID_OUT_CONSTANT);
+    	gearCollector.setGearInSolenoid(!RobotMap.GEAR_SOLENOID_IN_CONSTANT);
+    	gearCollector.setGearOutSolenoid(!RobotMap.GEAR_SOLENOID_OUT_CONSTANT);
     }
-    
-    /**
-     * When the time passed exceeds the time established in initialize(), isTimedOut() returns true, 
-     * making isFinished() return true and stopping the command
-     */
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return false;
     }
 
     // Called once after isFinished returns true

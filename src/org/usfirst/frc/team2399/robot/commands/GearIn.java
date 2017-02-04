@@ -33,7 +33,7 @@ public class GearIn extends Command {
      */
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	gearCollector.setGearSolenoid(RobotMap.GEAR_SOLENOID_IN_CONSTANT);
+    	gearCollector.setGearInSolenoid(RobotMap.GEAR_SOLENOID_IN_CONSTANT);
     }
 
     /**
@@ -42,7 +42,7 @@ public class GearIn extends Command {
      */
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return gearCollector.getGearSolenoid() == RobotMap.GEAR_SOLENOID_IN_CONSTANT;
+      return isTimedOut();
     }
 
     // Called once after isFinished returns true

@@ -25,6 +25,7 @@ public class RobotMap {
 	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 8;
 	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 5;
 	public static final int CLIMBER_TALON_ADDRESS = 2;
+	public static final int PCM_ADDRESS = 3;
 
 	/**
 	 * Ports for sensors, joysticks, and solenoids
@@ -33,7 +34,8 @@ public class RobotMap {
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
 
-	public static final int GEAR_SOLENOID_PORT = 0;
+	public static final int GEAR_OUT_SOLENOID_PORT = 2;
+	public static final int GEAR_IN_SOLENOID_PORT = 3;
 	/**
 	 * Forward Constants
 	 * To ensure positive/forward values of motion are what you expect.
@@ -50,7 +52,7 @@ public class RobotMap {
 
 	
 	public static final boolean GEAR_SOLENOID_OUT_CONSTANT = true;
-	public static final boolean GEAR_SOLENOID_IN_CONSTANT = false;
+	public static final boolean GEAR_SOLENOID_IN_CONSTANT = true;
 	
 	public static final boolean REVERSE_LEFT_FRONT_MOTOR_OUTPUT = (DRIVETRAIN_FORWARD_LEFT == -1);
 	public static final boolean REVERSE_RIGHT_FRONT_MOTOR_OUTPUT = (DRIVETRAIN_FORWARD_LEFT == -1);
@@ -62,7 +64,7 @@ public class RobotMap {
 	 * TODO: Set actual time
 	 */
 	
-	public static final double GEAR_TIMER = 0.5;
+	public static final double GEAR_TIMER = 0.2;
 
 
 
