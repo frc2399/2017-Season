@@ -6,7 +6,9 @@ import org.usfirst.frc.team2399.robot.commands.JoyDrive;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
@@ -19,6 +21,8 @@ public class DriveTrain extends Subsystem {
 	private CANTalon rightMiddleTalon;
 	
 	private double goalDistance;
+	
+	private AHRS Navx = new AHRS(SPI.Port.kMXP);
 		
 	public DriveTrain() {
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);

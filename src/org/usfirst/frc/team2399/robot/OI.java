@@ -55,9 +55,9 @@ public class OI {
 	
 	//Climbing buttons - to be used in teleop
 	//TODO: set climbing buttons
-	private static Button climbUpButt = new JoystickButton(leftJoy, 86);
-	private static Button climbDownButt = new JoystickButton(leftJoy, 59);
-	private static Button climbStopButt = new JoystickButton(leftJoy, 300);
+	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
+	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
+	private static Button climbStopButt = new JoystickButton(leftJoy, 10);
 	
 	/**
 	 * Presets
@@ -89,8 +89,8 @@ public class OI {
 	/**
 	 * Presets - sets instances of commands and speeds for use with buttons
 	 */
-	private static Button gearOutButt = new JoystickButton(rightJoy, 55);
-	private static Button gearInButt = new JoystickButton(rightJoy, 44);
+	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
+	private static Button gearInButt = new JoystickButton(rightJoy, 2);
 	private static GearOut moveGearOut = new GearOut();
 	private static GearIn moveGearIn = new GearIn();
 	

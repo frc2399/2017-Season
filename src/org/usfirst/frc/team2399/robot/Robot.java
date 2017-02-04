@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
 	 * Creates an instance of OI 
 	 */
 	public static OI oi = new OI();
-;
+
 	
 	/**
 	 * 

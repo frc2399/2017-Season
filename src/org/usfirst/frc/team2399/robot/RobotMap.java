@@ -33,7 +33,7 @@ public class RobotMap {
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
 
-	public static final int GEAR_SOLENOID_PORT = 899;
+	public static final int GEAR_SOLENOID_PORT = 0;
 	/**
 	 * Forward Constants
 	 * To ensure positive/forward values of motion are what you expect.
@@ -45,6 +45,8 @@ public class RobotMap {
 	public static final int CLIMBER_FORWARD = 1;
 	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT = 1;
 	public static final int DRIVETRAIN_ENCODER_FORWARD_RIGHT = 1;
+	public static final int CLIMBER_FORWARD_CONSTANT = 1;
+
 
 	
 	public static final boolean GEAR_SOLENOID_OUT_CONSTANT = true;
@@ -63,7 +65,6 @@ public class RobotMap {
 	public static final double GEAR_TIMER = 0.5;
 
 
-	public static final int CLIMBER_FORWARD_CONSTANT = 1;
 
 
 
