@@ -28,6 +28,7 @@ public class RobotMap {
 
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
+	public static final int JOYDRIVE_SHOOTER_STICK_PORT = 2;
 
 	/**
 	 * FORWARD CONSTANTS

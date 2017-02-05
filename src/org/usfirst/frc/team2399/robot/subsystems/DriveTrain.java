@@ -184,18 +184,32 @@ public class DriveTrain extends Subsystem {
 	 * the P to the current P + the increment/decrement constant
 	 */
 	
-	public void incrementDistanceConstant(CANTalon currentTalon){
-		double currentPConstant = currentTalon.getP();
-		currentTalon.setP(currentPConstant += RobotMap.DRIVE_DISTANCE_INCREMENT);
+	public void incrementRightDistancePConstant(){
+		double currentPConstant = rightFrontTalon.getP();
+		rightFrontTalon.setP(currentPConstant += RobotMap.DRIVE_DISTANCE_INCREMENT);
 	}
 	
-	public void decrementDistanceConstant(CANTalon currentTalon){
-		double currentPConstant = currentTalon.getP();
-		currentTalon.setP(currentPConstant-= RobotMap.DRIVE_DISTANCE_DECREMENT);
+	public void incrementLeftDistancePConstant(){
+		double currentPConstant = leftFrontTalon.getP();
+		leftFrontTalon.setP(currentPConstant += RobotMap.DRIVE_DISTANCE_INCREMENT);
 	}
 	
-	public double returnDistanceConstant(CANTalon currentTalon){
-		return currentTalon.getP();
+	public void decrementRightDistancePConstant(){
+		double currentPConstant = rightFrontTalon.getP();
+		rightFrontTalon.setP(currentPConstant -= RobotMap.DRIVE_DISTANCE_DECREMENT);
+	}
+	
+	public void decrementLeftDistancePConstant(){
+		double currentPConstant = leftFrontTalon.getP();
+		leftFrontTalon.setP(currentPConstant -= RobotMap.DRIVE_DISTANCE_DECREMENT);
+	}
+	
+	public double returnRightDistanceConstant(){
+		return rightFrontTalon.getP();
+	}
+	
+	public double returnLeftDistanceConstant(){
+		return leftFrontTalon.getP();
 	}
 	
 	public double getCurrentAngle()

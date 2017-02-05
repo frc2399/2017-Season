@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2399.robot;
 
 
+import org.usfirst.frc.team2399.robot.commands.DriveAnglePAdjustment;
+import org.usfirst.frc.team2399.robot.commands.DriveDistancePAdjustment;
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -23,6 +25,7 @@ public class OI {
 	
 	private static Joystick leftJoy = new Joystick(RobotMap.JOYDRIVE_LEFT_STICK_PORT);
 	private static Joystick rightJoy = new Joystick(RobotMap.JOYDRIVE_RIGHT_STICK_PORT);
+	private static Joystick shooterJoy = new Joystick(RobotMap.JOYDRIVE_SHOOTER_STICK_PORT);
 	
 	/**
 	 * JOYSTICK METHODS
@@ -38,6 +41,11 @@ public class OI {
 
 	public static double getRightY() {
 		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
+	}
+	
+	public static double getShooterY()
+	{
+		return shooterJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 
 	//// CREATING BUTTONS
@@ -57,6 +65,10 @@ public class OI {
 	private static Button climbUpButt = new JoystickButton(leftJoy, 86);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 59);
 	private static Button climbStopButt = new JoystickButton(leftJoy, 300);
+	private static Button driveDistanceIncrementButt = new JoystickButton(shooterJoy, 5);
+	private static Button driveDistanceDecrementButt = new JoystickButton(shooterJoy, 3);
+	private static Button driveAngleIncrementButt = new JoystickButton(shooterJoy, 6);
+	private static Button driveAngleDecrementButt = new JoystickButton(shooterJoy, 4);
 	
 	/**
 	 * Presets
@@ -68,22 +80,11 @@ public class OI {
 	private static JoyClimb climbUpSpeed = new JoyClimb(RobotMap.CLIMB_UP);
 	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
 	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
-
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
+	
+	private static DriveDistancePAdjustment incrementDistanceP = new DriveDistancePAdjustment(true);
+	private static DriveDistancePAdjustment decrementDistanceP = new DriveDistancePAdjustment(false);
+	private static DriveAnglePAdjustment incrementAngleP = new DriveAnglePAdjustment(true);
+	private static DriveAnglePAdjustment decrementAngleP = new DriveAnglePAdjustment(false);
 	
 	/**
 	 * OI Constructor
@@ -96,5 +97,9 @@ public class OI {
 		climbUpButt.whileHeld(climbUpSpeed);
 		climbDownButt.whileHeld(climbDownSpeed);
 		climbStopButt.whenPressed(climbStopSpeed);
+		driveDistanceIncrementButt.whenPressed(incrementDistanceP);
+		driveDistanceDecrementButt.whenPressed(decrementDistanceP);
+		driveAngleIncrementButt.whenPressed(incrementAngleP);
+		driveAngleDecrementButt.whenPressed(decrementAngleP);
 	}
 }
