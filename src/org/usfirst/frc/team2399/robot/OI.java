@@ -68,8 +68,8 @@ public class OI {
 	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
 	private static Button climbStopButt = new JoystickButton(leftJoy, 10);
-	private static Button shiftToHotButt = new JoystickButton(rightJoy, 4);
-	private static Button shiftToDangerousButt = new JoystickButton(rightJoy, 5);
+	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
+	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
 
 
 	/**
