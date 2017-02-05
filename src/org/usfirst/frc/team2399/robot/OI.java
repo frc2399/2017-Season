@@ -42,25 +42,7 @@ public class OI {
 	 * 
 	 * @return the y-value from the Joystick
 	 */
-	public static double getLeftY() {
-		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
-	}
 
-	public static double getRightY() {
-		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
-	}
-
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
 
 	/**
 	 * Created buttons to change from the Hot speed to the Dangerous speed
@@ -92,22 +74,6 @@ public class OI {
 	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
 	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
 
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
-
 	/**
 	 * Presets - sets instances of commands and speeds for use with buttons
 	 */
@@ -129,5 +95,25 @@ public class OI {
 		climbStopButt.whenPressed(climbStopSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
+	}
+	
+	public static double getLeftY() {
+		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
+	}
+
+	public static double getRightY() {
+		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
+	}
+	
+	public static double deadband(double input)
+	{
+		if(Math.abs(input) < RobotMap.DEADBAND)
+		{
+			return 0;
+		}
+		else
+		{
+			return ((Math.abs(input)/input) *((Math.abs(input)-RobotMap.DEADBAND)/(1-RobotMap.DEADBAND)));
+		}
 	}
 }
