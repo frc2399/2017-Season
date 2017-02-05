@@ -6,7 +6,9 @@ import org.usfirst.frc.team2399.robot.commands.JoyDrive;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
@@ -18,7 +20,11 @@ public class DriveTrain extends Subsystem {
 	private CANTalon leftMiddleTalon;
 	private CANTalon rightMiddleTalon;
 	
+	private AHRS Navx = new AHRS(SPI.Port.kMXP);
+	
 	private double goalDistance;
+	private double desiredAngle;
+	private double anglePConstant = RobotMap.DRIVE_ANGLE_P;
 		
 	public DriveTrain() {
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
@@ -180,16 +186,92 @@ public class DriveTrain extends Subsystem {
 	
 	public void incrementDistanceConstant(CANTalon currentTalon){
 		double currentPConstant = currentTalon.getP();
-		currentTalon.setP(currentPConstant += RobotMap.DISTANCE_INCREMENT);
+		currentTalon.setP(currentPConstant += RobotMap.DRIVE_DISTANCE_INCREMENT);
 	}
 	
 	public void decrementDistanceConstant(CANTalon currentTalon){
 		double currentPConstant = currentTalon.getP();
-		currentTalon.setP(currentPConstant-= RobotMap.DISTANCE_DECREMENT);
+		currentTalon.setP(currentPConstant-= RobotMap.DRIVE_DISTANCE_DECREMENT);
 	}
 	
 	public double returnDistanceConstant(CANTalon currentTalon){
 		return currentTalon.getP();
+	}
+	
+	public double getCurrentAngle()
+	{
+		return Navx.getYaw();
+	}
+	
+	public void setDesiredAngle(double goalAngle)
+	{
+		desiredAngle = goalAngle;
+	}
+	
+	public double getDesiredAngle()
+	{
+		return desiredAngle;
+	}
+	
+	public double calculateAngleError()
+	{
+		double newDesiredAngle;
+		
+		if(getCurrentAngle()-180 >= getDesiredAngle())
+		{
+			newDesiredAngle = getDesiredAngle() + 360;
+		}
+		else if(getCurrentAngle()+180 < getDesiredAngle())
+		{
+			newDesiredAngle = getDesiredAngle() - 360;
+		}
+		else
+		{
+			newDesiredAngle = getDesiredAngle();
+		}
+		
+		return newDesiredAngle - getCurrentAngle();
+	}
+	
+	public void moveToAngle()
+	{
+		double pOutput = calculateAngleError() * anglePConstant;
+		driveRightVelocity(-pOutput);
+		driveLeftVelocity(pOutput);
+	}
+	
+	public boolean isDriveAngleFinished()
+	{
+		if(Math.abs(calculateAngleError()) <= RobotMap.DRIVE_ANGLE_ERROR)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public void incrementAnglePConstant()
+	{
+		anglePConstant += RobotMap.DRIVE_ANGLE_INCREMENT;
+	}
+	
+	public void decrementAnglePConstant()
+	{
+		anglePConstant -= RobotMap.DRIVE_ANGLE_DECREMENT;
+	}
+	
+	public double getAnglePConstant()
+	{
+		return anglePConstant;
+	}
+	
+	public void driveAtAngleToDistance()
+	{
+		double anglePOutput = calculateAngleError() * anglePConstant;
+		double leftPOutput = leftFrontTalon.getError() * leftFrontTalon.getP();
+		double rightPOutput = rightFrontTalon.getError() * rightFrontTalon.getP();
+		
+		driveRightVelocity(rightPOutput * RobotMap.DRIVE_MIXED_LINEAR - anglePOutput * RobotMap.DRIVE_MIXED_ANGULAR);
+		driveLeftVelocity(leftPOutput * RobotMap.DRIVE_MIXED_LINEAR + anglePOutput * RobotMap.DRIVE_MIXED_ANGULAR);
 	}
 	
 	@Override

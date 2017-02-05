@@ -63,9 +63,14 @@ public class RobotMap {
 	 * TODO: Set actual values for constants
 	 */
 	
-	public static final double DISTANCE_DECREMENT = 0;
-	public static final double DISTANCE_INCREMENT = 0;
-	public static final double ANGLE_P = 0;
+	public static final double DRIVE_DISTANCE_DECREMENT = 0;
+	public static final double DRIVE_DISTANCE_INCREMENT = 0;
+	public static final double DRIVE_ANGLE_DECREMENT = 0;
+	public static final double DRIVE_ANGLE_INCREMENT = 0;
+	public static double DRIVE_ANGLE_P = 0;
+	public static final double DRIVE_ANGLE_ERROR = 0;
+	public static final double DRIVE_MIXED_LINEAR = 0;
+	public static final double DRIVE_MIXED_ANGULAR = 0;
 	
 	/**
 	 * CALCULATION CONSTANTS
