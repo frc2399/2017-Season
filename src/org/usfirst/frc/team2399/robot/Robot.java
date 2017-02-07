@@ -21,11 +21,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 // Created a instance of Shifter so the Robot can reference that subsystem
 public class Robot extends IterativeRobot {
+	public static Climber climber;
+	public static Shifter shifter;
+	public static DriveTrain driveTrain;
+	public static GearCollector gearCollector;
 
-	public static Climber climber = new Climber();
-	public static Shifter shifter = new Shifter();
-	public static DriveTrain driveTrain = new DriveTrain();
-	public static GearCollector gearCollector = new GearCollector();
+
 
 
 	/**
@@ -46,8 +47,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		  climber = new Climber();
+		  shifter = new Shifter();
+		  driveTrain = new DriveTrain();
+		  gearCollector = new GearCollector();
 
-		// chooser.addObject("My Auto", new MyAutoCommand());
 
 	}
 
