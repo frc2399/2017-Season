@@ -64,6 +64,8 @@ public class RobotMap {
 	public static final boolean REVERSE_LEFT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_LEFT == -1);
 	public static final boolean REVERSE_RIGHT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_RIGHT == -1);
 	
+	public static final double DEADBAND = 0.05;
+	
 
 	/**
 	 * Timing Constants
