@@ -105,15 +105,36 @@ public class OI {
 		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 	
-	public static double deadband(double input)
+	/**
+	 * Modifies the joystick output so that they aren't too sensitive/insensitive to driver control
+	 * 
+	 * joystickInputNoDirection/joystickInputWithDirection: Sets the input to be either 1 or negative one (forwards or backwards)
+	 * joystickInputNoDirection-RobotMap.DEADBAND: Removes  the deadband area from the joystick input to calculate the current actual input
+	 * 1-RobotMap.DEADBAND: Removes the deadband area form the total possible joystick input
+	 * joystickInputWithoutDeadband/totalJoystickInputPossibleWithDeadband: Calculates the amount of current input as a fraction of the total possible
+	 * 
+	 * If the joystick input is less than the deadband width, don't move the robot
+	 * Otherwise, perform the output scaling calculation to take deadband into account
+	 * @param input
+	 * @return
+	 */
+	
+	public static double modifyJoyOutputWithDeadband(double input)
 	{
-		if(Math.abs(input) < RobotMap.DEADBAND)
+		double joystickInputNoDirection = Math.abs(input);
+		double joystickInputWithDirection = input;
+		
+		double joystickInputDirection = joystickInputNoDirection/joystickInputWithDirection;
+		double joystickInputWithDeadband = joystickInputNoDirection-RobotMap.DEADBAND;
+		double totalJoystickInputPossibleWithDeadband = 1-RobotMap.DEADBAND;
+		
+		if(joystickInputNoDirection < RobotMap.DEADBAND)
 		{
 			return 0;
 		}
 		else
 		{
-			return ((Math.abs(input)/input) *((Math.abs(input)-RobotMap.DEADBAND)/(1-RobotMap.DEADBAND)));
+			return (joystickInputDirection * joystickInputWithoutDeadband/totalJoystickInputPossibleWithDeadband);
 		}
 	}
 }

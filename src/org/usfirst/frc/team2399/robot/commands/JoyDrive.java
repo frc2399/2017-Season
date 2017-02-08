@@ -25,8 +25,8 @@ public class JoyDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		driveTrain.driveLeftPercent(OI.deadband(OI.getLeftY()));
-		driveTrain.driveRightPercent(OI.deadband(OI.getRightY()));
+		driveTrain.driveLeftPercent(OI.modifyJoyOutputWithDeadband(OI.getLeftY()));
+		driveTrain.driveRightPercent(OI.modifyJoyOutputWithDeadband(OI.getRightY()));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
