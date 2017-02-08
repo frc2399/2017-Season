@@ -212,6 +212,12 @@ public class DriveTrain extends Subsystem {
 		return leftFrontTalon.getP();
 	}
 	
+	/**
+	 * Returns angle relative to initial position OR relative to field, measured from 180 to -180 degrees
+	 * Initial position - gyro in robot-oriented mode
+	 * Relative to field - gyro in field-oriented mode
+	 * @return
+	 */
 	public double getCurrentAngle()
 	{
 		return Navx.getYaw();
@@ -227,6 +233,10 @@ public class DriveTrain extends Subsystem {
 		return desiredAngle;
 	}
 	
+	/**
+	 * TODO: Simplify this error calculation
+	 * @return
+	 */
 	public double calculateAngleError()
 	{
 		double newDesiredAngle;
@@ -256,11 +266,7 @@ public class DriveTrain extends Subsystem {
 	
 	public boolean isDriveAngleFinished()
 	{
-		if(Math.abs(calculateAngleError()) <= RobotMap.DRIVE_ANGLE_ERROR)
-		{
-			return true;
-		}
-		return false;
+		return Math.abs(calculateAngleError()) <= RobotMap.DRIVE_ANGLE_ERROR;
 	}
 	
 	public void incrementAnglePConstant()

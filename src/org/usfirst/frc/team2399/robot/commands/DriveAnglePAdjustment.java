@@ -6,7 +6,7 @@ import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *Used for loop tuning with buttons
  */
 public class DriveAnglePAdjustment extends Command {
 	
@@ -26,7 +26,7 @@ public class DriveAnglePAdjustment extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(isIncrementing == true)
+    	if(isIncrementing)
     	{
     		driveTrain.incrementAnglePConstant();
     	}

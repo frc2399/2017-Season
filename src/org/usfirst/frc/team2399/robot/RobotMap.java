@@ -70,6 +70,9 @@ public class RobotMap {
 	public static final double DRIVE_ANGLE_INCREMENT = 0;
 	public static double DRIVE_ANGLE_P = 0;
 	public static final double DRIVE_ANGLE_ERROR = 0;
+	/**
+	 * Constants for completing both driving to a distance and to an angle at the same time
+	 */
 	public static final double DRIVE_MIXED_LINEAR = 0;
 	public static final double DRIVE_MIXED_ANGULAR = 0;
 	
