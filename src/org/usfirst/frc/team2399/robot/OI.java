@@ -134,7 +134,7 @@ public class OI {
 		}
 		else
 		{
-			return (joystickInputDirection * joystickInputWithoutDeadband/totalJoystickInputPossibleWithDeadband);
+			return (joystickInputDirection * joystickInputWithDeadband/totalJoystickInputPossibleWithDeadband);
 		}
 	}
 }
