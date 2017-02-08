@@ -119,10 +119,10 @@ public class OI {
 	 * @return
 	 */
 	
-	public static double modifyJoyOutputWithDeadband(double input)
+	public static double modifyJoyOutputWithDeadband(double joystickInputWithDirection)
 	{
-		double joystickInputNoDirection = Math.abs(input);
-		double joystickInputWithDirection = input;
+		double joystickInputNoDirection = Math.abs(joystickInputWithDirection);
+		
 		
 		double joystickInputDirection = joystickInputNoDirection/joystickInputWithDirection;
 		double joystickInputWithDeadband = joystickInputNoDirection-RobotMap.DEADBAND;
