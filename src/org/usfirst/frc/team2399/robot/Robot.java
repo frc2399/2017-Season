@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2399.robot;
 
+import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2399.robot.subsystems.Shifter;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static Shifter shifter = new Shifter();
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static GearCollector gearCollector = new GearCollector();
+	public static Agitator agitator = new Agitator();
 
 
 	/**
