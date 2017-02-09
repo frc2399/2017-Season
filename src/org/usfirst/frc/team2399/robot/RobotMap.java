@@ -73,17 +73,9 @@ public class RobotMap {
 
 	public static final double GEAR_TIMER = 0.2;
 
-
-
-
-
-
-
-
-	
 	/**
 	 * PRESET SPEEDS
-	 * Preset speeds for climber to be used elsewhere in code
+	 * Preset speeds to be used elsewhere in code
 	 * Currently at full speed - may need to be less depending on the mechanism
 	 * TODO: set actual speeds
 	 */

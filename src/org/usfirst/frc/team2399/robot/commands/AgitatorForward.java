@@ -7,8 +7,9 @@ import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * 
  */
+
 public class AgitatorForward extends Command {
 	
 	private Agitator agitator = Robot.agitator;
