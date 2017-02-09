@@ -7,7 +7,7 @@ import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Moves gear mechanism inwards
  */
 public class GearIn extends Command {
 	
@@ -16,41 +16,47 @@ public class GearIn extends Command {
     public GearIn() {
     	requires(gearCollector);
     	setInterruptible(true);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     /**
+     * Called just before this Command runs the first time
      * Sets the amount of the time the command runs for
      */
-    // Called just before this Command runs the first time
+
     protected void initialize() {
     	setTimeout(RobotMap.GEAR_TIMER);
     }
 
     /**
+     * Called repeatedly when this Command is scheduled to run
      * Solenoid is set to the "in" value and the command continues running until the timer runs out
      */
-    // Called repeatedly when this Command is scheduled to run
+    
     protected void execute() {
-    	gearCollector.setGearInSolenoid(RobotMap.GEAR_SOLENOID_IN_CONSTANT);
+    	gearCollector.setGearInSolenoid(RobotMap.GEAR_SOLENOID_IN);
     }
 
     /**
+     *Make this return true when this Command no longer needs to run execute()
      * When the time passed exceeds the time established in initialize(), isTimedOut() returns true, 
      *  making isFinished() return true and stopping the command
      */
-    // Make this return true when this Command no longer needs to run execute()
+
     protected boolean isFinished() {
       return isTimedOut();
     }
 
-    // Called once after isFinished returns true
+    /** 
+     * Called once after isFinished returns true
+     */
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    /**
+     *Called when another command which requires one or more of the same
+     *subsystems is scheduled to run
+     */
+
     protected void interrupted() {
     }
 }

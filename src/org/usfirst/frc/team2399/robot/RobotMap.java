@@ -11,12 +11,13 @@ public class RobotMap {
 
 	/**
 	 * ADDRESSES, PORTS, AND CHANNELS
-	 * Address for Talons Things on the CAN network have addresses. Things on
-
-	 * PWM network have ports. TODO: Find correct cantalon once on the robot
-	 * 
+	 * Address for Talons 
+	 * Things on the CAN network have addresses. Things on PWM network have ports. 
 	 */
 	
+	/**
+	 * Talon Addresses
+	 */
 	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 7;
 	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 10;
 	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 6;
@@ -28,7 +29,6 @@ public class RobotMap {
 
 	/**
 	 * Ports for sensors, joysticks, and solenoids
-	 * TODO: Set actual ports
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
@@ -39,60 +39,31 @@ public class RobotMap {
 	public static final int GEAR_IN_SOLENOID_PORT = 3;
 
 	/**
+	 * CONSTANTS
+	 */
+	
+	/**
 	 * Forward Constants
 	 * To ensure positive/forward values of motion are what you expect.
-	 * TODO: Set actual values
 	 */
+	
 	public static final int JOYDRIVE_FORWARD = -1;
+	
 	public static final int DRIVETRAIN_FORWARD_LEFT = -1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT = 1;
 	public static final int CLIMBER_FORWARD = 1;
+	
 	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT = -1;
 	public static final int DRIVETRAIN_ENCODER_FORWARD_RIGHT = 1;
-	public static final int CLIMBER_FORWARD_CONSTANT = 1;
 	
-	public static final boolean SHIFTER_SOLENOID_DANGEROUS_CONTSTANT = true;
-	public static final boolean SHIFTER_SOLENOID_HOT_CONTSTANT = true;
-
-
-
-
-	public static final boolean GEAR_SOLENOID_OUT_CONSTANT = true;
-	public static final boolean GEAR_SOLENOID_IN_CONSTANT = true;
-	
+	public static final boolean SHIFTER_SOLENOID_DANGEROUS= true;
+	public static final boolean SHIFTER_SOLENOID_HOT= true;
+	public static final boolean GEAR_SOLENOID_OUT= true;
+	public static final boolean GEAR_SOLENOID_IN = true;
 	
 	public static final boolean REVERSE_LEFT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_LEFT == -1);
 	public static final boolean REVERSE_RIGHT_ENCODER_OUTPUT = (DRIVETRAIN_ENCODER_FORWARD_RIGHT == -1);
-	
-	public static final double DEADBAND = 0.05;
-	
 
-	/**
-	 * Timing Constants
-	 * TODO: Set actual time
-	 */
-
-	public static final double GEAR_TIMER = 0.2;
-
-
-
-
-
-
-
-
-	
-	/**
-	 * PRESET SPEEDS
-	 * Preset speeds for climber to be used elsewhere in code
-	 * Currently at full speed - may need to be less depending on the mechanism
-	 * TODO: set actual speeds
-	 */
-
-	public static final double CLIMB_UP = 1.0;
-	public static final double CLIMB_DOWN = -1.0;
-	public static final double CLIMB_STOP = 0.0;
-	
 	/**
 	 * ENCODER CONSTANTS
 	 * TODO: Set actual values for constants
@@ -103,10 +74,30 @@ public class RobotMap {
 	public static final double ANGLE_P = 0;
 	
 	/**
+	 * Timing Constants
+	 */
+
+	public static final double GEAR_TIMER = 0.2;
+	public static final double SHIFT_TIMER = 0.5;
+	
+	/**
+	 * PRESET SPEEDS
+	 * Preset speeds to be used elsewhere in code
+	 * Climber is at full speed - may need to be less depending on the mechanism
+	 * TODO: set actual speeds
+	 */
+
+	public static final double CLIMB_UP = 1.0;
+	public static final double CLIMB_DOWN = -1.0;
+	public static final double CLIMB_STOP = 0.0;
+	
+	
+	/**
 	 * CALCULATION CONSTANTS
 	 */
 	
 	/**
+	 * Wheel Measurements
 	 * in inches
 	 */
 	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
@@ -122,13 +113,8 @@ public class RobotMap {
 	public static final double PERCENT_LOWER_SOFT_LIMIT = -1;
 	public static final double PERCENT_UPPER_SOFT_LIMIT = 1;
 	
-
 	/**
-	 * Timing Constants
+	 * Joystick Output
 	 */
-
-	// TODO: Figure out what this time should actually be
-	// Created a constant for how long the solenoid should run
-	public static final double SHIFT_TIMER = 0.5;
-
+	public static final double DEADBAND = 0.05;
 }

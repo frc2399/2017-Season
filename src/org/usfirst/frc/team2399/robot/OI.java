@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+
 public class OI {
 
 	/**
@@ -33,60 +34,42 @@ public class OI {
 	private static Joystick rightJoy = new Joystick(RobotMap.JOYDRIVE_RIGHT_STICK_PORT);
 
 	/**
-	 * JOYSTICK METHODS
+	 * BUTTONS
 	 */
-
-	/**
-	 * Gets values from the Joysticks for setting speeds in other
-	 * commands/subsystems
-	 * 
-	 * @return the y-value from the Joystick
-	 */
-
-
-	/**
-	 * Created buttons to change from the Hot speed to the Dangerous speed
-	 */
+	
 	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
 	private static Button climbStopButt = new JoystickButton(leftJoy, 10);
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
-
-
-	/**
-	 * Presets
-	 */
+	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
+	private static Button gearInButt = new JoystickButton(rightJoy, 2);
 
 	/**
-	 * Preset drivetrain gears, Created new instance of command so the buttons
-	 * can refer to them
+	 * COMMAND INSTANCES
+	 * Sets instances of commands and speeds for use with buttons
 	 */
 
 	private static ShiftDangerous shiftToDangerous = new ShiftDangerous();
 	private static ShiftHot shiftToHot = new ShiftHot();
-
-	// preset speeds
-
-	// References RobotMap for speed values; to be used to set speed when
-	// buttons are pressed
 	private static JoyClimb climbUpSpeed = new JoyClimb(RobotMap.CLIMB_UP);
 	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
 	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
-
-	/**
-	 * Presets - sets instances of commands and speeds for use with buttons
-	 */
-	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
-	private static Button gearInButt = new JoystickButton(rightJoy, 2);
 	private static GearOut moveGearOut = new GearOut();
 	private static GearIn moveGearIn = new GearIn();
 	
-	/**OI Constructor
+	/**
+	 * OI CONSTRUCTOR
+	 * 
+	 * gearOutButt: when pressed, move the gear collecting mechanism out
+	 * gearInButt: when pressed, move the gear collecting mechanism in
 	 * climbUpButt: While held down, go up at the preset speed (see above)
-	 * climbUpButt: While held down, go down at the preset speed (see above)
-	 * climbUpButt: When pressed, stop (emergency stop button)
+	 * climbDownButt: While held down, go down at the preset speed (see above)
+	 * climbStopButt: When pressed, stop (emergency stop button)
+	 * shiftToHotButt: When pressed, shift to hot (low) gear
+	 * shiftToDangerousButt: When pressed, shift to dangerous (high) gear
 	 */
+	
 	public OI(){
 		gearOutButt.whenPressed(moveGearOut);
 		gearInButt.whenPressed(moveGearIn);
@@ -97,9 +80,24 @@ public class OI {
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
 	}
 	
+	/**
+	 * JOYSTICK METHODS
+	 */
+
+	/**
+	 * Gets values from the left joystick for setting speeds in other
+	 * commands/subsystems
+	 * @return the y-value from the Joystick
+	 */
 	public static double getLeftY() {
 		return leftJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
+	
+	/**
+	 * Gets values from the right for setting speeds in other
+	 * commands/subsystems
+	 * @return the y-value from the Joystick
+	 */
 
 	public static double getRightY() {
 		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
