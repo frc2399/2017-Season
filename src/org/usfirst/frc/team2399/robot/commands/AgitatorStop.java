@@ -7,8 +7,9 @@ import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Stop agitator motor
  */
+
 public class AgitatorStop extends Command {
 
 	private Agitator agitator = Robot.agitator;

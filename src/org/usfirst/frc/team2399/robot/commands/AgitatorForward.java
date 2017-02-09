@@ -7,7 +7,7 @@ import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * 
+ * Moves agitator motor forward
  */
 
 public class AgitatorForward extends Command {

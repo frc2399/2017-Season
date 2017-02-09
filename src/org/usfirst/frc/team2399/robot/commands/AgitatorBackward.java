@@ -7,8 +7,9 @@ import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Moves agitator motor backwards
  */
+
 public class AgitatorBackward extends Command {
 
 	private Agitator agitator = Robot.agitator;

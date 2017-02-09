@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-
 public class Agitator extends Subsystem {
 
 	private CANTalon agitatorTalon;
@@ -29,10 +28,6 @@ public class Agitator extends Subsystem {
 		return agitatorTalon.getSpeed();
 	}
 	
-	
-	/**
-	 * TODO: Did I do this right?
-	 */
     public void initDefaultCommand() {
     	setDefaultCommand(new AgitatorStop());
     }
