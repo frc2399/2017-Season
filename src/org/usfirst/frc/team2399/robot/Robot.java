@@ -1,6 +1,8 @@
-
 package org.usfirst.frc.team2399.robot;
 
+
+
+import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2399.robot.subsystems.Shifter;
@@ -118,8 +120,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("DriveTrain Yaw", driveTrain.getCurrentAngle());
-		SmartDashboard.putNumber("DriveTrain Angle", driveTrain.getTheAngle());
 	}
 
 	/**
@@ -128,5 +128,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+		LiveWindow.addActuator("DriveTrain2", "PIDSubsystem Controller", driveTrain.getPIDController());
+		driveTrain.getPIDController().startLiveWindowMode();
 	}
 }

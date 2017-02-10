@@ -9,9 +9,11 @@ import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends PIDSubsystem {
 	
 	private CANTalon leftFrontTalon;
 	private CANTalon rightFrontTalon;
@@ -30,6 +32,7 @@ public class DriveTrain extends Subsystem {
 	
 	
 	public DriveTrain() {
+		super("DriveTrain", 0.02, 0.0, 0.0);
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
 		rightFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		leftBackTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_BACK_TALON_ADDRESS);
@@ -81,7 +84,8 @@ public class DriveTrain extends Subsystem {
 		rightFrontTalon.setP(0);
 		rightFrontTalon.setI(0);
 		rightFrontTalon.setD(0);
-	
+		getPIDController().setContinuous();
+		LiveWindow.addActuator("DriveTrain", "PIDSubsystem Controller", getPIDController());
 		
 	}
 	
@@ -221,14 +225,14 @@ public class DriveTrain extends Subsystem {
 	 * Relative to field - gyro in field-oriented mode
 	 * @return
 	 */
-	public double getCurrentAngle()
+	/*public double getCurrentAngle()
 	{
 		return Navx.getYaw();
 	}
 	
 	public double getTheAngle()
 	{
-		if(Navx.getAngle() <= 360)
+		if(Math.abs(Navx.getAngle()) <= 360)
 		return Navx.getAngle();
 		else
 		{
@@ -244,12 +248,12 @@ public class DriveTrain extends Subsystem {
 	{
 		return desiredAngle;
 	}
-	
+	*/
 	/**
 	 * TODO: Simplify this error calculation
 	 * @return
 	 */
-	public double calculateAngleError()
+	/*public double calculateAngleError()
 	{
 		double newDesiredAngle;
 		
@@ -268,8 +272,8 @@ public class DriveTrain extends Subsystem {
 		
 		return newDesiredAngle - getCurrentAngle();
 	}
-	
-	public void moveToAngle()
+	*/
+	/*public void moveToAngle()
 	{
 		double pOutput = calculateAngleError() * anglePConstant;
 		driveRightVelocity(-pOutput);
@@ -304,10 +308,23 @@ public class DriveTrain extends Subsystem {
 		
 		driveRightVelocity(rightPOutput * RobotMap.DRIVE_MIXED_LINEAR - anglePOutput * RobotMap.DRIVE_MIXED_ANGULAR);
 		driveLeftVelocity(leftPOutput * RobotMap.DRIVE_MIXED_LINEAR + anglePOutput * RobotMap.DRIVE_MIXED_ANGULAR);
-	}
+	}*/
 	
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new JoyDrive());
+	}
+
+	@Override
+	protected double returnPIDInput()
+	{
+		return Navx.getYaw();
+	}
+
+	@Override
+	protected void usePIDOutput(double output)
+	{
+		driveRightVelocity(-output);
+		driveLeftVelocity(output);
 	}		
 }
