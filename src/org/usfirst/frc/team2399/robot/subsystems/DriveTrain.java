@@ -223,6 +223,15 @@ public class DriveTrain extends Subsystem {
 		return Navx.getYaw();
 	}
 	
+	public double getTheAngle()
+	{
+		if(Navx.getAngle() <= 360)
+		return Navx.getAngle();
+		else
+		{
+			return Navx.getAngle() % 360;
+		}
+	}
 	public void setDesiredAngle(double goalAngle)
 	{
 		desiredAngle = goalAngle;
