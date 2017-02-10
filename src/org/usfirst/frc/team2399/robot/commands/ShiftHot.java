@@ -1,43 +1,45 @@
 package org.usfirst.frc.team2399.robot.commands;
 
-import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.Robot;
-import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2399.robot.RobotMap;
+import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Links drive train to joy stick
+ * Shifts drivetrain to hot (low) gear
  */
-public class JoyDrive extends Command {
+public class ShiftHot extends Command {
+	private Shifter shifter = Robot.shifter;
 
-	private DriveTrain driveTrain = Robot.driveTrain;
-
-	public JoyDrive() {
-		requires(driveTrain);
+	public ShiftHot() {
+		requires(shifter);
 		setInterruptible(true);
 	}
 
 	/**
+	 * Sets a timer of how long the solenoid needs to run
 	 * Called just before this Command runs the first time
 	 */
 	protected void initialize() {
-		
-	}
-	
-	/**
-	 * Called repeatedly when this Command is scheduled to run
-	 */
-	protected void execute() {
-		driveTrain.driveLeftPercent(OI.modifyJoyOutputWithDeadband(OI.getLeftY()));
-		driveTrain.driveRightPercent(OI.modifyJoyOutputWithDeadband(OI.getRightY()));
+		setTimeout(RobotMap.SHIFT_TIMER);
 	}
 
 	/**
+	 * Sets the solenoid to a boolean value of false
+	 * Called repeatedly when this Command is scheduled to run
+	 */
+	protected void execute() {
+		shifter.setShifterHotSolenoid(RobotMap.SHIFTER_SOLENOID_HOT);
+	}
+
+	/**
+	 * isTimedOut returns true when the timer runs out, and the command will no longer execute
 	 * Make this return true when this Command no longer needs to run execute()
 	 */
+	
 	protected boolean isFinished() {
-		return false;
+		return isTimedOut();
 	}
 
 	/**

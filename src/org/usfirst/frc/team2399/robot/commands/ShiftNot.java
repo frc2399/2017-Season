@@ -1,20 +1,20 @@
-
 package org.usfirst.frc.team2399.robot.commands;
 
 import org.usfirst.frc.team2399.robot.Robot;
-import org.usfirst.frc.team2399.robot.subsystems.Climber;
+import org.usfirst.frc.team2399.robot.RobotMap;
+import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Stops the climb mechanism 
+ * Sets both solenoids to false (idle)
  */
-public class StopClimb extends Command {
+public class ShiftNot extends Command {
 	
-	private Climber climber = Robot.climber;
+	private Shifter shifter = Robot.shifter;
 
-    public StopClimb() {
-    	requires(climber);
+    public ShiftNot() {
+    	requires(shifter);
     	setInterruptible(true);
     }
 
@@ -26,10 +26,11 @@ public class StopClimb extends Command {
 
     /**
      *  Called repeatedly when this Command is scheduled to run
-     *  Sets climber motor speed
+     *  Both solenoids are set to false (subsystem is idle)
      */
     protected void execute() {
-    	climber.setClimberSpeed(0);
+    	shifter.setShifterHotSolenoid(!RobotMap.SHIFTER_SOLENOID_HOT);
+    	shifter.setShifterDangerousSolenoid(!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
     }
 
     /**
@@ -48,7 +49,7 @@ public class StopClimb extends Command {
     /**
      *  Called when another command which requires one or more of the same
      *  subsystems is scheduled to run
-     */ 
+     */
     protected void interrupted() {
     }
 }
