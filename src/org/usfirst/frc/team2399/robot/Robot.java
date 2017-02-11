@@ -1,14 +1,19 @@
-
 package org.usfirst.frc.team2399.robot;
 
+
+
+import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2399.robot.subsystems.Shifter;
+import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,34 +22,35 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
 public class Robot extends IterativeRobot {
 	
-
-	public static Climber climber = new Climber();
+	public static Climber climber;
+	public static Shifter shifter;
+	public static DriveTrain driveTrain;
+	public static GearCollector gearCollector;
+	public static OI oi;
 
 	/**
-	 * Creates an instance of OI 
+	 * Autonomous command to be run should go here (used along with autonomousInit
 	 */
-	public static OI oi = new OI();
-;
-	
-	/**
-	 * 
-	 */
-	public static DriveTrain driveTrain = new DriveTrain();
-
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
+	 * All instances of subsystems should be initialized here
+	 * OI must be instantiated after the others so the buttons register the subsystems
+	 * used by the commands they're attached to
 	 */
 	@Override
 	public void robotInit() {
-
-		// chooser.addObject("My Auto", new MyAutoCommand());
-
+		  climber = new Climber();
+		  shifter = new Shifter();
+		  driveTrain = new DriveTrain();
+		  gearCollector = new GearCollector();
+		  oi = new OI();
 	}
 
 	/**
@@ -76,7 +82,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
-
+		driveTrain.resetDriveTrainGyro();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -99,13 +105,18 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-	}
+		/**
+		 * Puts the PIDController on the SmartDashboard to input values
+		 */
+		SmartDashboard.putData("PIDController", driveTrain.getPIDController());
+		}
 
 	/**
 	 * This function is called periodically during operator control

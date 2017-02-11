@@ -1,25 +1,23 @@
 package org.usfirst.frc.team2399.robot.commands;
 
 import org.usfirst.frc.team2399.robot.Robot;
-import org.usfirst.frc.team2399.robot.subsystems.Climber;
+import org.usfirst.frc.team2399.robot.RobotMap;
+import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Links climbing to joystick control
+ * Stops the gear mechanism from moving
+ * Subsystem default
  */
-public class JoyClimb extends Command {
+public class GearStop extends Command {
 	
-	private Climber climber = Robot.climber;
-	double speed;
+	private GearCollector gearCollector = Robot.gearCollector;
 	
-	/**
-	 * @param speed: the speed inputted into the constructor is assigned to the double created above
-	 */
-    public JoyClimb(double speed) {
-    	this.speed = speed;
-    	requires(climber);
+    public GearStop() {
+    	requires(gearCollector);
     	setInterruptible(true);
+        
     }
 
     /**
@@ -30,15 +28,16 @@ public class JoyClimb extends Command {
 
     /**
      * Called repeatedly when this Command is scheduled to run
-     * When command is run, climber is set to the inputted speed (see constructor)
+     * Sets the mechanism to be neither in nor out (idle)
      */
     protected void execute() {
-    	climber.setClimberSpeed(speed);
-    	
+    	gearCollector.setGearInSolenoid(!RobotMap.GEAR_SOLENOID_IN);
+    	gearCollector.setGearOutSolenoid(!RobotMap.GEAR_SOLENOID_OUT);
     }
 
     /**
      * Make this return true when this Command no longer needs to run execute()
+     * Continues running until interrupted by another command
      */
     protected boolean isFinished() {
         return false;
@@ -50,7 +49,8 @@ public class JoyClimb extends Command {
     protected void end() {
     }
 
-    /**Called when another command which requires one or more of the same
+    /**
+     * Called when another command which requires one or more of the same
      * subsystems is scheduled to run
      */
     protected void interrupted() {
