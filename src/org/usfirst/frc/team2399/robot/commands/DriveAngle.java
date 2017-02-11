@@ -22,7 +22,7 @@ public class DriveAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	driveTrain.setTargetAngle(setpoint);
+    	driveTrain.driveAngle(setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
