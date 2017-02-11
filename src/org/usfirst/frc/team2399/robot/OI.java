@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2399.robot;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
-import org.usfirst.frc.team2399.robot.commands.DriveAnglePAdjustment;
+import org.usfirst.frc.team2399.robot.commands.DriveAngle;
 import org.usfirst.frc.team2399.robot.commands.DriveDistancePAdjustment;
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 import org.usfirst.frc.team2399.robot.commands.ShiftDangerous;
@@ -41,12 +41,20 @@ public class OI {
 	/**
 	 * BUTTONS
 	 */
+	//Climbing buttons - to be used in teleop
+		//TODO: set climbing buttons
+	
+	private static Button driveAngleTest1Butt = new JoystickButton(shooterJoy, 6);
+	private static Button driveAngleTest2Butt = new JoystickButton(shooterJoy, 3);
+	private static Button driveAngleTest3Butt = new JoystickButton(shooterJoy, 4);
 	
 	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
 	private static Button climbStopButt = new JoystickButton(leftJoy, 10);
+	
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
+	
 	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
 	private static Button gearInButt = new JoystickButton(rightJoy, 2);
 
@@ -62,6 +70,11 @@ public class OI {
 	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
 	private static GearOut moveGearOut = new GearOut();
 	private static GearIn moveGearIn = new GearIn();
+	
+	private static DriveAngle driveAngleTest1 = new DriveAngle(RobotMap.TEST_ANGLE_1);
+	private static DriveAngle driveAngleTest2 = new DriveAngle(RobotMap.TEST_ANGLE_2);
+	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3);
+
 	
 	/**
 	 * OI CONSTRUCTOR
@@ -83,10 +96,10 @@ public class OI {
 		climbStopButt.whenPressed(climbStopSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
-		driveDistanceIncrementButt.whenPressed(incrementDistanceP);
-		driveDistanceDecrementButt.whenPressed(decrementDistanceP);
-		driveAngleIncrementButt.whenPressed(incrementAngleP);
-		driveAngleDecrementButt.whenPressed(decrementAngleP);
+
+		driveAngleTest1Butt.whenPressed(driveAngleTest1);
+		driveAngleTest2Butt.whenPressed(driveAngleTest2);
+		driveAngleTest3Butt.whenPressed(driveAngleTest3);
 
 	}
 	
@@ -119,15 +132,6 @@ public class OI {
 		return shooterJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 	
-	//Climbing buttons - to be used in teleop
-	//TODO: set climbing buttons
-	private static Button driveDistanceIncrementButt = new JoystickButton(shooterJoy, 5);
-	private static Button driveDistanceDecrementButt = new JoystickButton(shooterJoy, 3);
-	private static Button driveAngleIncrementButt = new JoystickButton(shooterJoy, 6);
-	private static Button driveAngleDecrementButt = new JoystickButton(shooterJoy, 4);
-
-
-	
 	/**
 	 * Modifies the joystick output so that they aren't too sensitive/insensitive to driver control
 	 * 
@@ -147,8 +151,6 @@ public class OI {
 	//References RobotMap for speed values; to be used to set speed when buttons are pressed
 	private static DriveDistancePAdjustment incrementDistanceP = new DriveDistancePAdjustment(true);
 	private static DriveDistancePAdjustment decrementDistanceP = new DriveDistancePAdjustment(false);
-	private static DriveAnglePAdjustment incrementAngleP = new DriveAnglePAdjustment(true);
-	private static DriveAnglePAdjustment decrementAngleP = new DriveAnglePAdjustment(false);
 	
 	public static double modifyJoyOutputWithDeadband(double joystickInputWithDirection)
 	{

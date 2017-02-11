@@ -82,7 +82,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
-
+		driveTrain.resetDriveTrainGyro();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -112,7 +112,11 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-	}
+		/**
+		 * Puts the PIDController on the SmartDashboard to input values
+		 */
+		SmartDashboard.putData("PIDController", driveTrain.getPIDController());
+		}
 
 	/**
 	 * This function is called periodically during operator control
@@ -128,7 +132,5 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
-		LiveWindow.addActuator("DriveTrain2", "PIDSubsystem Controller", driveTrain.getPIDController());
-		driveTrain.getPIDController().startLiveWindowMode();
 	}
 }

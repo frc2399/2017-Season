@@ -26,13 +26,22 @@ public class DriveTrain extends PIDSubsystem {
 	
 	private double goalDistance;
 
-	private double desiredAngle;
-	private double anglePConstant = RobotMap.DRIVE_ANGLE_P;
+	private double targetAngle;
+	private static double anglePConstant = RobotMap.DRIVE_ANGLE_P;
+	private static double angleIConstant = RobotMap.DRIVE_ANGLE_I;
+	private static double angleDConstant = RobotMap.DRIVE_ANGLE_D;
+
+	
+	private double angleMerkelTolerance = RobotMap.ANGLE_MERKEL_TOLERANCE;
 
 	
 	
 	public DriveTrain() {
-		super("DriveTrain", 0.02, 0.0, 0.0);
+		/**
+		 * Invokes PIDSubsystem constructor
+		 */
+		super("DriveTrain", anglePConstant, angleIConstant, angleDConstant);
+		
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
 		rightFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		leftBackTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_BACK_TALON_ADDRESS);
@@ -59,7 +68,7 @@ public class DriveTrain extends PIDSubsystem {
 		rightMiddleTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		rightBackTalon.changeControlMode(TalonControlMode.Follower);
 		rightBackTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
-		
+	
 		/**
 		 * If the forward constant is negative (see boolean in RobotMap) reverse the output of
 		 * either the sensor or the motor
@@ -84,9 +93,26 @@ public class DriveTrain extends PIDSubsystem {
 		rightFrontTalon.setP(0);
 		rightFrontTalon.setI(0);
 		rightFrontTalon.setD(0);
-		getPIDController().setContinuous();
-		LiveWindow.addActuator("DriveTrain", "PIDSubsystem Controller", getPIDController());
 		
+		/**
+		 * Treats the max and min values to be the same point for rotational distances
+		 */
+		getPIDController().setContinuous();
+		
+		/**
+		 * Sets the range of inputs (degrees from getYaw())
+		 */
+		getPIDController().setInputRange(-180.0, 180.0);
+		
+		/**
+		 * Sets the output range (voltage)
+		 */
+		getPIDController().setOutputRange(-1.0, 1.0);
+		
+		/**
+		 * Sets the acceptable range to target
+		 */
+		getPIDController().setAbsoluteTolerance(angleMerkelTolerance);
 	}
 	
 	/**
@@ -107,6 +133,7 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	public void driveLeftPercent(double leftSpeed) {
+		getPIDController().disable();
 		if(leftSpeed >= RobotMap.PERCENT_LOWER_SOFT_LIMIT && leftSpeed <= RobotMap.PERCENT_UPPER_SOFT_LIMIT )
 		{
 			leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
@@ -126,6 +153,7 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	public void driveRightPercent(double rightSpeed) {
+		getPIDController().disable();
 		if(rightSpeed >= RobotMap.PERCENT_LOWER_SOFT_LIMIT && rightSpeed <= RobotMap.PERCENT_UPPER_SOFT_LIMIT )
 		{
 			rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
@@ -134,8 +162,6 @@ public class DriveTrain extends PIDSubsystem {
 		}
 	}
 
-	
-	
 	/**
 	 * Gets the current position of the robot
 	 * Multiplied by the circumference of the wheel for scaling
@@ -220,89 +246,58 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	/**
+	 * Sets 0 to be where the robot is facing
+	 */
+	public void resetDriveTrainGyro()
+	{
+		Navx.reset();
+	}
+	
+	/**
+	 * Changes Talon control mode to speed for PID Loops
+	 * Enables PIDController
+	 * Sets setpoint (where we want to be) to targetAngle
+	 * @param targetAngle
+	 */
+	public void driveAngle(double targetAngle)
+	{
+		this.targetAngle = targetAngle;
+		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
+		rightFrontTalon.changeControlMode(TalonControlMode.Speed);
+
+		getPIDController().enable();
+		getPIDController().setSetpoint(targetAngle);
+	}
+	
+	public void setTargetAngle(double targetAngle)
+	{
+		this.targetAngle = targetAngle;
+	}
+	/**
+	 * Returns the angle we want to be
+	 * @return double targetAngle (degrees)
+	 */
+	public double getTargetAngle()
+	{
+		return targetAngle;
+	}
+	/**
 	 * Returns angle relative to initial position OR relative to field, measured from 180 to -180 degrees
 	 * Initial position - gyro in robot-oriented mode
 	 * Relative to field - gyro in field-oriented mode
-	 * @return
+	 * @return double degrees (-180 - 180)
 	 */
-	/*public double getCurrentAngle()
+	public double getCurrentAngle()
 	{
 		return Navx.getYaw();
 	}
 	
-	public double getTheAngle()
-	{
-		if(Math.abs(Navx.getAngle()) <= 360)
-		return Navx.getAngle();
-		else
-		{
-			return Navx.getAngle() % 360;
-		}
-	}
-	public void setDesiredAngle(double goalAngle)
-	{
-		desiredAngle = goalAngle;
-	}
-	
-	public double getDesiredAngle()
-	{
-		return desiredAngle;
-	}
-	*/
 	/**
-	 * TODO: Simplify this error calculation
-	 * @return
+	 * Does not work with current set-up
 	 */
-	/*public double calculateAngleError()
+	/*public void driveAtAngleToDistance()
 	{
-		double newDesiredAngle;
 		
-		if(getCurrentAngle()-180 >= getDesiredAngle())
-		{
-			newDesiredAngle = getDesiredAngle() + 360;
-		}
-		else if(getCurrentAngle()+180 < getDesiredAngle())
-		{
-			newDesiredAngle = getDesiredAngle() - 360;
-		}
-		else
-		{
-			newDesiredAngle = getDesiredAngle();
-		}
-		
-		return newDesiredAngle - getCurrentAngle();
-	}
-	*/
-	/*public void moveToAngle()
-	{
-		double pOutput = calculateAngleError() * anglePConstant;
-		driveRightVelocity(-pOutput);
-		driveLeftVelocity(pOutput);
-	}
-	
-	public boolean isDriveAngleFinished()
-	{
-		return Math.abs(calculateAngleError()) <= RobotMap.DRIVE_ANGLE_ERROR;
-	}
-	
-	public void incrementAnglePConstant()
-	{
-		anglePConstant += RobotMap.DRIVE_ANGLE_INCREMENT;
-	}
-	
-	public void decrementAnglePConstant()
-	{
-		anglePConstant -= RobotMap.DRIVE_ANGLE_DECREMENT;
-	}
-	
-	public double getAnglePConstant()
-	{
-		return anglePConstant;
-	}
-	
-	public void driveAtAngleToDistance()
-	{
-		double anglePOutput = calculateAngleError() * anglePConstant;
 		double leftPOutput = leftFrontTalon.getError() * leftFrontTalon.getP();
 		double rightPOutput = rightFrontTalon.getError() * rightFrontTalon.getP();
 		
