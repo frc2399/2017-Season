@@ -10,11 +10,20 @@ import edu.wpi.first.wpilibj.command.Command;
  * Shift to dangerous (high) speed
  */
 
-public class ShiftDangerous extends Command {
+public class Shift extends Command {
 	
 	private Shifter shifter = Robot.shifter;
+	private boolean shiftHotValue;
+	private boolean shiftDangerousValue;
 
-	public ShiftDangerous() {
+	/**
+	 * 
+	 * @param shiftHotValue: Should be set to either the RobotMap value (on) or !RobotMap value (off)
+	 * @param shiftDangerousValue: Should be set to either the RobotMap value (on) or !RobotMap value (off)
+	 */
+	public Shift(boolean shiftHotValue, boolean shiftDangerousValue) {
+		this.shiftHotValue = shiftHotValue;
+		this.shiftDangerousValue = shiftDangerousValue;
 		requires(shifter);
 		setInterruptible(true);
 	}
@@ -32,7 +41,8 @@ public class ShiftDangerous extends Command {
 	 *  Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		shifter.setShifterDangerousSolenoid(RobotMap.SHIFTER_SOLENOID_DANGEROUS);
+		shifter.setShifterHotSolenoid(shiftHotValue);
+		shifter.setShifterDangerousSolenoid(shiftDangerousValue);
 	}
 
 	/**

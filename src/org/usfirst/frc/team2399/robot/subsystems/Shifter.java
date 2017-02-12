@@ -1,9 +1,7 @@
 package org.usfirst.frc.team2399.robot.subsystems;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
-import org.usfirst.frc.team2399.robot.commands.ShiftHot;
-import org.usfirst.frc.team2399.robot.commands.ShiftNot;
-
+import org.usfirst.frc.team2399.robot.commands.Shift;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -49,7 +47,7 @@ public class Shifter extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new ShiftNot());
+		setDefaultCommand(new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS));
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 	}

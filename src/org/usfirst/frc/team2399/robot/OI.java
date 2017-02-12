@@ -2,8 +2,7 @@ package org.usfirst.frc.team2399.robot;
 
 
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
-import org.usfirst.frc.team2399.robot.commands.ShiftDangerous;
-import org.usfirst.frc.team2399.robot.commands.ShiftHot;
+import org.usfirst.frc.team2399.robot.commands.Shift;
 
 
 
@@ -50,8 +49,8 @@ public class OI {
 	 * Sets instances of commands and speeds for use with buttons
 	 */
 
-	private static ShiftDangerous shiftToDangerous = new ShiftDangerous();
-	private static ShiftHot shiftToHot = new ShiftHot();
+	private static Shift shiftToDangerous = new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,RobotMap.SHIFTER_SOLENOID_DANGEROUS);
+	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	private static JoyClimb climbUpSpeed = new JoyClimb(RobotMap.CLIMB_UP);
 	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
 	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
