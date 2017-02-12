@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Links climbing to joystick control
  */
-public class JoyClimb extends Command {
+public class Climb extends Command {
 	
 	private Climber climber = Robot.climber;
 	double speed;
@@ -16,7 +16,7 @@ public class JoyClimb extends Command {
 	/**
 	 * @param speed: the speed inputted into the constructor is assigned to the double created above
 	 */
-    public JoyClimb(double speed) {
+    public Climb(double speed) {
     	this.speed = speed;
     	requires(climber);
     	setInterruptible(true);

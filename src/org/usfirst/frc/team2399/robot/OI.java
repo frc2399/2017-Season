@@ -1,10 +1,10 @@
 package org.usfirst.frc.team2399.robot;
 
 
-import org.usfirst.frc.team2399.robot.commands.JoyClimb;
+import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
-import org.usfirst.frc.team2399.robot.commands.JoyClimb;
+import org.usfirst.frc.team2399.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -34,7 +34,6 @@ public class OI {
 	
 	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
-	private static Button climbStopButt = new JoystickButton(leftJoy, 10);
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
 	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
@@ -47,9 +46,8 @@ public class OI {
 
 	private static Shift shiftToDangerous = new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
-	private static JoyClimb climbUpSpeed = new JoyClimb(RobotMap.CLIMB_UP);
-	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
-	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
+	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMB_UP);
+	private static Climb climbDownSpeed = new Climb(RobotMap.CLIMB_DOWN);
 	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
 	
@@ -70,7 +68,6 @@ public class OI {
 		gearInButt.whenPressed(moveGearIn);
 		climbUpButt.whileHeld(climbUpSpeed);
 		climbDownButt.whileHeld(climbDownSpeed);
-		climbStopButt.whenPressed(climbStopSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
 	}

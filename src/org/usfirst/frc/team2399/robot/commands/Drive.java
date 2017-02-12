@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Links drive train to joy stick
  */
-public class JoyDrive extends Command {
+public class Drive extends Command {
 
 	private DriveTrain driveTrain = Robot.driveTrain;
 
-	public JoyDrive() {
+	public Drive() {
 		requires(driveTrain);
 		setInterruptible(true);
 	}
