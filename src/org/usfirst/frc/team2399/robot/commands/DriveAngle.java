@@ -6,39 +6,44 @@ import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *Used for loop tuning with buttons
+ *
  */
-public class DriveAnglePAdjustment extends Command {
-	
-	private DriveTrain driveTrain = Robot.driveTrain;
-	private boolean isIncrementing;
-	
+public class DriveAngle extends Command {
 
-    public DriveAnglePAdjustment(boolean isIncrementing) {
+	private DriveTrain driveTrain = Robot.driveTrain;
+	private double setpoint;
+	
+    public DriveAngle(double setpoint) {
     	requires(driveTrain);
+    	this.setpoint = setpoint;
     	setInterruptible(true);
-    	this.isIncrementing = isIncrementing;
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
+    /**
+     * Switches the Talons to speed mode
+     * Enables PIDController
+     * Sets the setpoint(where we want to be)
+     */
     protected void initialize() {
+    	driveTrain.setSpeedControlMode();
+    	driveTrain.getPIDController().enable();
+    	driveTrain.getPIDController().setSetpoint(setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(isIncrementing)
-    	{
-    		driveTrain.incrementAnglePConstant();
-    	}
-    	else
-    	{
-    		driveTrain.decrementAnglePConstant();
-    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
+    /**
+     * Checks to see if our current distance is within our absolute tolerance for the setpoint
+     */
     protected boolean isFinished() {
-        return true;
+        return driveTrain.getPIDController().onTarget();
     }
 
     // Called once after isFinished returns true

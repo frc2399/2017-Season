@@ -93,8 +93,6 @@ public class RobotMap {
 
 	public static final double CLIMB_UP = 1.0;
 	public static final double CLIMB_DOWN = -1.0;
-	public static final double CLIMB_STOP = 0.0;
-	
 
 	/**
 	 * ENCODER CONSTANTS
@@ -103,9 +101,13 @@ public class RobotMap {
 	
 	public static final double DRIVE_DISTANCE_DECREMENT = 0;
 	public static final double DRIVE_DISTANCE_INCREMENT = 0;
-	public static final double DRIVE_ANGLE_DECREMENT = 0;
-	public static final double DRIVE_ANGLE_INCREMENT = 0;
 	public static double DRIVE_ANGLE_P = 0;
+	public static double DRIVE_ANGLE_I = 0;
+	public static double DRIVE_ANGLE_D = 0;
+	public static double ANGLE_MERKEL_TOLERANCE = 0;
+	public static final double TEST_ANGLE_1 = 90.0;
+	public static final double TEST_ANGLE_2 = 180.0;
+	public static final double TEST_ANGLE_3 = -90.0;
 	public static final double DRIVE_ANGLE_ERROR = 0;
 	/**
 	 * Constants for completing both driving to a distance and to an angle at the same time

@@ -1,6 +1,8 @@
-
 package org.usfirst.frc.team2399.robot;
 
+
+
+import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2399.robot.subsystems.Shifter;
@@ -80,7 +82,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
-
+		driveTrain.resetDriveTrainGyro();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -110,7 +112,11 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-	}
+		/**
+		 * Puts the PIDController on the SmartDashboard to input values
+		 */
+		SmartDashboard.putData("PIDController", driveTrain.getPIDController());
+		}
 
 	/**
 	 * This function is called periodically during operator control
