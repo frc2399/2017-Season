@@ -1,4 +1,10 @@
 *.class
+<<<<<<< HEAD
 build/
 dist/
 /bin/
+=======
+/bin/
+build/
+dist/
+>>>>>>> master
