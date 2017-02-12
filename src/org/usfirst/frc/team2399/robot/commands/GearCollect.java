@@ -9,11 +9,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Moves gear mechanism inwards
  */
-public class GearIn extends Command {
+public class GearCollect extends Command {
 	
 	private GearCollector gearCollector = Robot.gearCollector;
+	private boolean gearIn;
+	private boolean gearOut;
 
-    public GearIn() {
+	/**
+	 * 
+	 * @param gearIn: Should be set to either the RobotMap value (on) or !RobotMap value (off)
+	 * @param gearOut: Should be set to either the RobotMap value (on) or !RobotMap value (off)
+	 */
+    public GearCollect(boolean gearIn,boolean gearOut) {
+    	this.gearIn = gearIn;
+    	this.gearOut = gearOut;
     	requires(gearCollector);
     	setInterruptible(true);
     }
@@ -33,7 +42,8 @@ public class GearIn extends Command {
      */
     
     protected void execute() {
-    	gearCollector.setGearInSolenoid(RobotMap.GEAR_SOLENOID_IN);
+    	gearCollector.setGearInSolenoid(gearIn);
+    	gearCollector.setGearOutSolenoid(gearOut);
     }
 
     /**

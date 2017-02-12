@@ -3,11 +3,7 @@ package org.usfirst.frc.team2399.robot;
 
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
-
-
-
-import org.usfirst.frc.team2399.robot.commands.GearIn;
-import org.usfirst.frc.team2399.robot.commands.GearOut;
+import org.usfirst.frc.team2399.robot.commands.GearCollect;
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -54,8 +50,8 @@ public class OI {
 	private static JoyClimb climbUpSpeed = new JoyClimb(RobotMap.CLIMB_UP);
 	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
 	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
-	private static GearOut moveGearOut = new GearOut();
-	private static GearIn moveGearIn = new GearIn();
+	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
+	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
 	
 	/**
 	 * OI CONSTRUCTOR
