@@ -54,11 +54,9 @@ public class DriveTrain extends Subsystem {
 		
 		/**
 		 * If the forward constant is negative (see boolean in RobotMap) reverse the output of
-		 * either the sensor or the motor
+		 *  the sensor 
 		 */
-		
 		leftFrontTalon.reverseSensor(RobotMap.REVERSE_LEFT_ENCODER_OUTPUT);
-	
 		rightFrontTalon.reverseSensor(RobotMap.REVERSE_RIGHT_ENCODER_OUTPUT);
 		
 		/**
@@ -83,10 +81,8 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * Velocity - this is better for programmers due to its precision
 	 * Percent - this is better for drivers because it feels more natural
-	 * TODO: Look at p.79 for a closed-loop walkthrough
 	 * TODO: Create a method for resetting calculated control values when
 	 * driver control (percent mode) begins; look through Talon methods first
-	 * TODO: Does Follower mode apply to speed as well as Control Mode?
 	 * @param leftSpeed rotations per minute
 	 */
 	public void driveLeftVelocity(double leftSpeed) {
@@ -144,7 +140,6 @@ public class DriveTrain extends Subsystem {
 	 * Methods that get/set the left and right positions of where we want to be
 	 * setPosition zeros out the encoder data, so that we start at 0
 	 */
-	
 	public void setLeftDesiredPosition(double goalDistance){
 		leftFrontTalon.setPosition(0);
 		this.goalDistance = goalDistance;
@@ -178,10 +173,9 @@ public class DriveTrain extends Subsystem {
 	
 	/**
 	 * Methods to increment, decrement, and get the distance constant
-	 * Method takes in the talon the P constant is being set for, gets the current P, and sets
+	 * Method takes in the Talon the P constant is being set for, gets the current P, and sets
 	 * the P to the current P + the increment/decrement constant
 	 */
-	
 	public void incrementDistanceConstant(CANTalon currentTalon){
 		double currentPConstant = currentTalon.getP();
 		currentTalon.setP(currentPConstant += RobotMap.DISTANCE_INCREMENT);

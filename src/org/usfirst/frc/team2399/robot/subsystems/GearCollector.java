@@ -5,16 +5,10 @@ import org.usfirst.frc.team2399.robot.commands.GearCollect;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class GearCollector extends Subsystem {
-
 	
 	private Solenoid gearOutSolenoid;
 	private Solenoid gearInSolenoid;
-	
-	
 	
 	public GearCollector(){
 		gearOutSolenoid = new Solenoid(RobotMap.PCM_ADDRESS, RobotMap.GEAR_OUT_SOLENOID_PORT);
@@ -22,7 +16,7 @@ public class GearCollector extends Subsystem {
 	}
 	
 	/**
-	 * Sets the solenoid to the inputted value
+	 * Sets the Solenoid to the inputted value
 	 * @param setGear
 	 */
 	public void setGearOutSolenoid(boolean setGearOut){
@@ -46,17 +40,12 @@ public class GearCollector extends Subsystem {
 	public boolean getGearInSolenoid(){
 		return gearInSolenoid.get();
 	}
-	
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 
 	/**
-	 * Default state of the gear collecting mechanism is "in'
+	 * Default state of the gear collecting mechanism is neither in nor out
 	 */
     public void initDefaultCommand() {
     	setDefaultCommand(new GearCollect(!RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT));
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 }
 
