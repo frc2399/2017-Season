@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,37 +21,36 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-// Created a instance of Shifter so the Robot can reference that subsystem
+
+
 public class Robot extends IterativeRobot {
-
-	public static Climber climber = new Climber();
-	public static Shifter shifter = new Shifter();
-	public static DriveTrain driveTrain = new DriveTrain();
-	public static GearCollector gearCollector = new GearCollector();
-	public static Agitator agitator = new Agitator();
-
+	
+	public static Climber climber;
+	public static Shifter shifter;
+	public static DriveTrain driveTrain;
+	public static GearCollector gearCollector;
+	public static OI oi;
 
 	/**
-	 * Creates an instance of OI
+	 * Autonomous command to be run should go here (used along with autonomousInit
 	 */
-
-	public static OI oi = new OI();;
-
-
-
-
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
+	 * All instances of subsystems should be initialized here
+	 * OI must be instantiated after the others so the buttons register the subsystems
+	 * used by the commands they're attached to
 	 */
 	@Override
 	public void robotInit() {
-
-		// chooser.addObject("My Auto", new MyAutoCommand());
-
+		  climber = new Climber();
+		  shifter = new Shifter();
+		  driveTrain = new DriveTrain();
+		  gearCollector = new GearCollector();
+		  oi = new OI();
 	}
 
 	/**
@@ -105,6 +105,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

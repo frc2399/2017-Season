@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2399.robot.subsystems;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
-import org.usfirst.frc.team2399.robot.commands.JoyDrive;
+import org.usfirst.frc.team2399.robot.commands.Drive;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -198,6 +198,6 @@ public class DriveTrain extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new JoyDrive());
+		setDefaultCommand(new Drive());
 	}		
 }
