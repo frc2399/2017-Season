@@ -161,6 +161,24 @@ public class DriveTrain extends PIDSubsystem {
 			rightFrontTalon.set(rightSpeed*RobotMap.DRIVETRAIN_FORWARD_RIGHT);
 		}
 	}
+	
+	/**
+	 * Sets the Talons to speed mode
+	 */
+	public void setSpeedControlMode()
+	{
+		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
+		rightFrontTalon.changeControlMode(TalonControlMode.Speed);
+	}
+	
+	/**
+	 * Sets the Talons to percent mode
+	 */
+	public void setPercentControlMode()
+	{
+		leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
+		rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
+	}
 
 	/**
 	 * Gets the current position of the robot
@@ -251,22 +269,6 @@ public class DriveTrain extends PIDSubsystem {
 	public void resetDriveTrainGyro()
 	{
 		Navx.reset();
-	}
-	
-	/**
-	 * Changes Talon control mode to speed for PID Loops
-	 * Enables PIDController
-	 * Sets setpoint (where we want to be) to targetAngle
-	 * @param targetAngle
-	 */
-	public void driveAngle(double targetAngle)
-	{
-		this.targetAngle = targetAngle;
-		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
-		rightFrontTalon.changeControlMode(TalonControlMode.Speed);
-
-		getPIDController().enable();
-		getPIDController().setSetpoint(targetAngle);
 	}
 	
 	public void setTargetAngle(double targetAngle)

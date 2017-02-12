@@ -12,6 +12,7 @@ public class DriveAngle extends Command {
 
 	private DriveTrain driveTrain = Robot.driveTrain;
 	private double setpoint;
+	
     public DriveAngle(double setpoint) {
     	requires(driveTrain);
     	this.setpoint = setpoint;
@@ -21,8 +22,15 @@ public class DriveAngle extends Command {
     }
 
     // Called just before this Command runs the first time
+    /**
+     * Switches the Talons to speed mode
+     * Enables PIDController
+     * Sets the setpoint(where we want to be)
+     */
     protected void initialize() {
-    	driveTrain.driveAngle(setpoint);
+    	driveTrain.setSpeedControlMode();
+    	driveTrain.getPIDController().enable();
+    	driveTrain.getPIDController().setSetpoint(setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
