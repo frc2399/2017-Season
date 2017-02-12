@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2399.robot.subsystems;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
-import org.usfirst.frc.team2399.robot.commands.StopClimb;
+import org.usfirst.frc.team2399.robot.commands.Climb;
 
 import com.ctre.CANTalon;
 
@@ -23,15 +23,6 @@ public class Climber extends Subsystem {
 	{
 		climbTalon = new CANTalon(RobotMap.CLIMBER_TALON_ADDRESS);
 	}
-
-	/**
-	 * Establishes the default state of the climber
-	 */
-	@Override
-	protected void initDefaultCommand() {
-		setDefaultCommand(new StopClimb());
-
-	}
 	
 	/**
 	 * Method that sets the climber Talon to go at an inputted speed
@@ -43,6 +34,16 @@ public class Climber extends Subsystem {
 		climbTalon.set(speed * RobotMap.CLIMBER_FORWARD);
 	
 	}
+
+	/**
+	 * Establishes the default state of the climber
+	 */
+	@Override
+	protected void initDefaultCommand() {
+		setDefaultCommand(new Climb(RobotMap.CLIMB_STOP));
+
+	}
+
 
 
 }
