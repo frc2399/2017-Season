@@ -25,6 +25,8 @@ public class RobotMap {
 	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 5;
 	public static final int CLIMBER_TALON_ADDRESS = 2;
 	public static final int PCM_ADDRESS = 3;
+	
+	//TODO: Set correct Talon address
 	public static final int AGITATOR_TALON_ADDRESS = 2399;
 
 	/**

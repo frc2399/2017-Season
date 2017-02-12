@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2399.robot.subsystems;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
-import org.usfirst.frc.team2399.robot.commands.AgitatorStop;
+import org.usfirst.frc.team2399.robot.commands.Agitate;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
@@ -17,7 +17,7 @@ public class Agitator extends Subsystem {
 	
 	public Agitator(){
 		agitatorTalon = new CANTalon(RobotMap.AGITATOR_TALON_ADDRESS);
-		agitatorTalon.changeControlMode(TalonControlMode.Speed);
+		agitatorTalon.changeControlMode(TalonControlMode.PercentVbus);
 	}
 	
 	public void setAgitatorSpeed(double speed){
@@ -29,7 +29,7 @@ public class Agitator extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new AgitatorStop());
+    	setDefaultCommand(new Agitate(RobotMap.AGITATOR_STOP));
     }
 }
 

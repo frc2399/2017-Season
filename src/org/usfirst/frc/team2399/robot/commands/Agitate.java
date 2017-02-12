@@ -7,14 +7,16 @@ import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Moves agitator motor forward
+ * Moves agitator motor backwards
  */
 
-public class AgitatorForward extends Command {
-	
-	private Agitator agitator = Robot.agitator;
+public class Agitate extends Command {
 
-    public AgitatorForward() {
+	private Agitator agitator = Robot.agitator;
+	private double speed;
+	
+    public Agitate(double speed) {
+    	this.speed = speed;
         requires(agitator);
         setInterruptible(true);
     }
@@ -25,12 +27,12 @@ public class AgitatorForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	agitator.setAgitatorSpeed(RobotMap.AGITATOR_FORWARD);
+    	agitator.setAgitatorSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

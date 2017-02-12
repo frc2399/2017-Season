@@ -4,9 +4,7 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 import org.usfirst.frc.team2399.robot.commands.ShiftDangerous;
 import org.usfirst.frc.team2399.robot.commands.ShiftHot;
-import org.usfirst.frc.team2399.robot.commands.AgitatorBackward;
-import org.usfirst.frc.team2399.robot.commands.AgitatorForward;
-import org.usfirst.frc.team2399.robot.commands.AgitatorStop;
+import org.usfirst.frc.team2399.robot.commands.Agitate;
 import org.usfirst.frc.team2399.robot.commands.GearIn;
 import org.usfirst.frc.team2399.robot.commands.GearOut;
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
@@ -72,8 +70,6 @@ public class OI {
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
 	private static Button agitatorForwardButt = new JoystickButton(leftJoy, 11);
 	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 12);
-	private static Button agitatorStopButt = new JoystickButton(leftJoy, 13);
-
 	/**
 	 * Presets
 	 */
@@ -94,9 +90,9 @@ public class OI {
 	private static JoyClimb climbDownSpeed = new JoyClimb(RobotMap.CLIMB_DOWN);
 	private static JoyClimb climbStopSpeed = new JoyClimb(RobotMap.CLIMB_STOP);
 	
-	private static AgitatorForward agitatorForwardSpeed = new AgitatorForward();
-	private static AgitatorBackward agitatorBackwardSpeed = new AgitatorBackward();
-	private static AgitatorStop agitatorStopSpeed = new AgitatorStop();
+	private static Agitate agitatorForwardSpeed = new Agitate(RobotMap.AGITATOR_FORWARD);
+	private static Agitate agitatorBackwardSpeed = new Agitate(RobotMap.AGITATOR_BACKWARDS);
+	
 
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	// Once you have a button, it's trivial to bind it to a button in one of
@@ -137,6 +133,5 @@ public class OI {
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
 		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
 		agitatorBackwardButt.whenPressed(agitatorBackwardSpeed);
-		agitatorStopButt.whenPressed(agitatorStopSpeed);
 	}
 }
