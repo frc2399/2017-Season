@@ -18,12 +18,12 @@ public class RobotMap {
 	/**
 	 * Talon Addresses
 	 */
-	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 7;
-	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 10;
-	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 6;
-	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 9;
-	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 8;
-	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 5;
+	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 10;
+	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 9;
+	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 7;
+	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 6;
+	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 5;
+	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 8;
 	public static final int CLIMBER_TALON_ADDRESS = 2;
 	public static final int PCM_ADDRESS = 3;
 
@@ -32,8 +32,8 @@ public class RobotMap {
 	 */
 	public static final int JOYDRIVE_LEFT_STICK_PORT = 0;
 	public static final int JOYDRIVE_RIGHT_STICK_PORT = 1;
-	public static final int SHIFTER_HOT_SOLENOID_PORT = 0;
-	public static final int SHIFTER_DANGEROUS_SOLENOID_PORT= 1;
+	public static final int SHIFTER_HOT_SOLENOID_PORT = 1;
+	public static final int SHIFTER_DANGEROUS_SOLENOID_PORT= 0;
 
 	public static final int GEAR_OUT_SOLENOID_PORT = 2;
 	public static final int GEAR_IN_SOLENOID_PORT = 3;
