@@ -293,17 +293,13 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	/**
-	 * Does not work with current set-up
+	 * Sets the distance P output for the left and right Talon
 	 */
-	/*public void driveAtAngleToDistance()
+	public void setDriveTrainDistancePOutput()
 	{
-		
 		double leftPOutput = leftFrontTalon.getError() * leftFrontTalon.getP();
 		double rightPOutput = rightFrontTalon.getError() * rightFrontTalon.getP();
-		
-		driveRightVelocity(rightPOutput * RobotMap.DRIVE_MIXED_LINEAR - anglePOutput * RobotMap.DRIVE_MIXED_ANGULAR);
-		driveLeftVelocity(leftPOutput * RobotMap.DRIVE_MIXED_LINEAR + anglePOutput * RobotMap.DRIVE_MIXED_ANGULAR);
-	}*/
+	}
 	
 	@Override
 	protected void initDefaultCommand() {
