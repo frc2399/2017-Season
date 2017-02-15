@@ -4,8 +4,10 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2399.robot.subsystems.Shooter;
 import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
+
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,10 +32,13 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static GearCollector gearCollector;
 	public static OI oi;
-
+	public static Agitator agitator;
+	public static Shooter shooter;
 	/**
 	 * Autonomous command to be run should go here (used along with autonomousInit
 	 */
+
+
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -51,6 +56,8 @@ public class Robot extends IterativeRobot {
 		  driveTrain = new DriveTrain();
 		  gearCollector = new GearCollector();
 		  oi = new OI();
+		  agitator = new Agitator();
+		  shooter = new Shooter();
 	}
 
 	/**
