@@ -4,12 +4,10 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.commands.Agitate;
 import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.commands.DriveAngle;
-import org.usfirst.frc.team2399.robot.commands.DriveDistancePAdjustment;
 import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
-import org.usfirst.frc.team2399.robot.commands.ShooterStop;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
-import org.usfirst.frc.team2399.robot.commands.JoyShoot;
+import org.usfirst.frc.team2399.robot.commands.Shoot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -162,8 +160,7 @@ public class OI {
 	//preset speeds
 	
 	//References RobotMap for speed values; to be used to set speed when buttons are pressed
-	private static DriveDistancePAdjustment incrementDistanceP = new DriveDistancePAdjustment(true);
-	private static DriveDistancePAdjustment decrementDistanceP = new DriveDistancePAdjustment(false);
+
 	
 	public static double modifyJoyOutputWithDeadband(double joystickInputWithDirection)
 	{
@@ -224,8 +221,7 @@ public class OI {
 	/**
 	 * Presets
 	 */
-	private static JoyShoot shooterOn = new JoyShoot(RobotMap.SHOOTER_SPEED_CONSTANT);
-	private static ShooterStop shooterStop = new ShooterStop();
+	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_CONSTANT);
 
 
 	

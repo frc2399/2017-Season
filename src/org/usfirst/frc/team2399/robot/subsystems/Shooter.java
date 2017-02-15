@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2399.robot.subsystems;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
-import org.usfirst.frc.team2399.robot.commands.ShooterStop;
+import org.usfirst.frc.team2399.robot.commands.Shoot;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -96,7 +96,7 @@ public class Shooter extends Subsystem {
 	 * @see edu.wpi.first.wpilibj.command.Subsystem#initDefaultCommand()
 	 */
 	public void initDefaultCommand() {
-		setDefaultCommand(new ShooterStop());
+		setDefaultCommand(new Shoot(0));
 	}
 
 }

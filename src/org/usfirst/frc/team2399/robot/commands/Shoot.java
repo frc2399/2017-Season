@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class JoyShoot extends Command {
+public class Shoot extends Command {
 	
 	private double speed;
 	private Shooter shooter = Robot.shooter;
 
-    public JoyShoot(double speed) {
+    public Shoot(double speed) {
     	this.speed = speed;
     	requires(shooter);
         // Use requires() here to declare subsystem dependencies
