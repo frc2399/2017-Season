@@ -118,7 +118,7 @@ public class RobotMap {
 	
 	/**
 	 * Speed Soft Limits
-	 * TODO: Calculate conversion for velocity
+	 * TODO: Calculate conversion for velocity - find them in code implementations part 3 journal
 	 */
 	
 	public static final double VELOCITY_LOWER_SOFT_LIMIT = 0;
