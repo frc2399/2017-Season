@@ -26,6 +26,9 @@ public class RobotMap {
 	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 8;
 	public static final int CLIMBER_TALON_ADDRESS = 2;
 	public static final int PCM_ADDRESS = 3;
+	
+	//TODO: Set correct Talon address
+	public static final int AGITATOR_TALON_ADDRESS = 2399;
 
 	/**
 	 * Ports for sensors, joysticks, and solenoids
@@ -91,6 +94,16 @@ public class RobotMap {
 	public static final double CLIMB_DOWN = -1.0;
 	public static final double CLIMB_STOP = 0.0;
 	
+
+	public static final double AGITATOR_STOP = 0;
+	public static final double AGITATOR_FORWARD = 1;
+	public static final double AGITATOR_BACKWARDS = -1;
+	
+	/**
+	 * ENCODER CONSTANTS
+	 * TODO: Set actual values for constants
+	 */
+
 	
 	/**
 	 * CALCULATION CONSTANTS
@@ -116,5 +129,9 @@ public class RobotMap {
 	/**
 	 * Joystick Output
 	 */
+
+	// TODO: Figure out what this time should actually be
+	// Created a constant for how long the solenoid should run
+	public static final double SHIFT_TIMER = 0.5;
 	public static final double DEADBAND = 0.05;
 }

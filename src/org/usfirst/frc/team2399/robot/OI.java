@@ -1,10 +1,9 @@
 package org.usfirst.frc.team2399.robot;
 
-
+import org.usfirst.frc.team2399.robot.commands.Agitate;
 import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
-import org.usfirst.frc.team2399.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -36,13 +35,32 @@ public class OI {
 	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
+	private static Button agitatorForwardButt = new JoystickButton(leftJoy, 11);
+	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 12);
 	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
 	private static Button gearInButt = new JoystickButton(rightJoy, 2);
+
 
 	/**
 	 * COMMAND INSTANCES
 	 * Sets instances of commands and speeds for use with buttons
 	 */
+
+
+
+
+
+	
+	private static Agitate agitatorForwardSpeed = new Agitate(RobotMap.AGITATOR_FORWARD);
+	private static Agitate agitatorBackwardSpeed = new Agitate(RobotMap.AGITATOR_BACKWARDS);
+	
+
+	/**
+	 * Presets - sets instances of commands and speeds for use with buttons
+	 */
+	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
+	private static Button gearInButt = new JoystickButton(rightJoy, 2);
+
 
 	private static Shift shiftToDangerous = new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
@@ -50,6 +68,7 @@ public class OI {
 	private static Climb climbDownSpeed = new Climb(RobotMap.CLIMB_DOWN);
 	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
+
 	
 	/**
 	 * OI CONSTRUCTOR
@@ -70,6 +89,8 @@ public class OI {
 		climbDownButt.whileHeld(climbDownSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
+		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
+		agitatorBackwardButt.whenPressed(agitatorBackwardSpeed);
 	}
 	
 	/**
