@@ -42,12 +42,12 @@ public class RobotMap {
 	public static final int SHIFTER_HOT_SOLENOID_PORT = 1;
 	public static final int SHIFTER_DANGEROUS_SOLENOID_PORT= 0;
 	public static final int JOYDRIVE_SHOOTER_STICK_PORT = 2;
-	
-	/**
-	 * Forward Constants
-	 * To ensure positive values of motion are what you expect.
-	 * TODO: Set actual constants for shooter values
-	 */
+
+	 /** 
+	  * Forward Constants
+	  * To ensure positive values of motion are what you expect.
+	  * TODO: Set actual constants for shooter values
+	  */
 
 
 	public static final int GEAR_OUT_SOLENOID_PORT = 2;
@@ -63,6 +63,7 @@ public class RobotMap {
 	public static final int DRIVETRAIN_FORWARD_LEFT = -1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT = 1;
 	public static final int CLIMBER_FORWARD = 1;
+	public static final int CLIMB_STOP = 0;
 	
 	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT = -1;
 	public static final int DRIVETRAIN_ENCODER_FORWARD_RIGHT = 1;
@@ -147,8 +148,13 @@ public class RobotMap {
 
 	public static final double CLIMB_UP = 1.0;
 	public static final double CLIMB_DOWN = -1.0;
-	public static final double CLIMB_STOP = 0.0;
+
+	/**
+	 * ENCODER CONSTANTS
+	 * TODO: Set actual values for constants
+	 */
 	
+
 
 	public static final double AGITATOR_STOP = 0;
 	public static final double AGITATOR_FORWARD = 1;
@@ -158,6 +164,23 @@ public class RobotMap {
 	 * ENCODER CONSTANTS
 	 * TODO: Set actual values for constants
 	 */
+
+	public static final double DRIVE_DISTANCE_DECREMENT = 0;
+	public static final double DRIVE_DISTANCE_INCREMENT = 0;
+	public static double DRIVE_ANGLE_P = 0;
+	public static double DRIVE_ANGLE_I = 0;
+	public static double DRIVE_ANGLE_D = 0;
+	public static double ANGLE_MERKEL_TOLERANCE = 0;
+	public static final double TEST_ANGLE_1 = 90.0;
+	public static final double TEST_ANGLE_2 = 180.0;
+	public static final double TEST_ANGLE_3 = -90.0;
+	public static final double DRIVE_ANGLE_ERROR = 0;
+	/**
+	 * Constants for completing both driving to a distance and to an angle at the same time
+	 */
+	public static final double DRIVE_MIXED_LINEAR = 0;
+	public static final double DRIVE_MIXED_ANGULAR = 0;
+
 
 	
 	/**

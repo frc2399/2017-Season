@@ -2,6 +2,9 @@ package org.usfirst.frc.team2399.robot;
 
 
 import org.usfirst.frc.team2399.robot.commands.Agitate;
+import org.usfirst.frc.team2399.robot.RobotMap;
+import org.usfirst.frc.team2399.robot.commands.DriveAngle;
+import org.usfirst.frc.team2399.robot.commands.DriveDistancePAdjustment;
 import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
 import org.usfirst.frc.team2399.robot.commands.ShooterStop;
@@ -33,13 +36,22 @@ public class OI {
 	/**
 	 * BUTTONS
 	 */
+	//Climbing buttons - to be used in teleop
+		//TODO: set climbing buttons
+	
+	private static Button driveAngleTest1Butt = new JoystickButton(shooterJoy, 6);
+	private static Button driveAngleTest2Butt = new JoystickButton(shooterJoy, 3);
+	private static Button driveAngleTest3Butt = new JoystickButton(shooterJoy, 4);
 	
 	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
+	
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
+
 	private static Button agitatorForwardButt = new JoystickButton(leftJoy, 11);
 	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 12);
+
 	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
 	private static Button gearInButt = new JoystickButton(rightJoy, 2);
 
@@ -72,6 +84,11 @@ public class OI {
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
 
 	
+	private static DriveAngle driveAngleTest1 = new DriveAngle(RobotMap.TEST_ANGLE_1);
+	private static DriveAngle driveAngleTest2 = new DriveAngle(RobotMap.TEST_ANGLE_2);
+	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3);
+
+	
 	/**
 	 * OI CONSTRUCTOR
 	 * 
@@ -94,6 +111,9 @@ public class OI {
 		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
 		agitatorBackwardButt.whenPressed(agitatorBackwardSpeed);
 		shootButt.whileHeld(shooterOn);
+		driveAngleTest1Butt.whenPressed(driveAngleTest1);
+		driveAngleTest2Butt.whenPressed(driveAngleTest2);
+		driveAngleTest3Butt.whenPressed(driveAngleTest3);
 	}
 
 	
@@ -119,6 +139,11 @@ public class OI {
 	public static double getRightY() {
 		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
+
+	public static double getShooterY()
+	{
+		return shooterJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
+	}
 	
 	/**
 	 * Modifies the joystick output so that they aren't too sensitive/insensitive to driver control
@@ -133,6 +158,12 @@ public class OI {
 	 * @param input
 	 * @return
 	 */
+	
+	//preset speeds
+	
+	//References RobotMap for speed values; to be used to set speed when buttons are pressed
+	private static DriveDistancePAdjustment incrementDistanceP = new DriveDistancePAdjustment(true);
+	private static DriveDistancePAdjustment decrementDistanceP = new DriveDistancePAdjustment(false);
 	
 	public static double modifyJoyOutputWithDeadband(double joystickInputWithDirection)
 	{
@@ -153,9 +184,7 @@ public class OI {
 		}
 	}
 	
-	public static double getShooterY(){
-		return shooterJoy.getY()* RobotMap.JOYDRIVE_FORWARD_CONSTANT;
-	}
+
 
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

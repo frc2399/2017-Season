@@ -6,12 +6,13 @@ import org.usfirst.frc.team2399.robot.commands.Drive;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-//import com.kauailabs.navx.frc.AHRS;
-
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends PIDSubsystem {
 	
 	private CANTalon leftFrontTalon;
 	private CANTalon rightFrontTalon;
@@ -20,11 +21,25 @@ public class DriveTrain extends Subsystem {
 	private CANTalon leftMiddleTalon;
 	private CANTalon rightMiddleTalon;
 	
-	private double goalDistance;
+	private AHRS Navx = new AHRS(SPI.Port.kMXP);
 	
-	//private AHRS Navx = new AHRS(SPI.Port.kMXP);
-		
+	private double goalDistance;
+
+	private double targetAngle;
+	private static double anglePConstant = RobotMap.DRIVE_ANGLE_P;
+	private static double angleIConstant = RobotMap.DRIVE_ANGLE_I;
+	private static double angleDConstant = RobotMap.DRIVE_ANGLE_D;
+
+	
+	private double angleMerkelTolerance = RobotMap.ANGLE_MERKEL_TOLERANCE;
+
+	
 	public DriveTrain() {
+		/**
+		 * Invokes PIDSubsystem constructor
+		 */
+		super("DriveTrain", anglePConstant, angleIConstant, angleDConstant);
+		
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
 		rightFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		leftBackTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_BACK_TALON_ADDRESS);
@@ -51,7 +66,7 @@ public class DriveTrain extends Subsystem {
 		rightMiddleTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		rightBackTalon.changeControlMode(TalonControlMode.Follower);
 		rightBackTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
-		
+	
 		/**
 		 * If the forward constant is negative (see boolean in RobotMap) reverse the output of
 		 *  the sensor 
@@ -74,8 +89,26 @@ public class DriveTrain extends Subsystem {
 		rightFrontTalon.setP(0);
 		rightFrontTalon.setI(0);
 		rightFrontTalon.setD(0);
-	
 		
+		/**
+		 * Treats the max and min values to be the same point for rotational distances
+		 */
+		getPIDController().setContinuous();
+		
+		/**
+		 * Sets the range of inputs (degrees from getYaw())
+		 */
+		getPIDController().setInputRange(-180.0, 180.0);
+		
+		/**
+		 * Sets the output range (voltage)
+		 */
+		getPIDController().setOutputRange(-1.0, 1.0);
+		
+		/**
+		 * Sets the acceptable range to target
+		 */
+		getPIDController().setAbsoluteTolerance(angleMerkelTolerance);
 	}
 	
 	/**
@@ -94,6 +127,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void driveLeftPercent(double leftSpeed) {
+		getPIDController().disable();
 		if(leftSpeed >= RobotMap.PERCENT_LOWER_SOFT_LIMIT && leftSpeed <= RobotMap.PERCENT_UPPER_SOFT_LIMIT )
 		{
 			leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
@@ -113,6 +147,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void driveRightPercent(double rightSpeed) {
+		getPIDController().disable();
 		if(rightSpeed >= RobotMap.PERCENT_LOWER_SOFT_LIMIT && rightSpeed <= RobotMap.PERCENT_UPPER_SOFT_LIMIT )
 		{
 			rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
@@ -120,9 +155,25 @@ public class DriveTrain extends Subsystem {
 			rightFrontTalon.set(rightSpeed*RobotMap.DRIVETRAIN_FORWARD_RIGHT);
 		}
 	}
+	
+	/**
+	 * Sets the Talons to speed mode
+	 */
+	public void setSpeedControlMode()
+	{
+		leftFrontTalon.changeControlMode(TalonControlMode.Speed);
+		rightFrontTalon.changeControlMode(TalonControlMode.Speed);
+	}
+	
+	/**
+	 * Sets the Talons to percent mode
+	 */
+	public void setPercentControlMode()
+	{
+		leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
+		rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
+	}
 
-	
-	
 	/**
 	 * Gets the current position of the robot
 	 * Multiplied by the circumference of the wheel for scaling
@@ -141,11 +192,13 @@ public class DriveTrain extends Subsystem {
 	 * setPosition zeros out the encoder data, so that we start at 0
 	 */
 	public void setLeftDesiredPosition(double goalDistance){
-		leftFrontTalon.setPosition(0);
 		this.goalDistance = goalDistance;
+		leftFrontTalon.setPosition(0);
+		leftFrontTalon.setSetpoint(goalDistance);
 	}
 	
 	public void setRightDesiredPosition(double goalDistance){
+		this.goalDistance = goalDistance;
 		rightFrontTalon.setPosition(0);
 		this.goalDistance = goalDistance;
 	}
@@ -176,22 +229,94 @@ public class DriveTrain extends Subsystem {
 	 * Method takes in the Talon the P constant is being set for, gets the current P, and sets
 	 * the P to the current P + the increment/decrement constant
 	 */
-	public void incrementDistanceConstant(CANTalon currentTalon){
-		double currentPConstant = currentTalon.getP();
-		currentTalon.setP(currentPConstant += RobotMap.DISTANCE_INCREMENT);
+
+	
+	public void incrementRightDistancePConstant(){
+		double currentPConstant = rightFrontTalon.getP();
+		rightFrontTalon.setP(currentPConstant += RobotMap.DRIVE_DISTANCE_INCREMENT);
 	}
 	
-	public void decrementDistanceConstant(CANTalon currentTalon){
-		double currentPConstant = currentTalon.getP();
-		currentTalon.setP(currentPConstant-= RobotMap.DISTANCE_DECREMENT);
+	public void incrementLeftDistancePConstant(){
+		double currentPConstant = leftFrontTalon.getP();
+		leftFrontTalon.setP(currentPConstant += RobotMap.DRIVE_DISTANCE_INCREMENT);
 	}
 	
-	public double returnDistanceConstant(CANTalon currentTalon){
-		return currentTalon.getP();
+	public void decrementRightDistancePConstant(){
+		double currentPConstant = rightFrontTalon.getP();
+		rightFrontTalon.setP(currentPConstant -= RobotMap.DRIVE_DISTANCE_DECREMENT);
+	}
+	
+	public void decrementLeftDistancePConstant(){
+		double currentPConstant = leftFrontTalon.getP();
+		leftFrontTalon.setP(currentPConstant -= RobotMap.DRIVE_DISTANCE_DECREMENT);
+	}
+	
+	public double returnRightDistanceConstant(){
+		return rightFrontTalon.getP();
+	}
+	
+	public double returnLeftDistanceConstant(){
+		return leftFrontTalon.getP();
+	}
+	
+	/**
+	 * Sets 0 to be where the robot is facing
+	 */
+	public void resetDriveTrainGyro()
+	{
+		Navx.reset();
+	}
+	
+	public void setTargetAngle(double targetAngle)
+	{
+		this.targetAngle = targetAngle;
+	}
+	/**
+	 * Returns the angle we want to be
+	 * @return double targetAngle (degrees)
+	 */
+	public double getTargetAngle()
+	{
+		return targetAngle;
+	}
+	/**
+	 * Returns angle relative to initial position OR relative to field, measured from 180 to -180 degrees
+	 * Initial position - gyro in robot-oriented mode
+	 * Relative to field - gyro in field-oriented mode
+	 * @return double degrees (-180 - 180)
+	 */
+	public double getCurrentAngle()
+	{
+		return Navx.getYaw();
+	}
+	
+	/**
+	 * Sets the distance P output for the left and right Talon
+	 */
+	public void setDriveTrainDistancePOutput()
+	{
+		double leftPOutput = leftFrontTalon.getError() * leftFrontTalon.getP();
+		double rightPOutput = rightFrontTalon.getError() * rightFrontTalon.getP();
 	}
 	
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new Drive());
+	}
+
+	@Override
+	protected double returnPIDInput()
+	{
+		return Navx.getYaw();
+	}
+	
+	/**
+	 * Sets rotation based on clockwise movment being positive
+	 */
+	@Override
+	protected void usePIDOutput(double output)
+	{
+		driveRightVelocity(-output);
+		driveLeftVelocity(output);
 	}		
 }
