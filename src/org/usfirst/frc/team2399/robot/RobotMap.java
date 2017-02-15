@@ -56,6 +56,7 @@ public class RobotMap {
 	public static final int DRIVETRAIN_FORWARD_LEFT = -1;
 	public static final int DRIVETRAIN_FORWARD_RIGHT = 1;
 	public static final int CLIMBER_FORWARD = 1;
+	public static final int CLIMB_STOP = 0;
 	
 	public static final int DRIVETRAIN_ENCODER_FORWARD_LEFT = -1;
 	public static final int DRIVETRAIN_ENCODER_FORWARD_RIGHT = 1;
