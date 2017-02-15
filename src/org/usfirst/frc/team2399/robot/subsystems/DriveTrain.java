@@ -197,11 +197,13 @@ public class DriveTrain extends PIDSubsystem {
 	 */
 	
 	public void setLeftDesiredPosition(double goalDistance){
-		leftFrontTalon.setPosition(0);
 		this.goalDistance = goalDistance;
+		leftFrontTalon.setPosition(0);
+		leftFrontTalon.setSetpoint(goalDistance);
 	}
 	
 	public void setRightDesiredPosition(double goalDistance){
+		this.goalDistance = goalDistance;
 		rightFrontTalon.setPosition(0);
 		this.goalDistance = goalDistance;
 	}
