@@ -7,7 +7,7 @@ import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Links drive train to joy stick
+ * Moves DriveTrain motors
  */
 public class Drive extends Command {
 
@@ -26,6 +26,7 @@ public class Drive extends Command {
 	}
 	
 	/**
+	 * Drives in percent mode, at a scaled speed 
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {

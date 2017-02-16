@@ -1,10 +1,13 @@
-
 package org.usfirst.frc.team2399.robot;
 
+import org.usfirst.frc.team2399.robot.subsystems.Agitator;
+import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2399.robot.subsystems.Shooter;
 import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
+
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,10 +31,9 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static GearCollector gearCollector;
 	public static OI oi;
+	public static Agitator agitator;
+	public static Shooter shooter;
 
-	/**
-	 * Autonomous command to be run should go here (used along with autonomousInit
-	 */
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -49,6 +51,8 @@ public class Robot extends IterativeRobot {
 		  driveTrain = new DriveTrain();
 		  gearCollector = new GearCollector();
 		  oi = new OI();
+		  agitator = new Agitator();
+		  shooter = new Shooter();
 	}
 
 	/**
@@ -80,7 +84,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
-
+		driveTrain.resetDriveTrainGyro();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -104,13 +108,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-	}
+		/**
+		 * Puts the PIDController on the SmartDashboard to input values
+		 */
+		SmartDashboard.putData("PIDController", driveTrain.getPIDController());
+		}
 
 	/**
 	 * This function is called periodically during operator control
@@ -119,7 +123,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putBoolean("  ", oi.deadOrAlive());
-		SmartDashboard.putNumber("Yaw", driveTrain.getDriveTrainYaw());
+		SmartDashboard.putNumber("Yaw", driveTrain.getCurrentAngle());
 		SmartDashboard.putNumber(" ", getRobotTemperature());
 		SmartDashboard.putBoolean("   ", shifter.getShifterHotSolenoid());
 		SmartDashboard.putBoolean("    ", shifter.getShifterDangerousSolenoid());

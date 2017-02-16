@@ -11,8 +11,11 @@ public class Shifter extends Subsystem {
 	private Solenoid shifterDangerousSolenoid;
 
 	public Shifter() {
-		shifterHotSolenoid = new Solenoid(3, RobotMap.SHIFTER_HOT_SOLENOID_PORT);
-		shifterDangerousSolenoid = new Solenoid(3, RobotMap.SHIFTER_DANGEROUS_SOLENOID_PORT);
+		/**
+		 * Assigns Solenoids to correct PCM address and port
+		 */
+		shifterHotSolenoid = new Solenoid(RobotMap.PCM_ADDRESS, RobotMap.SHIFTER_HOT_SOLENOID_PORT);
+		shifterDangerousSolenoid = new Solenoid(RobotMap.PCM_ADDRESS, RobotMap.SHIFTER_DANGEROUS_SOLENOID_PORT);
 	}
 
 	/**
@@ -28,7 +31,7 @@ public class Shifter extends Subsystem {
 	}
 
 	/**
-	 * Checks value of Solenoid for testing purposes
+	 * Gets value of Solenoid for testing purposes
 	 * @return
 	 */
 	public boolean getShifterHotSolenoid() {
@@ -40,11 +43,9 @@ public class Shifter extends Subsystem {
 	}
 
 	/**
-	 * Default state of subsystem is off
+	 * Default state of subsystem is neither hot nor dangerous
 	 */
 	public void initDefaultCommand() {
 		setDefaultCommand(new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS));
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
 	}
 }

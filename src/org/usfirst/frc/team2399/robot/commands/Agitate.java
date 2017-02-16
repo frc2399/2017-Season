@@ -1,47 +1,40 @@
 package org.usfirst.frc.team2399.robot.commands;
 
 import org.usfirst.frc.team2399.robot.Robot;
-import org.usfirst.frc.team2399.robot.subsystems.Climber;
+import org.usfirst.frc.team2399.robot.RobotMap;
+import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Moves Climber motor
+ * Moves agitator motor 
  */
-public class Climb extends Command {
+public class Agitate extends Command {
+
+	private Agitator agitator = Robot.agitator;
+	private double speed;
 	
-	private Climber climber = Robot.climber;
-	double speed;
-	
-	/**
-	 * @param speed: the speed inputted into the constructor is assigned to the double created above
-	 */
-    public Climb(double speed) {
+    public Agitate(double speed) {
     	this.speed = speed;
-    	requires(climber);
-    	setInterruptible(true);
+        requires(agitator);
+        setInterruptible(true);
     }
 
-    /**
-     * Called just before this Command runs the first time
-     */
     protected void initialize() {
     }
 
     /**
      * Called repeatedly when this Command is scheduled to run
-     * When command is run, climber is set to the speed passed to the constructor
      */
     protected void execute() {
-    	climber.setClimberSpeed(speed);
-    	
+    	agitator.setAgitatorSpeed(speed);
     }
 
     /**
      * Make this return true when this Command no longer needs to run execute()
      */
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     /**

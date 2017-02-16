@@ -1,11 +1,13 @@
 package org.usfirst.frc.team2399.robot;
 
 
+import org.usfirst.frc.team2399.robot.commands.Agitate;
+import org.usfirst.frc.team2399.robot.RobotMap;
+import org.usfirst.frc.team2399.robot.commands.DriveAngle;
 import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
-import org.usfirst.frc.team2399.robot.commands.Climb;
-
+import org.usfirst.frc.team2399.robot.commands.Shoot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -24,33 +26,54 @@ public class OI {
 	/**
 	 * Joysticks
 	 */
-
 	private static Joystick leftJoy = new Joystick(RobotMap.JOYDRIVE_LEFT_STICK_PORT);
 	private static Joystick rightJoy = new Joystick(RobotMap.JOYDRIVE_RIGHT_STICK_PORT);
+	private static Joystick shooterJoy = new Joystick(RobotMap.JOYDRIVE_SHOOTER_STICK_PORT);
 
 	/**
 	 * BUTTONS
+	 * TODO: Set all buttons on all Joysticks
 	 */
+	private static Button driveAngleTest1Butt = new JoystickButton(shooterJoy, 6);
+	private static Button driveAngleTest2Butt = new JoystickButton(shooterJoy, 3);
+	private static Button driveAngleTest3Butt = new JoystickButton(shooterJoy, 4);
 	
 	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
 	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
+	
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
+
+	private static Button agitatorForwardButt = new JoystickButton(leftJoy, 11);
+	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 12);
+
 	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
 	private static Button gearInButt = new JoystickButton(rightJoy, 2);
+	
+	private static Button shootButt = new JoystickButton(shooterJoy, 1);
 
 	/**
 	 * COMMAND INSTANCES
 	 * Sets instances of commands and speeds for use with buttons
 	 */
-
+	private static Agitate agitatorForwardSpeed = new Agitate(RobotMap.AGITATOR_FORWARD);
+	private static Agitate agitatorBackwardSpeed = new Agitate(RobotMap.AGITATOR_BACKWARDS);
+	
 	private static Shift shiftToDangerous = new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
-	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMB_UP);
-	private static Climb climbDownSpeed = new Climb(RobotMap.CLIMB_DOWN);
+	
+	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMBER_FORWARD);
+	private static Climb climbDownSpeed = new Climb(RobotMap.CLIMBER_BACKWARD);
+	
 	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
 	
+	private static DriveAngle driveAngleTest1 = new DriveAngle(RobotMap.TEST_ANGLE_1);
+	private static DriveAngle driveAngleTest2 = new DriveAngle(RobotMap.TEST_ANGLE_2);
+	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3);
+	
+	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_FORWARD);
+
 	/**
 	 * OI CONSTRUCTOR
 	 * 
@@ -61,8 +84,11 @@ public class OI {
 	 * climbStopButt: When pressed, stop (emergency stop button)
 	 * shiftToHotButt: When pressed, shift to hot (low) gear
 	 * shiftToDangerousButt: When pressed, shift to dangerous (high) gear
+	 * agitatorForwardButt: When pressed, moves agitator forward
+	 * agitatorBackwardButt: When pressed, moves agitator backward
+	 * shootButt: While held, shoot
+	 * driveAngleTestButts: Drive to designated angle when pressed
 	 */
-	
 	public OI(){
 		gearOutButt.whenPressed(moveGearOut);
 		gearInButt.whenPressed(moveGearIn);
@@ -70,8 +96,14 @@ public class OI {
 		climbDownButt.whileHeld(climbDownSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
+		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
+		agitatorBackwardButt.whenPressed(agitatorBackwardSpeed);
+		shootButt.whileHeld(shooterOn);
+		driveAngleTest1Butt.whenPressed(driveAngleTest1);
+		driveAngleTest2Butt.whenPressed(driveAngleTest2);
+		driveAngleTest3Butt.whenPressed(driveAngleTest3);
 	}
-	
+
 	/**
 	 * JOYSTICK METHODS
 	 */
@@ -86,13 +118,22 @@ public class OI {
 	}
 	
 	/**
-	 * Gets values from the right for setting speeds in other
+	 * Gets values from the right joystick for setting speeds in other
 	 * commands/subsystems
 	 * @return the y-value from the Joystick
 	 */
-
 	public static double getRightY() {
 		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
+	}
+
+	/**
+	 * Gets values from the shooter joystick for setting speeds in other
+	 * commands/subsystems
+	 * @return the y-value from the Joystick
+	 */
+	public static double getShooterY()
+	{
+		return shooterJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 	
 	/**
@@ -108,7 +149,6 @@ public class OI {
 	 * @param input
 	 * @return
 	 */
-	
 	public static double modifyJoyOutputWithDeadband(double joystickInputWithDirection)
 	{
 		double joystickInputNoDirection = Math.abs(joystickInputWithDirection);
@@ -127,6 +167,18 @@ public class OI {
 			return (joystickInputDirection * joystickInputWithDeadband/totalJoystickInputPossibleWithDeadband);
 		}
 	}
+
+	/**
+	 * Throttle Methods
+	 * (throttle +1)/2 sets the throttle range from 0 to 1 rather than
+	 * 	-1 to 1
+	 */
+	public static double getShooterThrottle()
+	{
+		double throttle = shooterJoy.getThrottle() * RobotMap.SHOOTER_THROTTLE_FORWARD_CONSTANT;
+		return (throttle +1)/2;
+	}
+	
 	/**
 	 * Checks to see if there has been an emergency and the main driver is incapacitated
 	 * @return State of the driver
@@ -141,3 +193,4 @@ public class OI {
 		return false;
 	}
 }
+
