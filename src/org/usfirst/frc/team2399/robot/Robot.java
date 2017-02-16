@@ -122,6 +122,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		/**
+		 * These are the methods to put information on the SmartDashboard
+		 * It works based on key-value pairs
+		 * The key is the String and the value is the information you want to put on the Dashboard
+		 */
 		SmartDashboard.putBoolean("  ", oi.deadOrAlive());
 		SmartDashboard.putNumber("Yaw", driveTrain.getCurrentAngle());
 		SmartDashboard.putNumber(" ", getRobotTemperature());
