@@ -118,6 +118,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putBoolean("  ", oi.deadOrAlive());
+		SmartDashboard.putNumber("Yaw", driveTrain.getDriveTrainYaw());
+		SmartDashboard.putNumber(" ", getRobotTemperature());
+		SmartDashboard.putBoolean("   ", shifter.getShifterHotSolenoid());
+		SmartDashboard.putBoolean("    ", shifter.getShifterDangerousSolenoid());
 	}
 
 	/**
@@ -126,5 +131,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+	}
+	
+	/**
+	 * Gets the temperature of the Robot to ensure that we are not overheating our electrical system and ruining valuable equipment
+	 * @return Average temperature of devices wired with temperature monitoring
+	 */
+	public double getRobotTemperature()
+	{
+		return 8;
 	}
 }

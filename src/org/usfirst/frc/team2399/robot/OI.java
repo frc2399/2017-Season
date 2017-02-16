@@ -127,4 +127,17 @@ public class OI {
 			return (joystickInputDirection * joystickInputWithDeadband/totalJoystickInputPossibleWithDeadband);
 		}
 	}
+	/**
+	 * Checks to see if there has been an emergency and the main driver is incapacitated
+	 * @return State of the driver
+	 */
+	public boolean deadOrAlive()
+	{
+		if(getLeftY() == 0 || getRightY() == 0)
+		{
+			return true;
+		}
+		
+		return false;
+	}
 }

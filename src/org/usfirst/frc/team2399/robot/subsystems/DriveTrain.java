@@ -7,6 +7,7 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 //import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,7 +23,7 @@ public class DriveTrain extends Subsystem {
 	
 	private double goalDistance;
 	
-	//private AHRS Navx = new AHRS(SPI.Port.kMXP);
+	private AHRS Navx = new AHRS(SPI.Port.kMXP);
 		
 	public DriveTrain() {
 		leftFrontTalon = new CANTalon(RobotMap.DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS);
@@ -121,8 +122,10 @@ public class DriveTrain extends Subsystem {
 		}
 	}
 
-	
-	
+	public double getDriveTrainYaw()
+	{
+		return Navx.getYaw();  
+	}
 	/**
 	 * Gets the current position of the robot
 	 * Multiplied by the circumference of the wheel for scaling
