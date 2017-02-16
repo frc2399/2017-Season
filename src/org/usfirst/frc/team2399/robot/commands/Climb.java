@@ -6,7 +6,7 @@ import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Links climbing to joystick control
+ * Moves Climber motor
  */
 public class Climb extends Command {
 	
@@ -30,7 +30,7 @@ public class Climb extends Command {
 
     /**
      * Called repeatedly when this Command is scheduled to run
-     * When command is run, climber is set to the inputted speed (see constructor)
+     * When command is run, climber is set to the speed passed to the constructor
      */
     protected void execute() {
     	climber.setClimberSpeed(speed);
@@ -50,7 +50,8 @@ public class Climb extends Command {
     protected void end() {
     }
 
-    /**Called when another command which requires one or more of the same
+    /**
+     * Called when another command which requires one or more of the same
      * subsystems is scheduled to run
      */
     protected void interrupted() {

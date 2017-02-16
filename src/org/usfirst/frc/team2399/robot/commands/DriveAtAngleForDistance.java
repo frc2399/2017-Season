@@ -7,7 +7,7 @@ import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Drives at an angle for a distance
  */
 public class DriveAtAngleForDistance extends Command {
 
@@ -15,16 +15,17 @@ public class DriveAtAngleForDistance extends Command {
 	private double setpoint;
 	private double distance;
 	
+	/**
+	 * @param setpoint: Goal angle
+	 * @param distance: Goal distance
+	 */
     public DriveAtAngleForDistance(double setpoint, double distance) {
     	requires(driveTrain);
     	this.setpoint = setpoint;
     	this.distance = distance;
     	setInterruptible(true);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
-    // Called just before this Command runs the first time
     /**
      * Switches the Talons to speed mode
      * Sets the setpoint(where we want to be)
@@ -37,10 +38,10 @@ public class DriveAtAngleForDistance extends Command {
     	driveTrain.setRightDesiredPosition(distance);	
     }
 
-    // Called repeatedly when this Command is scheduled to run
     /**
      * Calculate P outputs for left, right and angle
      * Has two MIXED constants one for lines and one for angles
+     * Called repeatedly when this Command is scheduled to run
      */
     protected void execute() {
 
@@ -52,20 +53,23 @@ public class DriveAtAngleForDistance extends Command {
     	driveTrain.driveRightVelocity(rightPOutput * RobotMap.DRIVE_MIXED_LINEAR - anglePOutput * RobotMap.DRIVE_MIXED_ANGULAR);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     /**
      * Checks to see if our current distance is within our absolute tolerance for the setpoint
+     * Make this return true when this Command no longer needs to run execute()
      */
     protected boolean isFinished() {
         return driveTrain.getPIDController().onTarget();
     }
 
-    // Called once after isFinished returns true
+    /**
+     * Called once after isFinished returns true
+     */
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    /**Called when another command which requires one or more of the same
+     * subsystems is scheduled to run
+     */
     protected void interrupted() {
     }
 }

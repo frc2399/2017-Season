@@ -7,7 +7,7 @@ import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Shift to dangerous (high) speed
+ * Shift to dangerous (high) speed or hot (low) speed with pneums
  */
 
 public class Shift extends Command {
@@ -17,7 +17,6 @@ public class Shift extends Command {
 	private boolean shiftDangerousValue;
 
 	/**
-	 * 
 	 * @param shiftHotValue: Should be set to either the RobotMap value (on) or !RobotMap value (off)
 	 * @param shiftDangerousValue: Should be set to either the RobotMap value (on) or !RobotMap value (off)
 	 */
@@ -29,15 +28,14 @@ public class Shift extends Command {
 	}
 
 	/**
-	 * Called just before this Command runs the first time
-	 * Starts the timer for the command
+	 * Sets how long the timer should run for
 	 */
 	protected void initialize() {
 		setTimeout(RobotMap.SHIFT_TIMER);
 	}
 
 	/**
-	 *  Sets the Solenoid to a boolean value of true so it goes to the speed of dangerous
+	 *  Sets the Solenoids to values passed to the constructor
 	 *  Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
