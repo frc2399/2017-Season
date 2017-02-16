@@ -9,9 +9,6 @@ import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Shooter extends Subsystem {
 
 	private CANTalon shooterTalon;
@@ -38,7 +35,7 @@ public class Shooter extends Subsystem {
 	}
 
 	/**
-	 * Sets the speed to the inputted speed 
+	 * Sets the speed to the speed passed to the method
 	 * @param speed
 	 * Position change/10 ms
 	 */
@@ -55,7 +52,7 @@ public class Shooter extends Subsystem {
 	}
 
     /**
-     * Encoder position is set to zero, speed is set to inputted value
+     * Encoder position is set to zero, speed is set to the value passed to the method
      * @param goalSpeed
      */
 	public void setShooterDesiredSpeed(double goalSpeed) {
@@ -75,7 +72,7 @@ public class Shooter extends Subsystem {
 	}
 
     /*
-     * Allows us to Increment and Decrement for testing
+     * Allows us to Increment and Decrement speed constants for testing
      */
 	public void incrementSpeedConstant() {
 		double currentPConstant = shooterTalon.getP();
@@ -92,11 +89,10 @@ public class Shooter extends Subsystem {
 	}
 
 	/*
-	 * Default is the motor at 0 speed(non-Javadoc)
-	 * @see edu.wpi.first.wpilibj.command.Subsystem#initDefaultCommand()
+	 * Default is the motor at 0 speed
 	 */
 	public void initDefaultCommand() {
-		setDefaultCommand(new Shoot(0));
+		setDefaultCommand(new Shoot(RobotMap.SHOOTER_STOP));
 	}
 
 }

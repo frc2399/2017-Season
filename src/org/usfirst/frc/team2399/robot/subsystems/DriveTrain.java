@@ -29,11 +29,9 @@ public class DriveTrain extends PIDSubsystem {
 	private static double anglePConstant = RobotMap.DRIVE_ANGLE_P;
 	private static double angleIConstant = RobotMap.DRIVE_ANGLE_I;
 	private static double angleDConstant = RobotMap.DRIVE_ANGLE_D;
-
 	
 	private double angleMerkelTolerance = RobotMap.ANGLE_MERKEL_TOLERANCE;
 
-	
 	public DriveTrain() {
 		/**
 		 * Invokes PIDSubsystem constructor
@@ -136,7 +134,6 @@ public class DriveTrain extends PIDSubsystem {
 		}
 	}
 	
-
 	public void driveRightVelocity(double rightSpeed) {
 		if(rightSpeed >= RobotMap.VELOCITY_LOWER_SOFT_LIMIT && rightSpeed <= RobotMap.VELOCITY_UPPER_SOFT_LIMIT)
 		{
@@ -225,11 +222,8 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	/**
-	 * Methods to increment, decrement, and get the distance constant
-	 * Method takes in the Talon the P constant is being set for, gets the current P, and sets
-	 * the P to the current P + the increment/decrement constant
+	 * Returns the P value of the Talons
 	 */
-	
 	public double returnRightDistanceConstant(){
 		return rightFrontTalon.getP();
 	}
@@ -239,17 +233,21 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	/**
-	 * Sets 0 to be where the robot is facing
+	 * Sets 0 degrees to be where the robot is facing
 	 */
 	public void resetDriveTrainGyro()
 	{
 		Navx.reset();
 	}
 	
+	/**
+	 * @param targetAngle: Goal angle
+	 */
 	public void setTargetAngle(double targetAngle)
 	{
 		this.targetAngle = targetAngle;
 	}
+	
 	/**
 	 * Returns the angle we want to be
 	 * @return double targetAngle (degrees)
@@ -258,6 +256,7 @@ public class DriveTrain extends PIDSubsystem {
 	{
 		return targetAngle;
 	}
+	
 	/**
 	 * Returns angle relative to initial position OR relative to field, measured from 180 to -180 degrees
 	 * Initial position - gyro in robot-oriented mode
