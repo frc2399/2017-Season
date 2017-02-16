@@ -40,7 +40,7 @@ public class Climber extends Subsystem {
 	 */
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new Climb(RobotMap.CLIMB_STOP));
+		setDefaultCommand(new Climb(RobotMap.CLIMBER_STOP));
 
 	}
 

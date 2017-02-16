@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 
-
 public class Robot extends IterativeRobot {
 	
 	public static Climber climber;
@@ -34,10 +33,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Agitator agitator;
 	public static Shooter shooter;
-	/**
-	 * Autonomous command to be run should go here (used along with autonomousInit
-	 */
-
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -113,10 +108,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		/**

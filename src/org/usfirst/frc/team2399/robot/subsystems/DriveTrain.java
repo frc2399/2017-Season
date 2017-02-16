@@ -229,27 +229,6 @@ public class DriveTrain extends PIDSubsystem {
 	 * Method takes in the Talon the P constant is being set for, gets the current P, and sets
 	 * the P to the current P + the increment/decrement constant
 	 */
-
-	
-	public void incrementRightDistancePConstant(){
-		double currentPConstant = rightFrontTalon.getP();
-		rightFrontTalon.setP(currentPConstant += RobotMap.DRIVE_DISTANCE_INCREMENT);
-	}
-	
-	public void incrementLeftDistancePConstant(){
-		double currentPConstant = leftFrontTalon.getP();
-		leftFrontTalon.setP(currentPConstant += RobotMap.DRIVE_DISTANCE_INCREMENT);
-	}
-	
-	public void decrementRightDistancePConstant(){
-		double currentPConstant = rightFrontTalon.getP();
-		rightFrontTalon.setP(currentPConstant -= RobotMap.DRIVE_DISTANCE_DECREMENT);
-	}
-	
-	public void decrementLeftDistancePConstant(){
-		double currentPConstant = leftFrontTalon.getP();
-		leftFrontTalon.setP(currentPConstant -= RobotMap.DRIVE_DISTANCE_DECREMENT);
-	}
 	
 	public double returnRightDistanceConstant(){
 		return rightFrontTalon.getP();

@@ -26,17 +26,14 @@ public class OI {
 	/**
 	 * Joysticks
 	 */
-
 	private static Joystick leftJoy = new Joystick(RobotMap.JOYDRIVE_LEFT_STICK_PORT);
 	private static Joystick rightJoy = new Joystick(RobotMap.JOYDRIVE_RIGHT_STICK_PORT);
 	private static Joystick shooterJoy = new Joystick(RobotMap.JOYDRIVE_SHOOTER_STICK_PORT);
 
 	/**
 	 * BUTTONS
+	 * TODO: Set all buttons on all Joysticks
 	 */
-	//Climbing buttons - to be used in teleop
-		//TODO: set climbing buttons
-	
 	private static Button driveAngleTest1Butt = new JoystickButton(shooterJoy, 6);
 	private static Button driveAngleTest2Butt = new JoystickButton(shooterJoy, 3);
 	private static Button driveAngleTest3Butt = new JoystickButton(shooterJoy, 4);
@@ -52,41 +49,31 @@ public class OI {
 
 	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
 	private static Button gearInButt = new JoystickButton(rightJoy, 2);
-
+	
+	private static Button shootButt = new JoystickButton(shooterJoy, 1);
 
 	/**
 	 * COMMAND INSTANCES
 	 * Sets instances of commands and speeds for use with buttons
 	 */
-
-
-
-
-
-	
 	private static Agitate agitatorForwardSpeed = new Agitate(RobotMap.AGITATOR_FORWARD);
 	private static Agitate agitatorBackwardSpeed = new Agitate(RobotMap.AGITATOR_BACKWARDS);
 	
-
-	/**
-	 * Presets - sets instances of commands and speeds for use with buttons
-	 */
-
-
-
 	private static Shift shiftToDangerous = new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
-	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMB_UP);
-	private static Climb climbDownSpeed = new Climb(RobotMap.CLIMB_DOWN);
+	
+	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMBER_FORWARD);
+	private static Climb climbDownSpeed = new Climb(RobotMap.CLIMBER_BACKWARD);
+	
 	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
-
 	
 	private static DriveAngle driveAngleTest1 = new DriveAngle(RobotMap.TEST_ANGLE_1);
 	private static DriveAngle driveAngleTest2 = new DriveAngle(RobotMap.TEST_ANGLE_2);
 	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3);
-
 	
+	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_FORWARD);
+
 	/**
 	 * OI CONSTRUCTOR
 	 * 
@@ -97,8 +84,11 @@ public class OI {
 	 * climbStopButt: When pressed, stop (emergency stop button)
 	 * shiftToHotButt: When pressed, shift to hot (low) gear
 	 * shiftToDangerousButt: When pressed, shift to dangerous (high) gear
+	 * agitatorForwardButt: When pressed, moves agitator forward
+	 * agitatorBackwardButt: When pressed, moves agitator backward
+	 * shootButt: While held, shoot
+	 * driveAngleTestButts: Drive to designated angle when pressed
 	 */
-	
 	public OI(){
 		gearOutButt.whenPressed(moveGearOut);
 		gearInButt.whenPressed(moveGearIn);
@@ -114,7 +104,6 @@ public class OI {
 		driveAngleTest3Butt.whenPressed(driveAngleTest3);
 	}
 
-	
 	/**
 	 * JOYSTICK METHODS
 	 */
@@ -129,15 +118,19 @@ public class OI {
 	}
 	
 	/**
-	 * Gets values from the right for setting speeds in other
+	 * Gets values from the right joystick for setting speeds in other
 	 * commands/subsystems
 	 * @return the y-value from the Joystick
 	 */
-
 	public static double getRightY() {
 		return rightJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 
+	/**
+	 * Gets values from the shooter joystick for setting speeds in other
+	 * commands/subsystems
+	 * @return the y-value from the Joystick
+	 */
 	public static double getShooterY()
 	{
 		return shooterJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
@@ -156,12 +149,6 @@ public class OI {
 	 * @param input
 	 * @return
 	 */
-	
-	//preset speeds
-	
-	//References RobotMap for speed values; to be used to set speed when buttons are pressed
-
-	
 	public static double modifyJoyOutputWithDeadband(double joystickInputWithDirection)
 	{
 		double joystickInputNoDirection = Math.abs(joystickInputWithDirection);
@@ -180,57 +167,12 @@ public class OI {
 			return (joystickInputDirection * joystickInputWithDeadband/totalJoystickInputPossibleWithDeadband);
 		}
 	}
-	
 
-
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
-	
-	/**
-	 * Buttons
-	 */
-	
-	private static Button shootButt = new JoystickButton(shooterJoy, 1);
-
-
-	/**
-	 * Presets
-	 */
-	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_CONSTANT);
-
-
-	
 	/**
 	 * Throttle Methods
 	 * (throttle +1)/2 sets the throttle range from 0 to 1 rather than
 	 * 	-1 to 1
 	 */
-	
 	public static double getShooterThrottle()
 	{
 		double throttle = shooterJoy.getThrottle() * RobotMap.SHOOTER_THROTTLE_FORWARD_CONSTANT;
