@@ -35,7 +35,7 @@ public class DriveAtAngleForDistance extends Command {
     	driveTrain.setSpeedControlMode();
     	driveTrain.getPIDController().setSetpoint(setpoint);
     	driveTrain.setLeftDesiredPosition(distance);
-    	driveTrain.setRightDesiredPosition(distance);	
+    	driveTrain.setRightDesiredPosition(distance);
     }
 
     /**
