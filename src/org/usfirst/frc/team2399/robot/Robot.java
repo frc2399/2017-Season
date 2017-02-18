@@ -53,6 +53,8 @@ public class Robot extends IterativeRobot {
 		  oi = new OI();
 		  agitator = new Agitator();
 		  shooter = new Shooter();
+		  
+		  SmartDashboard.putBoolean("Red", false);
 	}
 
 	/**
@@ -83,6 +85,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		/**
+		 * If we ARE on the red alliance, all angle values will be multiplied by -1
+		 * TODO: Make sure this works
+		 */
+		boolean isRed = SmartDashboard.getBoolean("Red",false);
 		autonomousCommand = chooser.getSelected();
 		driveTrain.resetDriveTrainGyro();
 		/*

@@ -1,28 +1,27 @@
 package org.usfirst.frc.team2399.robot.commands;
 
+import org.usfirst.frc.team2399.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
- *
+ * Drive to the center lift, place gear, drive away from the lift
+ * Keeps the Gear Collector open for about 3 seconds before closing it
  */
 public class AutoDriveToCenterLift extends CommandGroup {
 
-    public AutoDriveToCenterLift() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+	private double angleAdjustment = 1;
+	
+    public AutoDriveToCenterLift(boolean redAlliance) {
+    	if(redAlliance == true){
+    		angleAdjustment = -1;
+    	}
+    	addSequential(new DriveAngle(angleAdjustment*0));
+    	addSequential(new DriveAtAngleForDistance(angleAdjustment*0,69));
+    	addSequential(new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT));
+    	addSequential(new WaitCommand(3));
+    	addParallel(new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT));
+    	addParallel(new DriveAtAngleForDistance(angleAdjustment*0,-33));
     }
 }

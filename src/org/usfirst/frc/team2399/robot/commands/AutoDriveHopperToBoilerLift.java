@@ -1,28 +1,22 @@
 package org.usfirst.frc.team2399.robot.commands;
 
+import org.usfirst.frc.team2399.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Drive to hopper, drive backwards, turn, drive to the boiler-side lift, place gear while shooter
  */
 public class AutoDriveHopperToBoilerLift extends CommandGroup {
-
-    public AutoDriveHopperToBoilerLift() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+	private double angleAdjustment = 1;
+    public AutoDriveHopperToBoilerLift(boolean redAlliance) {
+    	if(redAlliance == true){
+    		angleAdjustment = -1;
+    	}
+    	addSequential(new AutoDriveToHopper(redAlliance));
+    	addSequential(new DriveAtAngleForDistance(angleAdjustment*45,-120));
+    	addSequential(new DriveAngle(angleAdjustment*135));
+    	addSequential(new DriveAtAngleForDistance(angleAdjustment*135,69));
+    	addSequential(new AutoPlaceGearAndShoot());
     }
 }
