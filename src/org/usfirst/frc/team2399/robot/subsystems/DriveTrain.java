@@ -30,6 +30,10 @@ public class DriveTrain extends PIDSubsystem {
 	private static double angleIConstant = RobotMap.DRIVE_ANGLE_I;
 	private static double angleDConstant = RobotMap.DRIVE_ANGLE_D;
 	
+	private static double rightDistancePConstant = RobotMap.RIGHT_DISTANCE_P;
+	private static double leftDistancePConstant = RobotMap.LEFT_DISTANCE_P;
+	private static double rightDistanceFConstant = RobotMap.RIGHT_DISTANCE_F;
+	private static double leftDistanceFConstant = RobotMap.LEFT_DISTANCE_F;
 	private double angleMerkelTolerance = RobotMap.ANGLE_MERKEL_TOLERANCE;
 
 	public DriveTrain() {
@@ -64,6 +68,13 @@ public class DriveTrain extends PIDSubsystem {
 		rightMiddleTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
 		rightBackTalon.changeControlMode(TalonControlMode.Follower);
 		rightBackTalon.set(RobotMap.DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS);
+		
+		leftFrontTalon.enableBrakeMode(!RobotMap.BRAKE_MODE);
+		leftBackTalon.enableBrakeMode(!RobotMap.BRAKE_MODE);
+		leftMiddleTalon.enableBrakeMode(!RobotMap.BRAKE_MODE);
+		rightFrontTalon.enableBrakeMode(!RobotMap.BRAKE_MODE);
+		rightBackTalon.enableBrakeMode(!RobotMap.BRAKE_MODE);
+		rightMiddleTalon.enableBrakeMode(!RobotMap.BRAKE_MODE);
 	
 		/**
 		 * If the forward constant is negative (see boolean in RobotMap) reverse the output of
@@ -125,7 +136,7 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	public void driveLeftPercent(double leftSpeed) {
-		getPIDController().disable();
+	//	getPIDController().disable();
 		if(leftSpeed >= RobotMap.PERCENT_LOWER_SOFT_LIMIT && leftSpeed <= RobotMap.PERCENT_UPPER_SOFT_LIMIT )
 		{
 			leftFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
@@ -144,7 +155,7 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	public void driveRightPercent(double rightSpeed) {
-		getPIDController().disable();
+	//	getPIDController().disable();
 		if(rightSpeed >= RobotMap.PERCENT_LOWER_SOFT_LIMIT && rightSpeed <= RobotMap.PERCENT_UPPER_SOFT_LIMIT )
 		{
 			rightFrontTalon.changeControlMode(TalonControlMode.PercentVbus);
@@ -182,6 +193,14 @@ public class DriveTrain extends PIDSubsystem {
 	
 	public double getRightPosition(){
 		return rightFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE;
+	}
+	
+	public void resetLeftPosition(){
+		leftFrontTalon.setPosition(0);
+	}
+	
+	public void resetRightPosition(){
+		rightFrontTalon.setPosition(0);
 	}
 	
 	/**
@@ -233,6 +252,50 @@ public class DriveTrain extends PIDSubsystem {
 	}
 	
 	/**
+	 * Returns the F value of the Talons
+	 */
+	public double returnRightDistanceFeedForward()
+	{
+		return rightFrontTalon.getF();
+	}
+	
+	public double returnLeftDistanceFeedForward()
+	{
+		return leftFrontTalon.getF();
+	}
+	
+	public void setLeftPConstant(double pConstant)
+	{
+		leftDistancePConstant = pConstant;
+		leftFrontTalon.setP(leftDistancePConstant);
+	}
+	
+	public void setRightPConstant(double pConstant)
+	{
+		rightDistancePConstant = pConstant;
+		rightFrontTalon.setP(rightDistancePConstant);
+	}
+	
+	public void incrementLeftPConstant(){
+		double currentP = leftFrontTalon.getP();
+		leftFrontTalon.setP(currentP + RobotMap.DISTANCE_P_INCREMENT);
+	}
+	
+	public void incrementRightPConstant(){
+		double currentP = rightFrontTalon.getP();
+		rightFrontTalon.setP(currentP + RobotMap.DISTANCE_P_INCREMENT);
+	}
+	
+	public void decrementLeftPConstant(){
+		double currentP = leftFrontTalon.getP();
+		leftFrontTalon.setP(currentP - RobotMap.DISTANCE_P_DECREMENT);
+	}
+	
+	public void decrementRightPConstant(){
+		double currentP = rightFrontTalon.getP();
+		rightFrontTalon.setP(currentP - RobotMap.DISTANCE_P_DECREMENT);
+	}
+	/**
 	 * Sets 0 degrees to be where the robot is facing
 	 */
 	public void resetDriveTrainGyro()
@@ -263,11 +326,29 @@ public class DriveTrain extends PIDSubsystem {
 	 * Relative to field - gyro in field-oriented mode
 	 * @return double degrees (-180 - 180)
 	 */
-	public double getCurrentAngle()
+	public double getCurrentYaw()
 	{
 		return Navx.getYaw();
 	}
 	
+	/**
+	 * Returns angle relative to initial position OR relative to field, measured from -360 to 360
+	 * getAngle() returns the angle accumulated since the last gyro reset
+	 * To account for this, if the absolute value of the angle is greater than 360 degrees
+	 * Divide by 360 degrees and return the remainder
+	 * Initial position - gyro in robot-oriented mode
+	 * Relative to field - gyro in field-oriented mode
+	* @return
+	 */
+	public double getCurrentAngle()
+	{
+		if(Math.abs(Navx.getAngle()) > 360)
+		{
+			return Navx.getAngle() % 360;
+		}
+		
+		return Navx.getAngle();
+	}
 	/**
 	 * Sets the distance P output for the left and right Talon
 	 */

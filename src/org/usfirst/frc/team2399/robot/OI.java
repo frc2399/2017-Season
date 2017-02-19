@@ -1,9 +1,11 @@
 package org.usfirst.frc.team2399.robot;
 
 
+import org.usfirst.frc.team2399.robot.commands.AdjustDriveDistanceP;
 import org.usfirst.frc.team2399.robot.commands.Agitate;
 import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.commands.DriveAngle;
+import org.usfirst.frc.team2399.robot.commands.DriveEncoderReset;
 import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
@@ -38,19 +40,24 @@ public class OI {
 	private static Button driveAngleTest2Butt = new JoystickButton(shooterJoy, 3);
 	private static Button driveAngleTest3Butt = new JoystickButton(shooterJoy, 4);
 	
-	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
-	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
+	private static Button climbUpButt = new JoystickButton(shooterJoy, 5);
+	private static Button climbUpReducedButt = new JoystickButton(shooterJoy, 12);
 	
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
 
 	private static Button agitatorForwardButt = new JoystickButton(leftJoy, 11);
-	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 12);
+	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 10);
 
 	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
 	private static Button gearInButt = new JoystickButton(rightJoy, 2);
 	
 	private static Button shootButt = new JoystickButton(shooterJoy, 1);
+	
+	private static Button incrementDistancePButt = new JoystickButton(rightJoy, 4);
+	private static Button decrementDistancePButt = new JoystickButton(rightJoy, 5);
+	
+	private static Button resetDriveEncodersButt = new JoystickButton(rightJoy, 10);
 
 	/**
 	 * COMMAND INSTANCES
@@ -62,8 +69,8 @@ public class OI {
 	private static Shift shiftToDangerous = new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	
-	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMBER_FORWARD);
-	private static Climb climbDownSpeed = new Climb(RobotMap.CLIMBER_BACKWARD);
+	private static Climb climbUpSpeed = new Climb(0.75);
+	private static Climb climbUpReducedSpeed = new Climb(RobotMap.CLIMBER_FORWARD_REDUCED);
 	
 	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
@@ -73,6 +80,11 @@ public class OI {
 	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3);
 	
 	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_FORWARD);
+	
+	private static AdjustDriveDistanceP incrementP = new AdjustDriveDistanceP(true);
+	private static AdjustDriveDistanceP decrementP = new AdjustDriveDistanceP(false);
+	
+	private static DriveEncoderReset driveEncoderReset = new DriveEncoderReset();
 
 	/**
 	 * OI CONSTRUCTOR
@@ -93,7 +105,7 @@ public class OI {
 		gearOutButt.whenPressed(moveGearOut);
 		gearInButt.whenPressed(moveGearIn);
 		climbUpButt.whileHeld(climbUpSpeed);
-		climbDownButt.whileHeld(climbDownSpeed);
+		climbUpReducedButt.whileHeld(climbUpReducedSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
 		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
@@ -102,6 +114,9 @@ public class OI {
 		driveAngleTest1Butt.whenPressed(driveAngleTest1);
 		driveAngleTest2Butt.whenPressed(driveAngleTest2);
 		driveAngleTest3Butt.whenPressed(driveAngleTest3);
+		incrementDistancePButt.whenPressed(incrementP);
+		decrementDistancePButt.whenPressed(decrementP);
+		resetDriveEncodersButt.whenPressed(driveEncoderReset);
 	}
 
 	/**

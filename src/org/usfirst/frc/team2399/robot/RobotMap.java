@@ -22,16 +22,18 @@ public class RobotMap {
 	 * TODO: Set actual address for shooter talon and agitator Talon
 	 * Talon Addresses
 	 */
-	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS = 10;
-	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS = 9;
-	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 7;
-	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 6;
-	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS = 5;
-	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 8;
-	public static final int CLIMBER_TALON_ADDRESS = 2;
+	
+	public static final int DRIVETRAIN_RIGHT_TALON_FRONT_ADDRESS =2 ;
+	public static final int DRIVETRAIN_LEFT_TALON_FRONT_ADDRESS =1 ;
+	public static final int DRIVETRAIN_LEFT_BACK_TALON_ADDRESS = 8;
+	public static final int DRIVETRAIN_RIGHT_BACK_TALON_ADDRESS = 7;
+	public static final int DRIVETRAIN_LEFT_MIDDLE_TALON_ADDRESS =5 ;
+	public static final int DRIVETRAIN_RIGHT_MIDDLE_TALON_ADDRESS = 3;
+	public static final int CLIMBER_TALON_ADDRESS = 10;
 	public static final int PCM_ADDRESS = 3;
-	public static final int AGITATOR_TALON_ADDRESS = 2399;
-	public static final int SHOOTER_TALON_ADDRESS = 8756;
+	//TODO: Make sure these match where they're plugged in
+	public static final int AGITATOR_TALON_ADDRESS = 4;
+	public static final int SHOOTER_TALON_ADDRESS = 6;
 
 	/**
 	 * Ports for sensors, joysticks, and solenoids
@@ -57,7 +59,7 @@ public class RobotMap {
 	public static final int DRIVETRAIN_FORWARD_RIGHT = 1;
 	
 	public static final int CLIMBER_FORWARD = 1;
-	public static final int CLIMBER_BACKWARD = -1;
+	public static final double CLIMBER_FORWARD_REDUCED = .5;
 	public static final int CLIMBER_STOP = 0;
 	
 	public static final int SHOOTER_FORWARD = 1;
@@ -80,6 +82,8 @@ public class RobotMap {
 	public static final boolean SHIFTER_SOLENOID_HOT= true;
 	public static final boolean GEAR_SOLENOID_OUT= true;
 	public static final boolean GEAR_SOLENOID_IN = true;
+	
+	public static final boolean BRAKE_MODE = true;
 	
 	/**
 	 * Constants for calculations
@@ -106,9 +110,16 @@ public class RobotMap {
 	 * ENCODER CONSTANTS
 	 * TODO: Set actual values for constants
 	 */
-	public static final double DISTANCE_DECREMENT = 0;
-	public static final double DISTANCE_INCREMENT = 0;
+	public static final double DISTANCE_P_DECREMENT = 0.005;
+	public static final double DISTANCE_P_INCREMENT = 0.005;
+	public static final double DISTANCE_F_DECREMENT = 0;
+	public static final double DISTANCE_F_INCREMENT = 0;
 	public static final double ANGLE_P = 0;
+	
+	public static final double RIGHT_DISTANCE_P = 0;
+	public static final double LEFT_DISTANCE_P = 0;
+	public static final double RIGHT_DISTANCE_F = 0;
+	public static final double LEFT_DISTANCE_F = 0;
 	
 	public static double DRIVE_ANGLE_P = 0;
 	public static double DRIVE_ANGLE_I = 0;

@@ -50,9 +50,9 @@ public class Robot extends IterativeRobot {
 		  shifter = new Shifter();
 		  driveTrain = new DriveTrain();
 		  gearCollector = new GearCollector();
-		  oi = new OI();
 		  agitator = new Agitator();
 		  shooter = new Shooter();
+		  oi = new OI();
 	}
 
 	/**
@@ -133,6 +133,20 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber(" ", getRobotTemperature());
 		SmartDashboard.putBoolean("   ", shifter.getShifterHotSolenoid());
 		SmartDashboard.putBoolean("    ", shifter.getShifterDangerousSolenoid());
+		
+		SmartDashboard.putNumber("Left Position", driveTrain.getLeftPosition());
+		SmartDashboard.putNumber("Right Position", driveTrain.getRightPosition());
+		SmartDashboard.putNumber("Desired Left Distance", driveTrain.getLeftDesiredDistance());
+		SmartDashboard.putNumber("Desired Right Distance", driveTrain.getRightDesiredDistance());
+		SmartDashboard.putNumber("Left Distance Current P", driveTrain.returnLeftDistanceConstant());
+		SmartDashboard.putNumber("Right Distance Current P", driveTrain.returnRightDistanceConstant());
+		SmartDashboard.putNumber("Left Distance Current F", driveTrain.returnLeftDistanceFeedForward());
+		SmartDashboard.putNumber("Right Distance Current F", driveTrain.returnRightDistanceFeedForward());
+		SmartDashboard.putNumber("Left Distance Error", driveTrain.returnLeftDistanceError());
+		SmartDashboard.putNumber("Right Distance Error", driveTrain.returnRightDistanceError());
+		
+		SmartDashboard.putNumber("Drive Train Gyro Current Yaw", driveTrain.getCurrentYaw());
+		SmartDashboard.putNumber("Drive Train Gyro Current Angle", driveTrain.getCurrentAngle());
 	}
 
 	/**
