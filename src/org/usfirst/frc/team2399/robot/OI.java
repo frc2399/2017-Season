@@ -2,6 +2,7 @@ package org.usfirst.frc.team2399.robot;
 
 
 import org.usfirst.frc.team2399.robot.commands.Agitate;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveTest;
 import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.commands.DriveAngle;
 import org.usfirst.frc.team2399.robot.commands.Climb;
@@ -51,6 +52,8 @@ public class OI {
 	private static Button gearInButt = new JoystickButton(rightJoy, 2);
 	
 	private static Button shootButt = new JoystickButton(shooterJoy, 1);
+	
+	private static Button distanceButt = new JoystickButton(leftJoy, 6);
 
 	/**
 	 * COMMAND INSTANCES
@@ -73,6 +76,8 @@ public class OI {
 	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3);
 	
 	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_FORWARD);
+	
+	private static AutoDriveTest driveTest = new AutoDriveTest();
 
 	/**
 	 * OI CONSTRUCTOR
@@ -102,6 +107,7 @@ public class OI {
 		driveAngleTest1Butt.whenPressed(driveAngleTest1);
 		driveAngleTest2Butt.whenPressed(driveAngleTest2);
 		driveAngleTest3Butt.whenPressed(driveAngleTest3);
+		distanceButt.whenPressed(driveTest);
 	}
 
 	/**

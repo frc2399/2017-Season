@@ -174,15 +174,16 @@ public class DriveTrain extends PIDSubsystem {
 
 	/**
 	 * Gets the current position of the robot
+	 * Divided by the gear ratio for the encoder
 	 * Multiplied by the circumference of the wheel for scaling
 	 * @return
 	 */
 	public double getLeftPosition(){
-		return leftFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE;
+		return leftFrontTalon.getPosition() / RobotMap.DRIVETRAIN_GEAR_RATIO * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE;
 	}
 	
 	public double getRightPosition(){
-		return rightFrontTalon.getPosition() * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE;
+		return rightFrontTalon.getPosition() / RobotMap.DRIVETRAIN_GEAR_RATIO * RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE;
 	}
 	
 	/**

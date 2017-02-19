@@ -92,14 +92,14 @@ public class RobotMap {
 	 * Distance per pulse is the amount of distance travelled by the robot per one pulse of the encoder
 	 * TODO: Find shooter wheel numbers
 	 */
-	public static final int SHOOTER_ENCODER_COUNT = 0;
-	public static final double SHOOTER_GEAR_RATIO = 1;
+	public static final int SHOOTER_ENCODER_COUNT = 4096;
+	public static final double SHOOTER_GEAR_RATIO = 1.0;
 	public static final double SHOOTER_WHEEL_DIAMETER = 3.875;
 	public static final double SHOOTER_WHEEL_CIRCUMFERENCE = RobotMap.SHOOTER_WHEEL_DIAMETER* Math.PI;
 	
-	public static final double DRIVETRAIN_ENCODER_COUNT = 0;
-	public static final double DRIVETRAIN_GEAR_RATIO = 0;
-	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4;
+	public static final int DRIVETRAIN_ENCODER_COUNT = 4096; 
+	public static final double DRIVETRAIN_GEAR_RATIO = 1.797; //Emperically determined
+	public static final double DRIVETRAIN_WHEEL_DIAMETER = 4.0;
 	public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
 
 	

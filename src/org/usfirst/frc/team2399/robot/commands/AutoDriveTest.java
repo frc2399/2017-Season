@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2399.robot.commands;
 
 import org.usfirst.frc.team2399.robot.Robot;
+import org.usfirst.frc.team2399.robot.Utility;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -24,21 +25,25 @@ public class AutoDriveTest extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	timer.start();
-    	distance = 120;
-    	velocity = 2;
+    	distance = 120; // inches
+    	velocity = 24; // inches per second
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double totalTime = distance/velocity;
-    	double desiredDistance = (distance*timer.get())/totalTime;
+    	
+    	
     	//MAKE THIS IN CORRECT UNITS
-    	leftFrontTalon.set(desiredDistance);
-    	leftFrontTalon.set(desiredDistance);
+    	driveTrain.driveLeftVelocity(Utility.inchesPerSecondToTalonVelocity(velocity));
+    	driveTrain.driveRightVelocity(Utility.inchesPerSecondToTalonVelocity(velocity));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        if(driveTrain.getLeftPosition() > distance && driveTrain.getRightPosition() > distance)
+        {
+        	return true;
+        }
         return false;
     }
 
