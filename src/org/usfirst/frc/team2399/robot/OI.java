@@ -7,9 +7,9 @@ import org.usfirst.frc.team2399.robot.commands.AngleErrorPAdjust;
 import org.usfirst.frc.team2399.robot.commands.DriveDistanceHoldAngle;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
+import org.usfirst.frc.team2399.robot.commands.Agitate;
 import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.commands.DriveAngle;
-import org.usfirst.frc.team2399.robot.commands.DriveAtAngleForDistance;
 import org.usfirst.frc.team2399.robot.commands.DriveEncoderReset;
 import org.usfirst.frc.team2399.robot.commands.DriveTrainGyroReset;
 import org.usfirst.frc.team2399.robot.commands.Climb;
@@ -76,6 +76,9 @@ public class OI {
 	 * COMMAND INSTANCES
 	 * Sets instances of commands and speeds for use with buttons
 	 */
+	private static Agitate agitatorForwardSpeed = new Agitate(RobotMap.AGITATOR_FORWARD);
+	private static Agitate agitatorBackwardSpeed = new Agitate(RobotMap.AGITATOR_BACKWARDS);
+	
 	private static Shift shiftToDangerous = new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	
@@ -92,7 +95,6 @@ public class OI {
 	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_MIN, RobotMap.SHOOTER_SPEED_MAX);
 	
 	private static DriveDistanceHoldAngle driveTest = new DriveDistanceHoldAngle(120, 24);
-	private static DriveAtAngleForDistance distanceAngleTest = new DriveAtAngleForDistance(0, 120);
 	private static AngleErrorPAdjust incrementP = new AngleErrorPAdjust(true);
 	private static AngleErrorPAdjust decrementP = new AngleErrorPAdjust(false);
 	private static AdjustDistanceF incrementF = new AdjustDistanceF(true);
@@ -124,6 +126,8 @@ public class OI {
 		climbUpButt.whileHeld(climbUpSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
+		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
+		agitatorBackwardButt.whenPressed(agitatorBackwardSpeed);
 		shootButt.whileHeld(shooterOn);
 		driveAngleTest1Butt.whenPressed(driveAngleTest1);
 		driveAngleTest2Butt.whenPressed(driveAngleTest2);
@@ -135,7 +139,6 @@ public class OI {
 		resetDriveGyroButt.whenPressed(driveGyroReset);
 		incrementDistanceFButt.whenPressed(incrementF);
 		decrementDistanceFButt.whenPressed(decrementF);
-		distanceAngleButt.whenPressed(distanceAngleTest);
 		autoCenterButt.whenPressed(autoCenter);
 	}
 

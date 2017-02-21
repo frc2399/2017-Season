@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2399.robot;
 
+import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveHopperToBoilerLift;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static GearCollector gearCollector;
 	public static OI oi;
+	public static Agitator agitator;
 	public static Shooter shooter;
 
 	Command autonomousCommand;
@@ -51,6 +53,7 @@ public class Robot extends IterativeRobot {
 		  shifter = new Shifter();
 		  driveTrain = new DriveTrain();
 		  gearCollector = new GearCollector();
+		  agitator = new Agitator();
 		  shooter = new Shooter();
 		  
 		//  SmartDashboard.putBoolean("Red", false);
