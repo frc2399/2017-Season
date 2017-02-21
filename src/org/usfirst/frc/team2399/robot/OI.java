@@ -4,7 +4,7 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.commands.AdjustDistanceF;
 import org.usfirst.frc.team2399.robot.commands.AdjustDriveDistanceP;
 import org.usfirst.frc.team2399.robot.commands.AngleErrorPAdjust;
-import org.usfirst.frc.team2399.robot.commands.AutoDriveTest;
+import org.usfirst.frc.team2399.robot.commands.DriveDistanceHoldAngle;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
 import org.usfirst.frc.team2399.robot.RobotMap;
@@ -91,7 +91,7 @@ public class OI {
 	
 	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_MIN, RobotMap.SHOOTER_SPEED_MAX);
 	
-	private static AutoDriveTest driveTest = new AutoDriveTest(120, 24);
+	private static DriveDistanceHoldAngle driveTest = new DriveDistanceHoldAngle(120, 24);
 	private static DriveAtAngleForDistance distanceAngleTest = new DriveAtAngleForDistance(0, 120);
 	private static AngleErrorPAdjust incrementP = new AngleErrorPAdjust(true);
 	private static AngleErrorPAdjust decrementP = new AngleErrorPAdjust(false);

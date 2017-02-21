@@ -15,8 +15,8 @@ public class AutoDriveToHopper extends CommandGroup {
     		angleAdjustment = -1;
     	}
     	
-    	addSequential(new AutoDriveTest(19, 24));
+    	addSequential(new DriveDistanceHoldAngle(19, 24));
     	addSequential(new DriveAngle(angleAdjustment*30));
-    	addSequential(new AutoDriveTest(135, 24));
+    	addSequential(new DriveDistanceHoldAngle(135, 24));
     }
 }

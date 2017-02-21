@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class AutoDriveTest extends Command {
+public class DriveDistanceHoldAngle extends Command {
 
 	private DriveTrain driveTrain = Robot.driveTrain;
 	private Timer timer;
@@ -22,7 +22,7 @@ public class AutoDriveTest extends Command {
 	private double rampTime;
 	private double rampDistance;
 	
-    public AutoDriveTest(double distance, double velocity) {
+    public DriveDistanceHoldAngle(double distance, double velocity) {
     	this.distance = distance; // inches
     	this.velocity = velocity; // inches per second
     	if(distance < 0)

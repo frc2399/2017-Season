@@ -17,11 +17,11 @@ public class AutoDriveToBoilerLift extends CommandGroup {
     		angleAdjustment = -1;
     	}
     
-       addSequential(new AutoDriveTest(19, 36));
+       addSequential(new DriveDistanceHoldAngle(19, 36));
        addSequential(new DriveAngle(angleAdjustment*35));
-       addSequential(new AutoDriveTest(72.5, 36));
+       addSequential(new DriveDistanceHoldAngle(72.5, 36));
        addSequential(new DriveAngle(angleAdjustment* -90));
-       addSequential(new AutoDriveTest(36, 36));
+       addSequential(new DriveDistanceHoldAngle(36, 36));
        addSequential(new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT));
        addSequential(new WaitCommand(3));
        addSequential(new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT));
