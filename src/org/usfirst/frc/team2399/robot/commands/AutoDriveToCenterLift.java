@@ -11,17 +11,20 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class AutoDriveToCenterLift extends CommandGroup {
 
-	private double angleAdjustment = 1;
+	//private double angleAdjustment = 1;
 	
-    public AutoDriveToCenterLift(boolean redAlliance) {
-    	if(redAlliance == true){
-    		angleAdjustment = -1;
-    	}
-    	addSequential(new DriveAngle(angleAdjustment*0));
-    	addSequential(new DriveAtAngleForDistance(angleAdjustment*0,69));
+    public AutoDriveToCenterLift() {
+    	//if(redAlliance == true){
+    	//	angleAdjustment = -1;
+    	//}
+    	//addSequential(new AutoDriveTest(19, 36));
+    	//addSequential(new DriveAngle(angleAdjustment*30));
+    	addSequential(new AutoDriveTest(69,36));
+    	//addSequential(new DriveAngle(angleAdjustment*-30));
+    	//addSequential(new AutoDriveTest(24,36));
     	addSequential(new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT));
     	addSequential(new WaitCommand(3));
     	addParallel(new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT));
-    	addParallel(new DriveAtAngleForDistance(angleAdjustment*0,-33));
+    	addParallel(new AutoDriveTest(-20,36));
     }
 }

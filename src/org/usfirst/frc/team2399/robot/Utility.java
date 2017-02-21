@@ -39,7 +39,7 @@ public class Utility
 	 * @param inchesPerSecond
 	 * @return Talon velocity (encoder ticks per 10 ms)
 	 */
-	public static double inchesPerSecondToTalonVelocity(double inchesPerSecond)
+	/*public static double inchesPerSecondToTalonVelocity(double inchesPerSecond)
 	{
 		double seconds = 1;
 		double inches = inchesPerSecond * seconds;
@@ -48,5 +48,30 @@ public class Utility
 		double tenMs = secondsToTenMs(seconds);
 		
 		return encoderTicks / tenMs;
+	}*/
+	
+	/**
+	 * Wheel
+	 * @param inchesPerSecond
+	 * @return RPM
+	 */
+	public static double inchesPerSecondToGearboxRPM(double inchesPerSecond)
+	{
+		double seconds = 1;
+		double inches = inchesPerSecond * seconds;
+		
+		double wheelRotations = inches / RobotMap.DRIVETRAIN_WHEEL_CIRCUMFERENCE;
+		double gearboxRotations = RobotMap.DRIVETRAIN_GEAR_RATIO * wheelRotations;
+		double minutes = seconds / 60;
+		
+		return gearboxRotations / minutes;
+	}
+	
+	public static boolean inRange(double first, double second, double tolerance)
+	{
+		double upperBound = first + tolerance;
+		double lowerBound = first - tolerance;
+		
+		return (second < upperBound) && (second > lowerBound);
 	}
 }

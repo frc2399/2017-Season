@@ -2,6 +2,9 @@ package org.usfirst.frc.team2399.robot;
 
 import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import org.usfirst.frc.team2399.robot.OI;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveHopperToBoilerLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2399.robot.subsystems.Shooter;
@@ -50,11 +53,15 @@ public class Robot extends IterativeRobot {
 		  shifter = new Shifter();
 		  driveTrain = new DriveTrain();
 		  gearCollector = new GearCollector();
-		  oi = new OI();
 		  agitator = new Agitator();
 		  shooter = new Shooter();
 		  
-		  SmartDashboard.putBoolean("Red", false);
+		//  SmartDashboard.putBoolean("Red", false);
+		  chooser.addObject("Gear on Boiler Lift", new AutoDriveToBoilerLift(true));
+		  chooser.addObject("Gear on Center Lift", new AutoDriveToCenterLift());
+		  chooser.addObject("Deploy Hopper, Boiler Lift Gear and Shoot", new AutoDriveHopperToBoilerLift(true));
+		  SmartDashboard.putData("Autonomous Mode", chooser);
+		  oi = new OI();
 	}
 
 	/**
@@ -89,8 +96,8 @@ public class Robot extends IterativeRobot {
 		 * If we ARE on the red alliance, all angle values will be multiplied by -1
 		 * TODO: Make sure this works
 		 */
-		boolean isRed = SmartDashboard.getBoolean("Red",false);
-		autonomousCommand = chooser.getSelected();
+		//boolean isRed = SmartDashboard.getBoolean("Red",false);
+		autonomousCommand = (Command) chooser.getSelected();
 		driveTrain.resetDriveTrainGyro();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -138,8 +145,17 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("  ", oi.deadOrAlive());
 		SmartDashboard.putNumber("Yaw", driveTrain.getCurrentAngle());
 		SmartDashboard.putNumber(" ", getRobotTemperature());
-		SmartDashboard.putBoolean("   ", shifter.getShifterHotSolenoid());
-		SmartDashboard.putBoolean("    ", shifter.getShifterDangerousSolenoid());
+		
+		SmartDashboard.putNumber("Left Position", driveTrain.getLeftPosition());
+		SmartDashboard.putNumber("Right Position", driveTrain.getRightPosition());
+		SmartDashboard.putNumber("Left Velocity Error", driveTrain.returnLeftDistanceError());
+		SmartDashboard.putNumber("Right Velocity Error", driveTrain.returnRightDistanceError());
+		
+		SmartDashboard.putNumber("Drive Train Gyro Current Yaw", driveTrain.getCurrentYaw());
+		SmartDashboard.putNumber("Drive Train Gyro Current Angle", driveTrain.getCurrentAngle());
+		
+		SmartDashboard.putNumber("Drive Left Velocity", driveTrain.getLeftSpeed());
+		SmartDashboard.putNumber("Drive Right Velocity", driveTrain.getRightSpeed());
 	}
 
 	/**

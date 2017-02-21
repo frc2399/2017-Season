@@ -5,6 +5,7 @@ import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Shift to dangerous (high) speed or hot (low) speed with pneums
@@ -32,6 +33,8 @@ public class Shift extends Command {
 	 */
 	protected void initialize() {
 		setTimeout(RobotMap.SHIFT_TIMER);
+		SmartDashboard.putBoolean("   ", shiftHotValue);
+		SmartDashboard.putBoolean("    ", shiftDangerousValue);
 	}
 
 	/**

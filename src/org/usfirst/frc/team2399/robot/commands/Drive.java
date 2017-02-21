@@ -22,7 +22,7 @@ public class Drive extends Command {
 	 * Called just before this Command runs the first time
 	 */
 	protected void initialize() {
-		
+		driveTrain.getPIDController().disable();		
 	}
 	
 	/**
@@ -30,8 +30,8 @@ public class Drive extends Command {
 	 * Called repeatedly when this Command is scheduled to run
 	 */
 	protected void execute() {
-		driveTrain.driveLeftPercent(OI.modifyJoyOutputWithDeadband(OI.getLeftY()));
-		driveTrain.driveRightPercent(OI.modifyJoyOutputWithDeadband(OI.getRightY()));
+		driveTrain.driveLeftPercent(OI.modifyJoyOutputWithDeadband(OI.getRightY()));
+		driveTrain.driveRightPercent(OI.modifyJoyOutputWithDeadband(OI.getLeftY()));
 	}
 
 	/**

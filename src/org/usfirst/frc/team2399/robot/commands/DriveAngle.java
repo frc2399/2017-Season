@@ -1,9 +1,14 @@
 package org.usfirst.frc.team2399.robot.commands;
 
+import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.Robot;
+import org.usfirst.frc.team2399.robot.RobotMap;
+import org.usfirst.frc.team2399.robot.Utility;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drive to an angle
@@ -12,6 +17,10 @@ public class DriveAngle extends Command {
 
 	private DriveTrain driveTrain = Robot.driveTrain;
 	private double setpoint;
+	private boolean fuzz;
+	private double angularVelocity;
+	private Timer timer; 
+	private double finishTime;
 	
 	/**
 	 * @param setpoint: Goal angle
@@ -20,6 +29,10 @@ public class DriveAngle extends Command {
     	requires(driveTrain);
     	this.setpoint = setpoint;
     	setInterruptible(true);
+    	fuzz = true;
+    	timer = new Timer();
+    	angularVelocity = 60;
+    	finishTime = Math.abs(setpoint / angularVelocity);
     }
 
     /**
@@ -28,16 +41,34 @@ public class DriveAngle extends Command {
      * Sets the setpoint(where we want to be)
      */
     protected void initialize() {
-    	driveTrain.setSpeedControlMode();
+    	driveTrain.resetDriveTrainGyro();
+    	driveTrain.setPercentControlMode();
+    	driveTrain.getPIDController().reset();
     	driveTrain.getPIDController().enable();
-    	driveTrain.getPIDController().setSetpoint(setpoint);
-    }
+    	timer.start();
+    	}
 
     /**
      * Called repeatedly when this Command is scheduled to run
      */
     protected void execute() {
     	
+    	fuzz = !fuzz;
+    	double fuzzNum = 0.0001;
+    	if(fuzz)
+    	{
+    		fuzzNum = -fuzzNum;
+    	}
+    	double currentSetpoint = setpoint;
+    	double currentTime = timer.get();
+    	if(currentTime < finishTime)
+    	{
+    		currentSetpoint = currentTime / finishTime * setpoint;
+    	}
+    	driveTrain.getPIDController().setSetpoint(currentSetpoint);
+    	SmartDashboard.putNumber("Angle Setpoint", driveTrain.getPIDController().getSetpoint() + fuzzNum);
+    	SmartDashboard.putNumber("Angle Actual Yaw", driveTrain.getCurrentYaw() + fuzzNum); 
+    	SmartDashboard.putNumber("Actual Angle", driveTrain.getCurrentAngle() + fuzzNum);
     }
 
     /**
@@ -45,13 +76,18 @@ public class DriveAngle extends Command {
      *  Make this return true when this Command no longer needs to run execute()
      */
     protected boolean isFinished() {
-        return driveTrain.getPIDController().onTarget();
+       return Utility.inRange(driveTrain.getCurrentYaw(), setpoint, RobotMap.ANGLE_MERKEL_TOLERANCE) 
+    		   && Utility.inRange(driveTrain.getLeftSpeed(), 0, 1) 
+    		   && Utility.inRange(driveTrain.getRightSpeed(), 0, 1);
+    		   //(driveTrain.getPIDController().onTarget());
+       //);
     }
 
     /**
      * Called once after isFinished returns true
      */
     protected void end() {
+    	driveTrain.getPIDController().disable();
     }
 
     /**
@@ -59,5 +95,6 @@ public class DriveAngle extends Command {
      * subsystems is scheduled to run
      */
     protected void interrupted() {
+    	end();
     }
 }

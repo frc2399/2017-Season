@@ -12,23 +12,27 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Shoot extends Command {
 	
-	private double speed;
+	private double minSpeed;
+	private double maxSpeed;
+
 	private Shooter shooter = Robot.shooter;
 
-    public Shoot(double speed) {
-    	this.speed = speed;
+    public Shoot(double minSpeed, double maxSpeed) {
+    	this.minSpeed = minSpeed;
+    	this.maxSpeed = maxSpeed;
     	requires(shooter);
     }
 
     protected void initialize() {
-    	
+    	shooter.setShooterSpeedMode(); 
+    	//shooter.shooterEncoderReset();
     }
 
     /**
      * When the command is run, the shooter is set to this speed
      */
     protected void execute() {
-    	shooter.setShooterSpeed(speed * OI.getShooterThrottle());
+    	shooter.setShooterSpeed((minSpeed + (maxSpeed - minSpeed) * OI.getShooterThrottle()));
     }
 
     /**
@@ -37,7 +41,7 @@ public class Shoot extends Command {
      * preventing us from being stuck in a loop
      */
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     /**

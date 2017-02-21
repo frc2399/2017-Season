@@ -1,10 +1,18 @@
 package org.usfirst.frc.team2399.robot;
 
 
+import org.usfirst.frc.team2399.robot.commands.AdjustDistanceF;
+import org.usfirst.frc.team2399.robot.commands.AdjustDriveDistanceP;
 import org.usfirst.frc.team2399.robot.commands.Agitate;
+import org.usfirst.frc.team2399.robot.commands.AngleErrorPAdjust;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveTest;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
 import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.commands.DriveAngle;
+import org.usfirst.frc.team2399.robot.commands.DriveAtAngleForDistance;
+import org.usfirst.frc.team2399.robot.commands.DriveEncoderReset;
+import org.usfirst.frc.team2399.robot.commands.DriveTrainGyroReset;
 import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
@@ -39,14 +47,13 @@ public class OI {
 	private static Button driveAngleTest2Butt = new JoystickButton(shooterJoy, 3);
 	private static Button driveAngleTest3Butt = new JoystickButton(shooterJoy, 4);
 	
-	private static Button climbUpButt = new JoystickButton(leftJoy, 3);
-	private static Button climbDownButt = new JoystickButton(leftJoy, 2);
+	private static Button climbUpButt = new JoystickButton(rightJoy, 1);
 	
-	private static Button shiftToHotButt = new JoystickButton(leftJoy, 4);
-	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 5);
+	private static Button shiftToHotButt = new JoystickButton(leftJoy, 2);
+	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 3);
 
 	private static Button agitatorForwardButt = new JoystickButton(leftJoy, 11);
-	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 12);
+	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 10);
 
 	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
 	private static Button gearInButt = new JoystickButton(rightJoy, 2);
@@ -54,6 +61,17 @@ public class OI {
 	private static Button shootButt = new JoystickButton(shooterJoy, 1);
 	
 	private static Button distanceButt = new JoystickButton(leftJoy, 6);
+	private static Button distanceAngleButt = new JoystickButton(leftJoy, 7);
+	private static Button incrementDistancePButt = new JoystickButton(rightJoy, 4);
+	private static Button decrementDistancePButt = new JoystickButton(rightJoy, 5);
+	private static Button incrementDistanceFButt = new JoystickButton(leftJoy, 4);
+	private static Button decrementDistanceFButt = new JoystickButton(leftJoy, 5);
+	
+	private static Button resetDriveEncodersButt = new JoystickButton(rightJoy, 10);
+	
+	private static Button resetDriveGyroButt = new JoystickButton(rightJoy, 11);
+	
+	private static Button autoCenterButt = new JoystickButton(shooterJoy, 10);
 
 	/**
 	 * COMMAND INSTANCES
@@ -66,7 +84,7 @@ public class OI {
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	
 	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMBER_FORWARD);
-	private static Climb climbDownSpeed = new Climb(RobotMap.CLIMBER_BACKWARD);
+	private static Climb climbUpReducedSpeed = new Climb(RobotMap.CLIMBER_FORWARD_REDUCED);
 	
 	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
@@ -75,9 +93,19 @@ public class OI {
 	private static DriveAngle driveAngleTest2 = new DriveAngle(RobotMap.TEST_ANGLE_2);
 	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3);
 	
-	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_FORWARD);
+	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_MIN, RobotMap.SHOOTER_SPEED_MAX);
 	
-	private static AutoDriveTest driveTest = new AutoDriveTest();
+	private static AutoDriveTest driveTest = new AutoDriveTest(120, 24);
+	private static DriveAtAngleForDistance distanceAngleTest = new DriveAtAngleForDistance(0, 120);
+	private static AngleErrorPAdjust incrementP = new AngleErrorPAdjust(true);
+	private static AngleErrorPAdjust decrementP = new AngleErrorPAdjust(false);
+	private static AdjustDistanceF incrementF = new AdjustDistanceF(true);
+	private static AdjustDistanceF decrementF = new AdjustDistanceF(false);
+
+	private static AutoDriveToBoilerLift autoCenter = new AutoDriveToBoilerLift(true);
+	
+	private static DriveEncoderReset driveEncoderReset = new DriveEncoderReset();
+	private static DriveTrainGyroReset driveGyroReset = new DriveTrainGyroReset();
 
 	/**
 	 * OI CONSTRUCTOR
@@ -98,7 +126,6 @@ public class OI {
 		gearOutButt.whenPressed(moveGearOut);
 		gearInButt.whenPressed(moveGearIn);
 		climbUpButt.whileHeld(climbUpSpeed);
-		climbDownButt.whileHeld(climbDownSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
 		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
@@ -108,6 +135,14 @@ public class OI {
 		driveAngleTest2Butt.whenPressed(driveAngleTest2);
 		driveAngleTest3Butt.whenPressed(driveAngleTest3);
 		distanceButt.whenPressed(driveTest);
+		incrementDistancePButt.whenPressed(incrementP);
+		decrementDistancePButt.whenPressed(decrementP);
+		resetDriveEncodersButt.whenPressed(driveEncoderReset);
+		resetDriveGyroButt.whenPressed(driveGyroReset);
+		incrementDistanceFButt.whenPressed(incrementF);
+		decrementDistanceFButt.whenPressed(decrementF);
+		distanceAngleButt.whenPressed(distanceAngleTest);
+		autoCenterButt.whenPressed(autoCenter);
 	}
 
 	/**
@@ -142,6 +177,10 @@ public class OI {
 		return shooterJoy.getY() * RobotMap.JOYDRIVE_FORWARD;
 	}
 	
+	public static double getShooterTwist()
+	{
+		return shooterJoy.getTwist();
+	}
 	/**
 	 * Modifies the joystick output so that they aren't too sensitive/insensitive to driver control
 	 * 
@@ -183,6 +222,11 @@ public class OI {
 	{
 		double throttle = shooterJoy.getThrottle() * RobotMap.SHOOTER_THROTTLE_FORWARD_CONSTANT;
 		return (throttle +1)/2;
+	}
+	
+	public static double rawThrottle()
+	{
+		return shooterJoy.getThrottle();
 	}
 	
 	/**

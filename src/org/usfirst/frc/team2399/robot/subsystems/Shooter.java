@@ -23,24 +23,37 @@ public class Shooter extends Subsystem {
 	 */
 	public Shooter() {
 		shooterTalon = new CANTalon(RobotMap.SHOOTER_TALON_ADDRESS);
-		shooterTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		}
+
+	public void shooterEncoderReset()
+	{
+		shooterTalon.setPosition(0);
+	}
+	public void setShooterSpeedMode()
+	{
 		shooterTalon.changeControlMode(TalonControlMode.Speed);
+
+		shooterTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		shooterTalon.reverseOutput(RobotMap.SHOOTER_MOTOR_REVERSE_OUTPUT_CONSTANT);
+		shooterTalon.enableBrakeMode(false);
+		
+		
+		shooterTalon.configPeakOutputVoltage(13.0, 0.0);
 		shooterTalon.reverseSensor(RobotMap.SHOOTER_ENCODER_REVERSE_OUTPUT_CONSTANT);
 		
 		shooterTalon.setF(0);
-		shooterTalon.setP(0);
+		shooterTalon.setP(1);
 		shooterTalon.setI(0);
 		shooterTalon.setD(0);
+	
 	}
-
 	/**
 	 * Sets the speed to the speed passed to the method
 	 * @param speed
-	 * Position change/10 ms
+	 * RPM
 	 */
 	public void setShooterSpeed(double speed) {
-		shooterTalon.set(speed);
+		shooterTalon.set(Math.abs(speed));
 	}
 
 	/**
@@ -92,7 +105,7 @@ public class Shooter extends Subsystem {
 	 * Default is the motor at 0 speed
 	 */
 	public void initDefaultCommand() {
-		setDefaultCommand(new Shoot(RobotMap.SHOOTER_STOP));
+		setDefaultCommand(new Shoot(RobotMap.SHOOTER_STOP, RobotMap.SHOOTER_STOP));
 	}
 
 }
