@@ -97,6 +97,7 @@ public class Robot extends IterativeRobot {
 		 * TODO: Make sure this works
 		 */
 		//boolean isRed = SmartDashboard.getBoolean("Red",false);
+		
 		autonomousCommand = (Command) chooser.getSelected();
 		driveTrain.resetDriveTrainGyro();
 		/*
