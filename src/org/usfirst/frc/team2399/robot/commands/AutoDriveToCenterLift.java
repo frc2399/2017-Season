@@ -19,7 +19,7 @@ public class AutoDriveToCenterLift extends CommandGroup {
     	//}
     	//addSequential(new AutoDriveTest(19, 36));
     	//addSequential(new DriveAngle(angleAdjustment*30));
-    	addSequential(new AutoDriveTest(69,36));
+    	addSequential(new AutoDriveTest(105,36));
     	//addSequential(new DriveAngle(angleAdjustment*-30));
     	//addSequential(new AutoDriveTest(24,36));
     	addSequential(new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT));
