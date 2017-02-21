@@ -3,7 +3,6 @@ package org.usfirst.frc.team2399.robot;
 
 import org.usfirst.frc.team2399.robot.commands.AdjustDistanceF;
 import org.usfirst.frc.team2399.robot.commands.AdjustDriveDistanceP;
-import org.usfirst.frc.team2399.robot.commands.Agitate;
 import org.usfirst.frc.team2399.robot.commands.AngleErrorPAdjust;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveTest;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
@@ -77,9 +76,6 @@ public class OI {
 	 * COMMAND INSTANCES
 	 * Sets instances of commands and speeds for use with buttons
 	 */
-	private static Agitate agitatorForwardSpeed = new Agitate(RobotMap.AGITATOR_FORWARD);
-	private static Agitate agitatorBackwardSpeed = new Agitate(RobotMap.AGITATOR_BACKWARDS);
-	
 	private static Shift shiftToDangerous = new Shift(!RobotMap.SHIFTER_SOLENOID_HOT,RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	
@@ -128,8 +124,6 @@ public class OI {
 		climbUpButt.whileHeld(climbUpSpeed);
 		shiftToHotButt.whenPressed(shiftToHot);
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
-		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
-		agitatorBackwardButt.whenPressed(agitatorBackwardSpeed);
 		shootButt.whileHeld(shooterOn);
 		driveAngleTest1Butt.whenPressed(driveAngleTest1);
 		driveAngleTest2Butt.whenPressed(driveAngleTest2);
