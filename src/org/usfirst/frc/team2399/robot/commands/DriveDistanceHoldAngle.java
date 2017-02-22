@@ -22,16 +22,22 @@ public class DriveDistanceHoldAngle extends Command {
 	private double rampTime;
 	private double rampDistance;
 	
-    public DriveDistanceHoldAngle(double distance, double velocity) {
-    	this.distance = distance; // inches
-    	this.velocity = velocity; // inches per second
+    public DriveDistanceHoldAngle(double dist, double vel, double timeout) {
+    	this.distance = dist; // inches
+    	this.velocity = vel; // inches per second
+    	
+    	requires(driveTrain);
+    	setInterruptible(true);
+    	timer = new Timer();
+    	setTimeout(timeout);
+    	time = Math.abs(distance) / velocity;
+    	rampTime = RobotMap.DRIVE_RAMP_TIME;
+    	rampDistance = velocity * rampTime / 2;
     	if(distance < 0)
     	{
     		velocity = -velocity;
     	}
-    	requires(driveTrain);
-    	setInterruptible(true);
-    	timer = new Timer();
+    	
     }
 
     // Called just before this Command runs the first time
@@ -41,9 +47,7 @@ public class DriveDistanceHoldAngle extends Command {
     	driveTrain.resetDriveTrainGyro();
     	timer.start();
     	driveTrain.setSpeedControlMode();
-    	time = Math.abs(distance) / velocity;
-    	rampTime = RobotMap.DRIVE_RAMP_TIME;
-    	rampDistance = velocity * rampTime / 2;
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -57,9 +61,9 @@ public class DriveDistanceHoldAngle extends Command {
     		currentVelocity = currentTime / rampTime * velocity;
     	}
     	
-    	else if(avgDistance > distance - rampDistance)
+    	else if(Math.abs(avgDistance) > (Math.abs(distance) - Math.abs(rampDistance)))
     	{
-    		currentVelocity = (distance - avgDistance) / rampDistance * velocity;
+    		currentVelocity = Math.abs(distance - avgDistance) / rampDistance * velocity;
     	}
     	
     	else
@@ -76,8 +80,8 @@ public class DriveDistanceHoldAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(Utility.inRange(driveTrain.getLeftPosition(), distance, RobotMap.DRIVE_DISTANCE_TOLERANCE) 
-        		|| Utility.inRange(driveTrain.getRightPosition(), distance, RobotMap.DRIVE_DISTANCE_TOLERANCE))
+        if(isTimedOut() || (Utility.inRange(driveTrain.getLeftPosition(), distance, RobotMap.DRIVE_DISTANCE_TOLERANCE) 
+        		|| Utility.inRange(driveTrain.getRightPosition(), distance, RobotMap.DRIVE_DISTANCE_TOLERANCE)))
         {
         	return true;
         }

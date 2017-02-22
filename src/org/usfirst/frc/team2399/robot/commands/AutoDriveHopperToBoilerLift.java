@@ -14,9 +14,9 @@ public class AutoDriveHopperToBoilerLift extends CommandGroup {
     		angleAdjustment = -1;
     	}
     	addSequential(new AutoDriveToHopper(redAlliance));
-    	addSequential(new DriveDistanceHoldAngle(-62,36));
-    	addSequential(new DriveAngle(angleAdjustment*62));
-    	addSequential(new DriveDistanceHoldAngle(69,36)); //???
+    	addSequential(new DriveDistanceHoldAngle(-62,36,7));
+    	addSequential(new DriveAngle(angleAdjustment*62,3));
+    	addSequential(new DriveDistanceHoldAngle(69,36,7)); //???
     	addSequential(new AutoPlaceGearAndShoot());
     }
 }

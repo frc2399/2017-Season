@@ -8,10 +8,12 @@ import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shooter extends Subsystem {
 
 	private CANTalon shooterTalon;
+	private CANTalon indexTalon;
 	private double goalSpeed;
 	private double shooterSpeedPConstant = RobotMap.SHOOTER_SPEED_P_CONSTANT;
 
@@ -23,6 +25,7 @@ public class Shooter extends Subsystem {
 	 */
 	public Shooter() {
 		shooterTalon = new CANTalon(RobotMap.SHOOTER_TALON_ADDRESS);
+		indexTalon = new CANTalon(RobotMap.INDEX_TALON_ADDRESS);
 		}
 
 	public void shooterEncoderReset()
@@ -41,8 +44,8 @@ public class Shooter extends Subsystem {
 		shooterTalon.configPeakOutputVoltage(13.0, 0.0);
 		shooterTalon.reverseSensor(RobotMap.SHOOTER_ENCODER_REVERSE_OUTPUT_CONSTANT);
 		
-		shooterTalon.setF(0);
-		shooterTalon.setP(1);
+		shooterTalon.setF(0.0163);
+		shooterTalon.setP(0.048);
 		shooterTalon.setI(0);
 		shooterTalon.setD(0);
 	
@@ -55,6 +58,10 @@ public class Shooter extends Subsystem {
 	public void setShooterSpeed(double speed) {
 		shooterTalon.set(Math.abs(speed));
 	}
+	
+	public void setIndexSpeed(double speed){
+		indexTalon.set(Math.abs(speed));
+	}
 
 	/**
 	 *Gets speed from sensor in ticks/100 ms
@@ -62,6 +69,10 @@ public class Shooter extends Subsystem {
 	 */
 	public double getShooterSpeed() {
 		return shooterTalon.getSpeed();
+	}
+	
+	public double getIndexSpeed(){
+		return indexTalon.getSpeed();
 	}
 
     /**
@@ -99,6 +110,12 @@ public class Shooter extends Subsystem {
 
 	public double getShooterSpeedConstant() {
 		return shooterSpeedPConstant;
+	}
+	
+	public void printShooterMotorOutput(){
+		double shooterOutput = shooterTalon.getOutputVoltage()/shooterTalon.getBusVoltage();
+		SmartDashboard.putNumber("shooter output", shooterOutput);
+		System.out.println(shooterOutput);
 	}
 
 	/*

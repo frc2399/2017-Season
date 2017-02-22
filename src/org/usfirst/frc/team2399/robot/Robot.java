@@ -3,7 +3,7 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveHopperToBoilerLift;
-import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 		  shooter = new Shooter();
 		  
 		//  SmartDashboard.putBoolean("Red", false);
-		  chooser.addObject("Gear on Boiler Lift", new AutoDriveToBoilerLift(true));
+		  chooser.addObject("Gear on Boiler Lift", new AutoDriveToBoilerLiftRed(true));
 		  chooser.addObject("Gear on Center Lift", new AutoDriveToCenterLift());
 		  chooser.addObject("Deploy Hopper, Boiler Lift Gear and Shoot", new AutoDriveHopperToBoilerLift(true));
 		  SmartDashboard.putData("Autonomous Mode", chooser);

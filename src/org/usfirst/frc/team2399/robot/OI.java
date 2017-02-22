@@ -4,8 +4,9 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.commands.AdjustDistanceF;
 import org.usfirst.frc.team2399.robot.commands.AdjustDriveDistanceP;
 import org.usfirst.frc.team2399.robot.commands.AngleErrorPAdjust;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftBlue;
 import org.usfirst.frc.team2399.robot.commands.DriveDistanceHoldAngle;
-import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
 import org.usfirst.frc.team2399.robot.commands.Agitate;
 import org.usfirst.frc.team2399.robot.RobotMap;
@@ -70,8 +71,10 @@ public class OI {
 	
 	private static Button resetDriveGyroButt = new JoystickButton(rightJoy, 11);
 	
-	private static Button autoCenterButt = new JoystickButton(shooterJoy, 10);
+	private static Button autoBoilerRedButt = new JoystickButton(shooterJoy, 10);
+	private static Button autoBoilerBlueButt = new JoystickButton(shooterJoy, 11);
 
+	
 	/**
 	 * COMMAND INSTANCES
 	 * Sets instances of commands and speeds for use with buttons
@@ -88,19 +91,20 @@ public class OI {
 	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
 	
-	private static DriveAngle driveAngleTest1 = new DriveAngle(RobotMap.TEST_ANGLE_1);
-	private static DriveAngle driveAngleTest2 = new DriveAngle(RobotMap.TEST_ANGLE_2);
-	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3);
+	private static DriveAngle driveAngleTest1 = new DriveAngle(RobotMap.TEST_ANGLE_1,3);
+	private static DriveAngle driveAngleTest2 = new DriveAngle(RobotMap.TEST_ANGLE_2,3);
+	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3,3);
 	
 	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_MIN, RobotMap.SHOOTER_SPEED_MAX);
 	
-	private static DriveDistanceHoldAngle driveTest = new DriveDistanceHoldAngle(120, 24);
+	private static DriveDistanceHoldAngle driveTest = new DriveDistanceHoldAngle(120, 24,6);
 	private static AngleErrorPAdjust incrementP = new AngleErrorPAdjust(true);
 	private static AngleErrorPAdjust decrementP = new AngleErrorPAdjust(false);
 	private static AdjustDistanceF incrementF = new AdjustDistanceF(true);
 	private static AdjustDistanceF decrementF = new AdjustDistanceF(false);
 
-	private static AutoDriveToBoilerLift autoCenter = new AutoDriveToBoilerLift(true);
+	private static AutoDriveToBoilerLiftRed autoBoilerRed = new AutoDriveToBoilerLiftRed(true);
+	private static AutoDriveToBoilerLiftBlue autoBoilerBlue = new AutoDriveToBoilerLiftBlue(true);
 	
 	private static DriveEncoderReset driveEncoderReset = new DriveEncoderReset();
 	private static DriveTrainGyroReset driveGyroReset = new DriveTrainGyroReset();
@@ -139,7 +143,8 @@ public class OI {
 		resetDriveGyroButt.whenPressed(driveGyroReset);
 		incrementDistanceFButt.whenPressed(incrementF);
 		decrementDistanceFButt.whenPressed(decrementF);
-		autoCenterButt.whenPressed(autoCenter);
+		autoBoilerRedButt.whenPressed(autoBoilerRed);
+		autoBoilerBlueButt.whenPressed(autoBoilerBlue);
 	}
 
 	/**

@@ -25,7 +25,7 @@ public class DriveAngle extends Command {
 	/**
 	 * @param setpoint: Goal angle
 	 */
-    public DriveAngle(double setpoint) {
+    public DriveAngle(double setpoint,double timeout) {
     	requires(driveTrain);
     	this.setpoint = setpoint;
     	setInterruptible(true);
@@ -33,6 +33,7 @@ public class DriveAngle extends Command {
     	timer = new Timer();
     	angularVelocity = 60;
     	finishTime = Math.abs(setpoint / angularVelocity);
+    	setTimeout(timeout);
     }
 
     /**
@@ -76,7 +77,7 @@ public class DriveAngle extends Command {
      *  Make this return true when this Command no longer needs to run execute()
      */
     protected boolean isFinished() {
-       return Utility.inRange(driveTrain.getCurrentYaw(), setpoint, RobotMap.ANGLE_MERKEL_TOLERANCE) 
+       return isTimedOut() || Utility.inRange(driveTrain.getCurrentYaw(), setpoint, RobotMap.ANGLE_MERKEL_TOLERANCE) 
     		   && Utility.inRange(driveTrain.getLeftSpeed(), 0, 1) 
     		   && Utility.inRange(driveTrain.getRightSpeed(), 0, 1);
     		   //(driveTrain.getPIDController().onTarget());

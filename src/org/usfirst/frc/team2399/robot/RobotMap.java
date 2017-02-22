@@ -128,10 +128,10 @@ public class RobotMap {
 	public static final double LEFT_DISTANCE_P = 0.5;
 	public static final double RIGHT_DISTANCE_F = 0.5;
 	public static final double LEFT_DISTANCE_F = 0.5;
-	public static final double RIGHT_DISTANCE_I = .001;
-	public static final double LEFT_DISTANCE_I = .001;
-	public static final double RIGHT_DISTANCE_D = 10;
-	public static final double LEFT_DISTANCE_D = 10;
+	public static final double RIGHT_DISTANCE_I = .0015;
+	public static final double LEFT_DISTANCE_I = .0015;
+	public static final double RIGHT_DISTANCE_D = 0;
+	public static final double LEFT_DISTANCE_D = 0;
 	
 	public static double DRIVE_ANGLE_P = 0.03;
 	public static double DRIVE_ANGLE_I = 1.0E-5;
@@ -148,9 +148,9 @@ public class RobotMap {
 	public static final double TEST_ANGLE_3 = -90.0;
 	public static final double DRIVE_ANGLE_ERROR = 0;
 	
-	public static final int SHOOTER_SPEED_P_CONSTANT = 0;
-	public static final int SHOOTER_SPEED_DECREMENT_CONSTANT = 0;
-	public static final int SHOOTER_SPEED_INCREMENT_CONSTANT = 0;
+	public static final double SHOOTER_SPEED_P_CONSTANT = 0;
+	public static final double SHOOTER_SPEED_DECREMENT_CONSTANT = 0.005;
+	public static final double SHOOTER_SPEED_INCREMENT_CONSTANT = 0.005;
 	
 	/**
 	 * Timing Constants
