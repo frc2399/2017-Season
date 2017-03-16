@@ -6,6 +6,7 @@ import org.usfirst.frc.team2399.robot.commands.AutoDriveHopperToBoilerLift;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
+import org.usfirst.frc.team2399.robot.commands.DriveTrainGyroReset;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2399.robot.subsystems.Shooter;
@@ -38,8 +39,9 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Agitator agitator;
 	public static Shooter shooter;
-	DigitalInput autoGearByBoilerSelect;
+	DigitalInput autoGearLeftLiftSelect;
 	DigitalInput autoGearCenterLiftSelect;
+	DigitalInput autoGearRightLiftSelect;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -63,9 +65,11 @@ public class Robot extends IterativeRobot {
 		//  SmartDashboard.putBoolean("Red", false);
 		  oi = new OI();
 		  
-		  autoGearByBoilerSelect = new DigitalInput(RobotMap.AUTO_GEAR_BY_BOILER_SELECT_PORT);
+		  autoGearLeftLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_LEFT_LIFT_SELECT_PORT);
+		  autoGearRightLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_RIGHT_LIFT_SELECT_PORT);
 		  autoGearCenterLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_CENTER_LIFT_SELECT_PORT);
-		  
+		 
+		  driveTrain.resetDriveTrainGyro();
 	}
 
 	/**
@@ -111,21 +115,18 @@ public class Robot extends IterativeRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 		
-		DriverStation driverStation = DriverStation.getInstance();
-		DriverStation.Alliance alliance;
-		alliance = driverStation.getAlliance();
-		
-		if (alliance == DriverStation.Alliance.Invalid){
-			autonomousCommand = null;
-		} else {
-			if (autoGearByBoilerSelect.get() == false){
-				autonomousCommand = new AutoDriveToBoilerLift(alliance);
+
+			if (autoGearLeftLiftSelect.get() == false){
+				SmartDashboard.putString("auto", "auto running");
+				autonomousCommand = new AutoDriveToBoilerLift(false);
+			} else if (autoGearRightLiftSelect.get() == false){
+				autonomousCommand = new AutoDriveToBoilerLift(true);
 			} else if (autoGearCenterLiftSelect.get() == false){
 				autonomousCommand = new AutoDriveToCenterLift();
 			} else {
 				autonomousCommand = null;
 			}
-		}
+		
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)

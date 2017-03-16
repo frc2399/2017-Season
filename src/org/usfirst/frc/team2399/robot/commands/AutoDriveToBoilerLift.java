@@ -11,11 +11,14 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  * Gear Collector remains open for about 3 seconds before closing 
  */
 public class AutoDriveToBoilerLift extends CommandGroup {
+	private boolean negate;
 	private double angleAdjustment = 1;
 	
-    public AutoDriveToBoilerLift(DriverStation.Alliance alliance) {
-    	if(alliance == DriverStation.Alliance.Red){
+    public AutoDriveToBoilerLift(boolean negate) {
+    	if(negate == true){
     		angleAdjustment = -1;
+    	} else {
+    		angleAdjustment = 1;
     	}
        /*addSequential(new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS));
        addSequential(new DriveDistanceHoldAngle(16, 36, 3));
@@ -44,15 +47,16 @@ public class AutoDriveToBoilerLift extends CommandGroup {
     	 * rotate positive 45 degrees 
     	 * drive forward 82 inches
     	 */
+    	
     	addSequential(new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS));
-    	addSequential(new DriveDistanceHoldAngle(116, 36, 4));
-    	addSequential(new DriveAngle(angleAdjustment*-45, 3));
-    	addSequential(new DriveDistanceHoldAngle(38, 36, 2));
+    	addSequential(new DriveDistanceHoldAngle(76, 36, 4));
+    	addSequential(new DriveAngle(angleAdjustment*45, 3));
+    	addSequential(new DriveDistanceHoldAngle(38, 12, 4));
     	addSequential(new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT));
     	addSequential(new WaitCommand(2));
     	addSequential(new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT));
-    	addSequential(new DriveDistanceHoldAngle(38, 36, 2));
-    	addSequential(new DriveAngle(angleAdjustment*45, 3));
-    	addSequential(new DriveDistanceHoldAngle(82, 36, 3));
+    	//addSequential(new DriveDistanceHoldAngle(38, 12, 4));
+    	//addSequential(new DriveAngle(angleAdjustment*45, 3));
+    	//addSequential(new DriveDistanceHoldAngle(82, 36, 3));
     }
 }

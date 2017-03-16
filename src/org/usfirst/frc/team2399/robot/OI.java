@@ -45,16 +45,16 @@ public class OI {
 	 * BUTTONS
 	 * TODO: Set all buttons on all Joysticks
 	 */
-	private static Button climbUpButt = new JoystickButton(rightJoy, 1);
+	private static Button climbUpButt = new JoystickButton(shooterJoy, 1);
 	
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 2);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 3);
 
-	private static Button agitatorForwardButt = new JoystickButton(leftJoy, 11);
-	private static Button agitatorBackwardButt = new JoystickButton(leftJoy, 10);
+	private static Button agitatorForwardButt = new JoystickButton(shooterJoy, 11);
+	private static Button agitatorBackwardButt = new JoystickButton(shooterJoy, 10);
 
-	private static Button gearOutButt = new JoystickButton(rightJoy, 3);
-	private static Button gearInButt = new JoystickButton(rightJoy, 2);
+	private static Button gearOutButt = new JoystickButton(shooterJoy, 3);
+	private static Button gearInButt = new JoystickButton(shooterJoy, 5);
 	
 	private static Button shootButt = new JoystickButton(shooterJoy, 1);
 	
