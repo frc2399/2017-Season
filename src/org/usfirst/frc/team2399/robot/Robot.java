@@ -61,10 +61,6 @@ public class Robot extends IterativeRobot {
 		  shooter = new Shooter();
 		  
 		//  SmartDashboard.putBoolean("Red", false);
-		  chooser.addObject("Gear on Boiler Lift", new AutoDriveToBoilerLiftRed(true));
-		  chooser.addObject("Gear on Center Lift", new AutoDriveToCenterLift());
-		  chooser.addObject("Deploy Hopper, Boiler Lift Gear and Shoot", new AutoDriveHopperToBoilerLift(true));
-		  SmartDashboard.putData("Autonomous Mode", chooser);
 		  oi = new OI();
 		  
 		  autoGearByBoilerSelect = new DigitalInput(RobotMap.AUTO_GEAR_BY_BOILER_SELECT_PORT);
@@ -122,9 +118,9 @@ public class Robot extends IterativeRobot {
 		if (alliance == DriverStation.Alliance.Invalid){
 			autonomousCommand = null;
 		} else {
-			if (autoGearByBoilerSelect.get() == true){
+			if (autoGearByBoilerSelect.get() == false){
 				autonomousCommand = new AutoDriveToBoilerLift(alliance);
-			} else if (autoGearCenterLiftSelect.get() == true){
+			} else if (autoGearCenterLiftSelect.get() == false){
 				autonomousCommand = new AutoDriveToCenterLift();
 			} else {
 				autonomousCommand = null;
@@ -152,7 +148,7 @@ public class Robot extends IterativeRobot {
 		/**
 		 * Puts the PIDController on the SmartDashboard to input values
 		 */
-		SmartDashboard.putData("PIDController", driveTrain.getPIDController());
+		//SmartDashboard.putData("PIDController", driveTrain.getPIDController());
 		}
 
 	/**
@@ -169,19 +165,8 @@ public class Robot extends IterativeRobot {
 		 */
 		SmartDashboard.putBoolean("  ", oi.deadOrAlive());
 		SmartDashboard.putNumber("Yaw", driveTrain.getCurrentAngle());
-		SmartDashboard.putNumber(" ", getRobotTemperature());
-		
-		SmartDashboard.putNumber("Left Position", driveTrain.getLeftPosition());
-		SmartDashboard.putNumber("Right Position", driveTrain.getRightPosition());
-		SmartDashboard.putNumber("Left Velocity Error", driveTrain.returnLeftDistanceError());
-		SmartDashboard.putNumber("Right Velocity Error", driveTrain.returnRightDistanceError());
-		
-		SmartDashboard.putNumber("Drive Train Gyro Current Yaw", driveTrain.getCurrentYaw());
-		SmartDashboard.putNumber("Drive Train Gyro Current Angle", driveTrain.getCurrentAngle());
-		
-		SmartDashboard.putNumber("Drive Left Velocity", driveTrain.getLeftSpeed());
-		SmartDashboard.putNumber("Drive Right Velocity", driveTrain.getRightSpeed());
-	}
+		SmartDashboard.putNumber(" ", getRobotTemperature());	
+	} 
 
 	/**
 	 * This function is called periodically during test mode
