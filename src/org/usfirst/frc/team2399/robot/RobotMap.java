@@ -32,9 +32,8 @@ public class RobotMap {
 	public static final int CLIMBER_TALON_ADDRESS = 10;
 	public static final int PCM_ADDRESS = 3;
 	//TODO: Make sure these match where they're plugged in
-	public static final int AGITATOR_TALON_ADDRESS = 4;
+	public static final int AGITATOR_TALON_ADDRESS = 4; 
 	public static final int SHOOTER_TALON_ADDRESS = 6;
-
 	/**
 	 * Ports for sensors, joysticks, and solenoids
 	 */
@@ -178,4 +177,7 @@ public class RobotMap {
 	 * TODO: Figure out what this time should actually be
 	 */
 	public static final double DEADBAND = 0.05;
+	
+	public static final int AUTO_GEAR_BY_BOILER_SELECT_PORT = 0;
+	public static final int AUTO_GEAR_CENTER_LIFT_SELECT_PORT = 1;
 }

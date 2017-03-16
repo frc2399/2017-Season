@@ -3,6 +3,7 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import org.usfirst.frc.team2399.robot.OI;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveHopperToBoilerLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
@@ -11,7 +12,8 @@ import org.usfirst.frc.team2399.robot.subsystems.Shooter;
 import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
 
-
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -36,6 +38,8 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Agitator agitator;
 	public static Shooter shooter;
+	DigitalInput autoGearByBoilerSelect;
+	DigitalInput autoGearCenterLiftSelect;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -62,6 +66,10 @@ public class Robot extends IterativeRobot {
 		  chooser.addObject("Deploy Hopper, Boiler Lift Gear and Shoot", new AutoDriveHopperToBoilerLift(true));
 		  SmartDashboard.putData("Autonomous Mode", chooser);
 		  oi = new OI();
+		  
+		  autoGearByBoilerSelect = new DigitalInput(RobotMap.AUTO_GEAR_BY_BOILER_SELECT_PORT);
+		  autoGearCenterLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_CENTER_LIFT_SELECT_PORT);
+		  
 	}
 
 	/**
@@ -98,7 +106,7 @@ public class Robot extends IterativeRobot {
 		 */
 		//boolean isRed = SmartDashboard.getBoolean("Red",false);
 		
-		autonomousCommand = (Command) chooser.getSelected();
+		//autonomousCommand = (Command) chooser.getSelected();
 		driveTrain.resetDriveTrainGyro();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -106,6 +114,22 @@ public class Robot extends IterativeRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
+		
+		DriverStation driverStation = DriverStation.getInstance();
+		DriverStation.Alliance alliance;
+		alliance = driverStation.getAlliance();
+		
+		if (alliance == DriverStation.Alliance.Invalid){
+			autonomousCommand = null;
+		} else {
+			if (autoGearByBoilerSelect.get() == true){
+				autonomousCommand = new AutoDriveToBoilerLift(alliance);
+			} else if (autoGearCenterLiftSelect.get() == true){
+				autonomousCommand = new AutoDriveToCenterLift();
+			} else {
+				autonomousCommand = null;
+			}
+		}
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)

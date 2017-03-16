@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter extends Subsystem {
 
 	private CANTalon shooterTalon;
-	private CANTalon indexTalon;
+	private CANTalon agitatorTalon;
 	private double goalSpeed;
 	private double shooterSpeedPConstant = RobotMap.SHOOTER_SPEED_P_CONSTANT;
 
@@ -25,7 +25,7 @@ public class Shooter extends Subsystem {
 	 */
 	public Shooter() {
 		shooterTalon = new CANTalon(RobotMap.SHOOTER_TALON_ADDRESS);
-		indexTalon = new CANTalon(RobotMap.INDEX_TALON_ADDRESS);
+		agitatorTalon = new CANTalon(RobotMap.AGITATOR_TALON_ADDRESS);
 		}
 
 	public void shooterEncoderReset()
@@ -59,8 +59,8 @@ public class Shooter extends Subsystem {
 		shooterTalon.set(Math.abs(speed));
 	}
 	
-	public void setIndexSpeed(double speed){
-		indexTalon.set(Math.abs(speed));
+	public void setAgitatorSpeed(double speed){
+		agitatorTalon.set(Math.abs(speed));
 	}
 
 	/**
@@ -71,8 +71,8 @@ public class Shooter extends Subsystem {
 		return shooterTalon.getSpeed();
 	}
 	
-	public double getIndexSpeed(){
-		return indexTalon.getSpeed();
+	public double getAgitatorSpeed(){
+		return agitatorTalon.getSpeed();
 	}
 
     /**

@@ -4,7 +4,7 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.commands.AdjustDistanceF;
 import org.usfirst.frc.team2399.robot.commands.AdjustDriveDistanceP;
 import org.usfirst.frc.team2399.robot.commands.AngleErrorPAdjust;
-import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftBlue;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
 import org.usfirst.frc.team2399.robot.commands.DriveDistanceHoldAngle;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
@@ -17,6 +17,8 @@ import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
 import org.usfirst.frc.team2399.robot.commands.Shoot;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -104,7 +106,7 @@ public class OI {
 	private static AdjustDistanceF decrementF = new AdjustDistanceF(false);
 
 	private static AutoDriveToBoilerLiftRed autoBoilerRed = new AutoDriveToBoilerLiftRed(true);
-	private static AutoDriveToBoilerLiftBlue autoBoilerBlue = new AutoDriveToBoilerLiftBlue(true);
+	private static AutoDriveToBoilerLift autoBoilerBlue = new AutoDriveToBoilerLift(DriverStation.Alliance.Red);
 	
 	private static DriveEncoderReset driveEncoderReset = new DriveEncoderReset();
 	private static DriveTrainGyroReset driveGyroReset = new DriveTrainGyroReset();

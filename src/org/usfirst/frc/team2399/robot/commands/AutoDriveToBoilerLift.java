@@ -2,6 +2,7 @@ package org.usfirst.frc.team2399.robot.commands;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
@@ -9,11 +10,11 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  * Drive to boiler-side lift, place gear, and back away from lift
  * Gear Collector remains open for about 3 seconds before closing 
  */
-public class AutoDriveToBoilerLiftBlue extends CommandGroup {
+public class AutoDriveToBoilerLift extends CommandGroup {
 	private double angleAdjustment = 1;
 	
-    public AutoDriveToBoilerLiftBlue(boolean redAlliance) {
-    	if(redAlliance == true){
+    public AutoDriveToBoilerLift(DriverStation.Alliance alliance) {
+    	if(alliance == DriverStation.Alliance.Red){
     		angleAdjustment = -1;
     	}
        addSequential(new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS));
