@@ -114,7 +114,7 @@ public class Shooter extends Subsystem {
 	
 	public void printShooterMotorOutput(){
 		double shooterOutput = shooterTalon.getOutputVoltage()/shooterTalon.getBusVoltage();
-		SmartDashboard.putNumber("shooter output", shooterOutput);
+		//SmartDashboard.putNumber("shooter output", shooterOutput);
 		System.out.println(shooterOutput);
 	}
 

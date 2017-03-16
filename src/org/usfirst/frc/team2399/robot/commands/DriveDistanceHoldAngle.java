@@ -73,10 +73,7 @@ public class DriveDistanceHoldAngle extends Command {
     	//MAKE THIS IN CORRECT UNITS
     	driveTrain.setLeftSpeedWithAngle(Utility.inchesPerSecondToGearboxRPM(currentVelocity));
     	driveTrain.setRightSpeedWithAngle(Utility.inchesPerSecondToGearboxRPM(currentVelocity));
-    	SmartDashboard.putNumber("Left Velocity", driveTrain.getLeftSpeed());
-    	SmartDashboard.putNumber("Right Velocity", driveTrain.getRightSpeed());
-    	SmartDashboard.putNumber("Setpoint", Utility.inchesPerSecondToGearboxRPM(currentVelocity));
-    }
+    	}
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

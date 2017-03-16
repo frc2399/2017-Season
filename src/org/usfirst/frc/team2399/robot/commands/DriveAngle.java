@@ -17,7 +17,6 @@ public class DriveAngle extends Command {
 
 	private DriveTrain driveTrain = Robot.driveTrain;
 	private double setpoint;
-	private boolean fuzz;
 	private double angularVelocity;
 	private Timer timer; 
 	private double finishTime;
@@ -29,7 +28,6 @@ public class DriveAngle extends Command {
     	requires(driveTrain);
     	this.setpoint = setpoint;
     	setInterruptible(true);
-    	fuzz = true;
     	timer = new Timer();
     	angularVelocity = 60;
     	finishTime = Math.abs(setpoint / angularVelocity);
@@ -54,12 +52,6 @@ public class DriveAngle extends Command {
      */
     protected void execute() {
     	
-    	fuzz = !fuzz;
-    	double fuzzNum = 0.0001;
-    	if(fuzz)
-    	{
-    		fuzzNum = -fuzzNum;
-    	}
     	double currentSetpoint = setpoint;
     	double currentTime = timer.get();
     	if(currentTime < finishTime)
@@ -67,10 +59,7 @@ public class DriveAngle extends Command {
     		currentSetpoint = currentTime / finishTime * setpoint;
     	}
     	driveTrain.getPIDController().setSetpoint(currentSetpoint);
-    	SmartDashboard.putNumber("Angle Setpoint", driveTrain.getPIDController().getSetpoint() + fuzzNum);
-    	SmartDashboard.putNumber("Angle Actual Yaw", driveTrain.getCurrentYaw() + fuzzNum); 
-    	SmartDashboard.putNumber("Actual Angle", driveTrain.getCurrentAngle() + fuzzNum);
-    }
+    	}
 
     /**
      * Checks to see if our current distance is within our absolute tolerance for the setpoint

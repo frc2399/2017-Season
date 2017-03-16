@@ -45,10 +45,6 @@ public class OI {
 	 * BUTTONS
 	 * TODO: Set all buttons on all Joysticks
 	 */
-	private static Button driveAngleTest1Butt = new JoystickButton(shooterJoy, 6);
-	private static Button driveAngleTest2Butt = new JoystickButton(shooterJoy, 3);
-	private static Button driveAngleTest3Butt = new JoystickButton(shooterJoy, 4);
-	
 	private static Button climbUpButt = new JoystickButton(rightJoy, 1);
 	
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 2);
@@ -62,21 +58,11 @@ public class OI {
 	
 	private static Button shootButt = new JoystickButton(shooterJoy, 1);
 	
-	private static Button distanceButt = new JoystickButton(leftJoy, 6);
-	private static Button distanceAngleButt = new JoystickButton(leftJoy, 7);
-	private static Button incrementDistancePButt = new JoystickButton(rightJoy, 4);
-	private static Button decrementDistancePButt = new JoystickButton(rightJoy, 5);
-	private static Button incrementDistanceFButt = new JoystickButton(leftJoy, 4);
-	private static Button decrementDistanceFButt = new JoystickButton(leftJoy, 5);
-	
 	private static Button resetDriveEncodersButt = new JoystickButton(rightJoy, 10);
 	
 	private static Button resetDriveGyroButt = new JoystickButton(rightJoy, 11);
 	
-	private static Button autoBoilerRedButt = new JoystickButton(shooterJoy, 10);
-	private static Button autoBoilerBlueButt = new JoystickButton(shooterJoy, 11);
-
-	
+		
 	/**
 	 * COMMAND INSTANCES
 	 * Sets instances of commands and speeds for use with buttons
@@ -88,26 +74,12 @@ public class OI {
 	private static Shift shiftToHot = new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS);
 	
 	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMBER_FORWARD);
-	private static Climb climbUpReducedSpeed = new Climb(RobotMap.CLIMBER_FORWARD_REDUCED);
 	
 	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
 	
-	private static DriveAngle driveAngleTest1 = new DriveAngle(RobotMap.TEST_ANGLE_1,3);
-	private static DriveAngle driveAngleTest2 = new DriveAngle(RobotMap.TEST_ANGLE_2,3);
-	private static DriveAngle driveAngleTest3 = new DriveAngle(RobotMap.TEST_ANGLE_3,3);
-	
 	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_MIN, RobotMap.SHOOTER_SPEED_MAX);
-	
-	private static DriveDistanceHoldAngle driveTest = new DriveDistanceHoldAngle(120, 24,6);
-	private static AngleErrorPAdjust incrementP = new AngleErrorPAdjust(true);
-	private static AngleErrorPAdjust decrementP = new AngleErrorPAdjust(false);
-	private static AdjustDistanceF incrementF = new AdjustDistanceF(true);
-	private static AdjustDistanceF decrementF = new AdjustDistanceF(false);
-
-	private static AutoDriveToBoilerLiftRed autoBoilerRed = new AutoDriveToBoilerLiftRed(true);
-	private static AutoDriveToBoilerLift autoBoilerBlue = new AutoDriveToBoilerLift(DriverStation.Alliance.Red);
-	
+		
 	private static DriveEncoderReset driveEncoderReset = new DriveEncoderReset();
 	private static DriveTrainGyroReset driveGyroReset = new DriveTrainGyroReset();
 
@@ -135,19 +107,9 @@ public class OI {
 		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
 		agitatorBackwardButt.whenPressed(agitatorBackwardSpeed);
 		shootButt.whileHeld(shooterOn);
-		driveAngleTest1Butt.whenPressed(driveAngleTest1);
-		driveAngleTest2Butt.whenPressed(driveAngleTest2);
-		driveAngleTest3Butt.whenPressed(driveAngleTest3);
-		distanceButt.whenPressed(driveTest);
-		incrementDistancePButt.whenPressed(incrementP);
-		decrementDistancePButt.whenPressed(decrementP);
 		resetDriveEncodersButt.whenPressed(driveEncoderReset);
 		resetDriveGyroButt.whenPressed(driveGyroReset);
-		incrementDistanceFButt.whenPressed(incrementF);
-		decrementDistanceFButt.whenPressed(decrementF);
-		autoBoilerRedButt.whenPressed(autoBoilerRed);
-		autoBoilerBlueButt.whenPressed(autoBoilerBlue);
-	}
+		}
 
 	/**
 	 * JOYSTICK METHODS
