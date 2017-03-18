@@ -29,7 +29,7 @@ public class DriveAngle extends Command {
     	this.setpoint = setpoint;
     	setInterruptible(true);
     	timer = new Timer();
-    	angularVelocity = 60;
+    	angularVelocity = 60; //degrees per second
     	finishTime = Math.abs(setpoint / angularVelocity);
     	setTimeout(timeout);
     }

@@ -16,17 +16,17 @@ public class AutoDriveToBoilerLiftBlue extends CommandGroup {
 
     public AutoDriveToBoilerLiftBlue() {
        addSequential(new Shift(RobotMap.SHIFTER_SOLENOID_HOT,!RobotMap.SHIFTER_SOLENOID_DANGEROUS));
-       addSequential(new DriveDistanceHoldAngle(16, 36, 3));
-       addSequential(new DriveAngle(angleAdjustment*-35, 3));
-       addSequential(new DriveDistanceHoldAngle(89.25, 36, 5));
-       addSequential(new DriveAngle(angleAdjustment* 90, 4));
-       addSequential(new DriveDistanceHoldAngle(38, 36, 4));
+       addSequential(new DriveDistanceHoldAngle(16, 40, 1));
+       addSequential(new DriveAngle(angleAdjustment*-35, 1.5));
+       addSequential(new DriveDistanceHoldAngle(89.25, 40, 2.75));
+       addSequential(new DriveAngle(angleAdjustment* 90, 2));
+       addSequential(new DriveDistanceHoldAngle(38, 40, 1.5));
        addSequential(new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT));
        addParallel(new Drive());
        addSequential(new WaitCommand(3));
        addSequential(new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT));
-       addSequential(new DriveDistanceHoldAngle(-20, 36, 3));
-       addSequential(new DriveAngle(angleAdjustment* 62,4));
-       addSequential(new DriveDistanceHoldAngle(108,36,5));
+       addSequential(new DriveDistanceHoldAngle(-20, 40, 1.25));
+       addSequential(new DriveAngle(angleAdjustment* 62, 1.9));
+       addSequential(new DriveDistanceHoldAngle(108, 40, 3.25));
     }
 }
