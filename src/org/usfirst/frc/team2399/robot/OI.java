@@ -47,16 +47,17 @@ public class OI {
 	 */
 	private static Button climbUpButt = new JoystickButton(shooterJoy, 1);
 	
+	
 	private static Button shiftToHotButt = new JoystickButton(leftJoy, 2);
 	private static Button shiftToDangerousButt = new JoystickButton(leftJoy, 3);
 
 	private static Button agitatorForwardButt = new JoystickButton(shooterJoy, 11);
 	private static Button agitatorBackwardButt = new JoystickButton(shooterJoy, 10);
 
-	private static Button gearOutButt = new JoystickButton(shooterJoy, 3);
-	private static Button gearInButt = new JoystickButton(shooterJoy, 5);
+	private static Button gearOutButt = new JoystickButton(shooterJoy, 5);
+	private static Button gearInButt = new JoystickButton(shooterJoy, 3);
 	
-	private static Button shootButt = new JoystickButton(shooterJoy, 1);
+//	private static Button shootButt = new JoystickButton(shooterJoy, 1);
 	
 	private static Button resetDriveEncodersButt = new JoystickButton(rightJoy, 10);
 	
@@ -75,7 +76,7 @@ public class OI {
 	
 	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMBER_FORWARD);
 	
-	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN,RobotMap.GEAR_SOLENOID_OUT);
+	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN, RobotMap.GEAR_SOLENOID_OUT);
 	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
 	
 	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_MIN, RobotMap.SHOOTER_SPEED_MAX);
@@ -106,7 +107,7 @@ public class OI {
 		shiftToDangerousButt.whenPressed(shiftToDangerous);
 		agitatorForwardButt.whenPressed(agitatorForwardSpeed);
 		agitatorBackwardButt.whenPressed(agitatorBackwardSpeed);
-		shootButt.whileHeld(shooterOn);
+	//	shootButt.whileHeld(shooterOn);
 		resetDriveEncodersButt.whenPressed(driveEncoderReset);
 		resetDriveGyroButt.whenPressed(driveGyroReset);
 		}
