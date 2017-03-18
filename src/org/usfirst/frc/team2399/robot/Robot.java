@@ -1,20 +1,16 @@
 package org.usfirst.frc.team2399.robot;
 
-import org.usfirst.frc.team2399.robot.subsystems.Agitator;
-import org.usfirst.frc.team2399.robot.OI;
-import org.usfirst.frc.team2399.robot.commands.AutoDriveHopperToBoilerLift;
-import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftBlue;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
-import org.usfirst.frc.team2399.robot.commands.DriveTrainGyroReset;
+import org.usfirst.frc.team2399.robot.subsystems.Agitator;
 import org.usfirst.frc.team2399.robot.subsystems.Climber;
 import org.usfirst.frc.team2399.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team2399.robot.subsystems.Shooter;
-import org.usfirst.frc.team2399.robot.subsystems.Shifter;
 import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
+import org.usfirst.frc.team2399.robot.subsystems.Shifter;
+import org.usfirst.frc.team2399.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -31,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 
 public class Robot extends IterativeRobot {
-	
+
 	public static Climber climber;
 	public static Shifter shifter;
 	public static DriveTrain driveTrain;
@@ -39,9 +35,9 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Agitator agitator;
 	public static Shooter shooter;
-	DigitalInput autoGearLeftLiftSelect;
+	DigitalInput autoGearRedLiftSelect;
 	DigitalInput autoGearCenterLiftSelect;
-	DigitalInput autoGearRightLiftSelect;
+	DigitalInput autoGearBlueLiftSelect;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -61,14 +57,14 @@ public class Robot extends IterativeRobot {
 		  gearCollector = new GearCollector();
 		  agitator = new Agitator();
 		  shooter = new Shooter();
-		  
+
 		//  SmartDashboard.putBoolean("Red", false);
 		  oi = new OI();
-		  
-		  autoGearLeftLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_LEFT_LIFT_SELECT_PORT);
-		  autoGearRightLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_RIGHT_LIFT_SELECT_PORT);
+
+		  autoGearRedLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_RED_LIFT_SELECT_PORT);
+		  autoGearBlueLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_BLUE_LIFT_SELECT_PORT);
 		  autoGearCenterLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_CENTER_LIFT_SELECT_PORT);
-		 
+
 		  driveTrain.resetDriveTrainGyro();
 	}
 
@@ -100,35 +96,19 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		/**
-		 * If we ARE on the red alliance, all angle values will be multiplied by -1
-		 * TODO: Make sure this works
-		 */
-		//boolean isRed = SmartDashboard.getBoolean("Red",false);
-		
-		//autonomousCommand = (Command) chooser.getSelected();
 		driveTrain.resetDriveTrainGyro();
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-		
 
-			if (autoGearLeftLiftSelect.get() == false){
-				SmartDashboard.putString("auto", "auto running");
-				autonomousCommand = new AutoDriveToBoilerLift(false);
-			} else if (autoGearRightLiftSelect.get() == false){
-				autonomousCommand = new AutoDriveToBoilerLift(true);
-			} else if (autoGearCenterLiftSelect.get() == false){
-				autonomousCommand = new AutoDriveToCenterLift();
-			} else {
-				autonomousCommand = null;
-			}
-		
+		if (autoGearRedLiftSelect.get() == false){ // case RED
+			autonomousCommand = new AutoDriveToBoilerLiftRed();
+		} else if (autoGearBlueLiftSelect.get() == false){ // case BLUE
+			autonomousCommand = new AutoDriveToBoilerLiftBlue();
+		} else if (autoGearCenterLiftSelect.get() == false){ // case CENTER
+			autonomousCommand = new AutoDriveToCenterLift();
+		} else { // case jumper elsewhere
+			autonomousCommand = null;
+		}
 
-		// schedule the autonomous command (example)
+		// schedule the autonomous command
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -143,7 +123,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		
+
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		/**
@@ -158,7 +138,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
+
 		/**
 		 * These are the methods to put information on the SmartDashboard
 		 * It works based on key-value pairs
@@ -166,8 +146,8 @@ public class Robot extends IterativeRobot {
 		 */
 		SmartDashboard.putBoolean("  ", oi.deadOrAlive());
 		SmartDashboard.putNumber("Yaw", driveTrain.getCurrentAngle());
-		SmartDashboard.putNumber(" ", getRobotTemperature());	
-	} 
+		SmartDashboard.putNumber(" ", getRobotTemperature());
+	}
 
 	/**
 	 * This function is called periodically during test mode
@@ -176,7 +156,7 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
-	
+
 	/**
 	 * Gets the temperature of the Robot to ensure that we are not overheating our electrical system and ruining valuable equipment
 	 * @return Average temperature of devices wired with temperature monitoring

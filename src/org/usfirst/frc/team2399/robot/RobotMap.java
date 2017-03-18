@@ -178,7 +178,7 @@ public class RobotMap {
 	 */
 	public static final double DEADBAND = 0.05;
 	
-	public static final int AUTO_GEAR_LEFT_LIFT_SELECT_PORT = 0;
+	public static final int AUTO_GEAR_RED_LIFT_SELECT_PORT = 0;
 	public static final int AUTO_GEAR_CENTER_LIFT_SELECT_PORT = 1;
-	public static final int AUTO_GEAR_RIGHT_LIFT_SELECT_PORT = 2;
+	public static final int AUTO_GEAR_BLUE_LIFT_SELECT_PORT = 2;
 }

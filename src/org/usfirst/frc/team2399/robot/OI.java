@@ -4,7 +4,7 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.commands.AdjustDistanceF;
 import org.usfirst.frc.team2399.robot.commands.AdjustDriveDistanceP;
 import org.usfirst.frc.team2399.robot.commands.AngleErrorPAdjust;
-import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftBlue;
 import org.usfirst.frc.team2399.robot.commands.DriveDistanceHoldAngle;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
