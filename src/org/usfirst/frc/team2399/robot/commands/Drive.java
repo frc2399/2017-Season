@@ -31,7 +31,7 @@ public class Drive extends Command {
 	 */
 	protected void execute() {
 		driveTrain.driveLeftPercent(OI.modifyJoyOutputWithDeadband(OI.getRightY()));
-		driveTrain.driveRightPercent(OI.modifyJoyOutputWithDeadband(OI.getLeftY()));
+		driveTrain.driveRightPercent(OI.modifyJoyOutputWithDeadband(OI.getLeftY()));	
 	}
 
 	/**
