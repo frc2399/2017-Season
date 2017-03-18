@@ -181,4 +181,6 @@ public class RobotMap {
 	public static final int AUTO_GEAR_RED_LIFT_SELECT_PORT = 0;
 	public static final int AUTO_GEAR_CENTER_LIFT_SELECT_PORT = 1;
 	public static final int AUTO_GEAR_BLUE_LIFT_SELECT_PORT = 2;
+	public static final int AUTO_DRIVE_NEUTRAL_FEEDER_BLUE_PORT = 8;
+	public static final int AUTO_DRIVE_NEUTRAL_FEEDER_RED_PORT = 9;
 }
