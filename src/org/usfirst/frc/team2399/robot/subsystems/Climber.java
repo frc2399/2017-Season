@@ -14,6 +14,7 @@ public class Climber extends Subsystem {
 	public Climber()
 	{
 		climbTalon = new CANTalon(RobotMap.CLIMBER_TALON_ADDRESS);
+		climbTalon.enableBrakeMode(true);
 	}
 	
 	/**
