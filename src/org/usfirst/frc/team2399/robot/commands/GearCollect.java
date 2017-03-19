@@ -12,16 +12,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class GearCollect extends Command {
 	
 	private GearCollector gearCollector = Robot.gearCollector;
-	private boolean gearIn;
-	private boolean gearOut;
+	private boolean open;
 
 	/**
-	 * @param gearIn: Should be set to either the RobotMap value (on) or !RobotMap value (off)
-	 * @param gearOut: Should be set to either the RobotMap value (on) or !RobotMap value (off)
+	 * @param open if true, gear collector will open, if false, gear collector will close
 	 */
-    public GearCollect(boolean gearIn,boolean gearOut) {
-    	this.gearIn = gearIn;
-    	this.gearOut = gearOut;
+    public GearCollect(boolean open) {
+    	this.open = open;
     	requires(gearCollector);
     	setInterruptible(true);
     }
@@ -39,8 +36,8 @@ public class GearCollect extends Command {
      * Solenoids set to values passed to the constructor
      */
     protected void execute() {
-    	gearCollector.setGearInSolenoid(gearIn);
-    	gearCollector.setGearOutSolenoid(gearOut);
+    	gearCollector.setGearInSolenoid(!open);
+    	gearCollector.setGearOutSolenoid(open);
     }
 
     /**

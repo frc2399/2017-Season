@@ -76,8 +76,8 @@ public class OI {
 	
 	private static Climb climbUpSpeed = new Climb(RobotMap.CLIMBER_FORWARD);
 	
-	private static GearCollect moveGearOut = new GearCollect(!RobotMap.GEAR_SOLENOID_IN, RobotMap.GEAR_SOLENOID_OUT);
-	private static GearCollect moveGearIn = new GearCollect(RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT);
+	private static GearCollect moveGearOut = new GearCollect(true);
+	private static GearCollect moveGearIn = new GearCollect(false);
 	
 	private static Shoot shooterOn = new Shoot(RobotMap.SHOOTER_SPEED_MIN, RobotMap.SHOOTER_SPEED_MAX);
 		

@@ -46,7 +46,7 @@ public class GearCollector extends Subsystem {
 	 * Default state of the gear collecting mechanism is neither in nor out
 	 */
     public void initDefaultCommand() {
-    	setDefaultCommand(new GearCollect(!RobotMap.GEAR_SOLENOID_IN,!RobotMap.GEAR_SOLENOID_OUT));
+    	setDefaultCommand(new GearCollect(false));
     }
 }
 
