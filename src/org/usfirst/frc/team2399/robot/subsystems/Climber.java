@@ -2,6 +2,7 @@ package org.usfirst.frc.team2399.robot.subsystems;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.commands.Climb;
+import org.usfirst.frc.team2399.robot.commands.GearCollecterHoldPosition;
 import org.usfirst.frc.team2399.robot.commands.JoyClimb;
 
 import com.ctre.CANTalon;
@@ -42,6 +43,6 @@ public class Climber extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new Climb(RobotMap.CLIMBER_STOP));
-		setDefaultCommand(new JoyClimb());
+		setDefaultCommand(new GearCollecterHoldPosition());
 	}
 }
