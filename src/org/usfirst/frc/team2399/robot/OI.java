@@ -63,6 +63,11 @@ public class OI {
 	
 	private static Button resetDriveGyroButt = new JoystickButton(rightJoy, 11);
 	
+	private static Button turnRightButt = new JoystickButton(rightJoy, 9);
+	private static Button turnLeftButt = new JoystickButton(rightJoy, 8);
+	private static Button driveForwardsButt = new JoystickButton(rightJoy, 7);
+	private static Button driveBackwardsButt = new JoystickButton(rightJoy, 6);
+	
 		
 	/**
 	 * COMMAND INSTANCES
@@ -83,6 +88,11 @@ public class OI {
 		
 	private static DriveEncoderReset driveEncoderReset = new DriveEncoderReset();
 	private static DriveTrainGyroReset driveGyroReset = new DriveTrainGyroReset();
+	
+	private static DriveAngle turnRight = new DriveAngle(5, 3);
+	private static DriveAngle turnLeft = new DriveAngle(-5, 3);
+	private static DriveDistanceHoldAngle driveForwards = new DriveDistanceHoldAngle(6, 12, 3);
+	private static DriveDistanceHoldAngle driveBackwards = new DriveDistanceHoldAngle(-6, 12, 3);
 
 	/**
 	 * OI CONSTRUCTOR
@@ -110,6 +120,11 @@ public class OI {
 	//	shootButt.whileHeld(shooterOn);
 		resetDriveEncodersButt.whenPressed(driveEncoderReset);
 		resetDriveGyroButt.whenPressed(driveGyroReset);
+		
+		turnRightButt.whenPressed(turnRight);
+		turnLeftButt.whenPressed(turnLeft);
+		driveForwardsButt.whenPressed(driveForwards);
+		driveBackwardsButt.whenPressed(driveBackwards);
 		}
 
 	/**
