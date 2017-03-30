@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutoDriveToCenterLift extends CommandGroup {
 	
     public AutoDriveToCenterLift() {
-    	addSequential(new DriveDistanceHoldAngle(69, 40, 3));
+    	addSequential(new DriveDistanceHoldAngle(77, 40, 3));
+    	addSequential(new GearCollect(true));
     }
 }

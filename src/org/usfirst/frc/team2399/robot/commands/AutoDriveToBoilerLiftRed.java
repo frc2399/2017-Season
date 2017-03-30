@@ -19,7 +19,7 @@ public class AutoDriveToBoilerLiftRed extends CommandGroup {
        addSequential(new DriveDistanceHoldAngle(16, 40, 2)); //distance, velocity, timeout
        addSequential(new DriveAngle(angleAdjustment*35, 3)); //setpoint, timeout
        addSequential(new DriveDistanceHoldAngle(89.25, 40, 4));
-       addSequential(new DriveAngle(angleAdjustment* -90, 4));
-       addSequential(new DriveDistanceHoldAngle(38, 40, 2));
+       addSequential(new DriveAngle(angleAdjustment* -115, 4));
+     //  addSequential(new DriveDistanceHoldAngle(38, 40, 2));
     }
 }

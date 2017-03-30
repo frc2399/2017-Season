@@ -34,7 +34,7 @@ public class DriveTrain extends PIDSubsystem {
 	private static double anglePConstant = RobotMap.DRIVE_ANGLE_P;
 	private static double angleIConstant = RobotMap.DRIVE_ANGLE_I;
 	private static double angleDConstant = RobotMap.DRIVE_ANGLE_D;
-	public static double angleErrorPConstant = 0.02;
+	public static double angleErrorPConstant = 0.064; //originally 0.02
 	public static double incrementConstant = 0.005;
 	
 	private static double rightDistancePConstant = RobotMap.RIGHT_DISTANCE_P;

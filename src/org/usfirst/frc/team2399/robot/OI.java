@@ -63,10 +63,10 @@ public class OI {
 	
 	private static Button resetDriveGyroButt = new JoystickButton(rightJoy, 11);
 	
-	private static Button turnRightButt = new JoystickButton(rightJoy, 9);
-	private static Button turnLeftButt = new JoystickButton(rightJoy, 8);
-	private static Button driveForwardsButt = new JoystickButton(rightJoy, 7);
-	private static Button driveBackwardsButt = new JoystickButton(rightJoy, 6);
+	private static Button turnRightButt = new JoystickButton(rightJoy, 4);
+	private static Button turnLeftButt = new JoystickButton(rightJoy, 5);
+	private static Button driveForwardsButt = new JoystickButton(rightJoy, 2);
+	private static Button driveBackwardsButt = new JoystickButton(rightJoy, 3);
 	
 		
 	/**
@@ -92,7 +92,7 @@ public class OI {
 	private static DriveAngle turnRight = new DriveAngle(5, 3);
 	private static DriveAngle turnLeft = new DriveAngle(-5, 3);
 	private static DriveDistanceHoldAngle driveForwards = new DriveDistanceHoldAngle(6, 12, 3);
-	private static DriveDistanceHoldAngle driveBackwards = new DriveDistanceHoldAngle(-6, 12, 3);
+	private static DriveDistanceHoldAngle driveBackwards = new DriveDistanceHoldAngle(-5, 12, 3);
 
 	/**
 	 * OI CONSTRUCTOR
