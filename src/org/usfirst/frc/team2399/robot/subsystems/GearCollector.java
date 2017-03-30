@@ -2,6 +2,8 @@ package org.usfirst.frc.team2399.robot.subsystems;
 
 import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
+import org.usfirst.frc.team2399.robot.commands.GearCollecterHoldPosition;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -46,7 +48,7 @@ public class GearCollector extends Subsystem {
 	 * Default state of the gear collecting mechanism is neither in nor out
 	 */
     public void initDefaultCommand() {
-    	setDefaultCommand(new GearCollect(false));
+    	setDefaultCommand(new GearCollecterHoldPosition());
     }
 }
 

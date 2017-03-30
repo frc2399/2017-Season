@@ -42,7 +42,7 @@ public class Climber extends Subsystem {
 	 */
 	@Override
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new Climb(RobotMap.CLIMBER_STOP));
-		setDefaultCommand(new GearCollecterHoldPosition());
+		setDefaultCommand(new JoyClimb());
+		//setDefaultCommand(new GearCollecterHoldPosition());
 	}
 }

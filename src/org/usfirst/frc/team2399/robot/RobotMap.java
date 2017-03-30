@@ -121,7 +121,7 @@ public class RobotMap {
 	public static final double DISTANCE_P_INCREMENT = 0.005;
 	public static final double DISTANCE_F_DECREMENT = 0.005;
 	public static final double DISTANCE_F_INCREMENT = 0.005;
-	public static final double ANGLE_P = 0;
+	public static final double ANGLE_P = 0;        
 	
 	public static final double RIGHT_DISTANCE_P = 0.5;
 	public static final double LEFT_DISTANCE_P = 0.5;
