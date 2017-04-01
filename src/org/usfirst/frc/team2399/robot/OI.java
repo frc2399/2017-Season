@@ -13,6 +13,7 @@ import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.commands.DriveAngle;
 import org.usfirst.frc.team2399.robot.commands.DriveEncoderReset;
 import org.usfirst.frc.team2399.robot.commands.DriveTrainGyroReset;
+import org.usfirst.frc.team2399.robot.commands.DriveTrainHoldPosition;
 import org.usfirst.frc.team2399.robot.commands.Climb;
 import org.usfirst.frc.team2399.robot.commands.Shift;
 import org.usfirst.frc.team2399.robot.commands.GearCollect;
@@ -65,8 +66,9 @@ public class OI {
 	
 	private static Button turnRightButt = new JoystickButton(rightJoy, 4);
 	private static Button turnLeftButt = new JoystickButton(rightJoy, 5);
-	private static Button driveForwardsButt = new JoystickButton(rightJoy, 2);
+	private static Button driveForwardsButt = new JoystickButton(rightJoy, 1);
 	private static Button driveBackwardsButt = new JoystickButton(rightJoy, 3);
+	private static Button holdPositionButt = new JoystickButton(rightJoy, 2);
 	
 		
 	/**
@@ -92,7 +94,8 @@ public class OI {
 	private static DriveAngle turnRight = new DriveAngle(5, 3);
 	private static DriveAngle turnLeft = new DriveAngle(-5, 3);
 	private static DriveDistanceHoldAngle driveForwards = new DriveDistanceHoldAngle(6, 12, 3);
-	private static DriveDistanceHoldAngle driveBackwards = new DriveDistanceHoldAngle(-5, 12, 3);
+	private static DriveDistanceHoldAngle driveBackwards = new DriveDistanceHoldAngle(-5, 40, 3);
+	private static DriveTrainHoldPosition holdPosition = new DriveTrainHoldPosition();
 
 	/**
 	 * OI CONSTRUCTOR
@@ -121,10 +124,11 @@ public class OI {
 		resetDriveEncodersButt.whenPressed(driveEncoderReset);
 		resetDriveGyroButt.whenPressed(driveGyroReset);
 		
-		turnRightButt.whenPressed(turnRight);
-		turnLeftButt.whenPressed(turnLeft);
-		driveForwardsButt.whenPressed(driveForwards);
+	//	turnRightButt.whenPressed(turnRight);
+	//	turnLeftButt.whenPressed(turnLeft);
+	//	driveForwardsButt.whenPressed(driveForwards);
 		driveBackwardsButt.whenPressed(driveBackwards);
+		holdPositionButt.whileHeld(holdPosition);
 		}
 
 	/**

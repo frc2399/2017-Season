@@ -3,6 +3,8 @@ package org.usfirst.frc.team2399.robot;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftBlue;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToFeederLiftBlue;
+import org.usfirst.frc.team2399.robot.commands.AutoDriveToFeederLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoNeutralZoneFeederBlue;
 import org.usfirst.frc.team2399.robot.commands.AutoNeutralZoneFeederRed;
 import org.usfirst.frc.team2399.robot.subsystems.Agitator;
@@ -37,11 +39,13 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Agitator agitator;
 	public static Shooter shooter;
-	DigitalInput autoGearRedLiftSelect;
+	DigitalInput autoGearRedBoilerLiftSelect;
 	DigitalInput autoGearCenterLiftSelect;
-	DigitalInput autoGearBlueLiftSelect;
+	DigitalInput autoGearBlueBoilerLiftSelect;
 	DigitalInput autoNeutralZoneFeederBlueSelect;
 	DigitalInput autoNeutralZoneFeederRedSelect;
+	DigitalInput autoGearRedFeederLiftSelect;
+	DigitalInput autoGearBlueFeederLiftSelect;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -65,11 +69,13 @@ public class Robot extends IterativeRobot {
 		//  SmartDashboard.putBoolean("Red", false);
 		  oi = new OI();
 
-		  autoGearRedLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_RED_LIFT_SELECT_PORT);
-		  autoGearBlueLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_BLUE_LIFT_SELECT_PORT);
+		  autoGearRedBoilerLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_RED_BOILER_LIFT_SELECT_PORT);
+		  autoGearBlueBoilerLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_BLUE_BOILER_LIFT_SELECT_PORT);
 		  autoGearCenterLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_CENTER_LIFT_SELECT_PORT);
 		  autoNeutralZoneFeederBlueSelect = new DigitalInput(RobotMap.AUTO_DRIVE_NEUTRAL_FEEDER_BLUE_PORT);
 		  autoNeutralZoneFeederRedSelect = new DigitalInput(RobotMap.AUTO_DRIVE_NEUTRAL_FEEDER_RED_PORT);
+		  autoGearRedFeederLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_RED_FEEDER_LIFT_SELECT_PORT);
+		  autoGearBlueFeederLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_BLUE_FEEDER_LIFT_SELECT_PORT);
 
 		  driveTrain.resetDriveTrainGyro();
 	}
@@ -104,9 +110,9 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		driveTrain.resetDriveTrainGyro();
 
-		if (autoGearRedLiftSelect.get() == false){ // case RED BOILER SIDE LIFT
+		if (autoGearRedBoilerLiftSelect.get() == false){ // case RED BOILER SIDE LIFT
 			autonomousCommand = new AutoDriveToBoilerLiftRed();
-		} else if (autoGearBlueLiftSelect.get() == false){ // case BLUE BOILER SIDE LIFT
+		} else if (autoGearBlueBoilerLiftSelect.get() == false){ // case BLUE BOILER SIDE LIFT
 			autonomousCommand = new AutoDriveToBoilerLiftBlue();
 		} else if (autoGearCenterLiftSelect.get() == false){ // case CENTER LIFT
 			autonomousCommand = new AutoDriveToCenterLift();
@@ -114,6 +120,10 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutoNeutralZoneFeederBlue();
 		} else if (autoNeutralZoneFeederRedSelect.get() == false){ //case RED NEUTRAL ZONE
 			autonomousCommand = new AutoNeutralZoneFeederRed();
+		} else if (autoGearBlueFeederLiftSelect.get() == false){ //case BLUE HOPPER SIDE LIFT
+			autonomousCommand = new AutoDriveToFeederLiftBlue();
+		} else if (autoGearRedFeederLiftSelect.get() == false){ //case RED HOPPER SIDE LIFT
+			autonomousCommand = new AutoDriveToFeederLiftRed();
 		}
 		else { // case jumper elsewhere
 			autonomousCommand = null;
