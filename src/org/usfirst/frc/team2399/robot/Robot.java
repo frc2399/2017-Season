@@ -5,6 +5,8 @@ import org.usfirst.frc.team2399.robot.commands.AutoDriveToBoilerLiftRed;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToCenterLift;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToFeederLiftBlue;
 import org.usfirst.frc.team2399.robot.commands.AutoDriveToFeederLiftRed;
+import org.usfirst.frc.team2399.robot.commands.AutoCrossBaseLineAndReverseBlue;
+import org.usfirst.frc.team2399.robot.commands.AutoCrossBaseLineAndReverseRed;
 import org.usfirst.frc.team2399.robot.commands.AutoNeutralZoneFeederBlue;
 import org.usfirst.frc.team2399.robot.commands.AutoNeutralZoneFeederRed;
 import org.usfirst.frc.team2399.robot.subsystems.Agitator;
@@ -46,6 +48,8 @@ public class Robot extends IterativeRobot {
 	DigitalInput autoNeutralZoneFeederRedSelect;
 	DigitalInput autoGearRedFeederLiftSelect;
 	DigitalInput autoGearBlueFeederLiftSelect;
+	DigitalInput autoDriveToBaseLineAndReverseRed;
+	DigitalInput autoDriveToBaseLineAndReverseBlue;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -76,6 +80,8 @@ public class Robot extends IterativeRobot {
 		  autoNeutralZoneFeederRedSelect = new DigitalInput(RobotMap.AUTO_DRIVE_NEUTRAL_FEEDER_RED_PORT);
 		  autoGearRedFeederLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_RED_FEEDER_LIFT_SELECT_PORT);
 		  autoGearBlueFeederLiftSelect = new DigitalInput(RobotMap.AUTO_GEAR_BLUE_FEEDER_LIFT_SELECT_PORT);
+		  autoDriveToBaseLineAndReverseRed = new DigitalInput(RobotMap.AUTO_DRIVE_BASE_LINE_AND_REVERSE_RED);
+		  autoDriveToBaseLineAndReverseBlue = new DigitalInput(RobotMap.AUTO_DRIVE_BASE_LINE_AND_REVERSE_BLUE);
 
 		  driveTrain.resetDriveTrainGyro();
 	}
@@ -124,6 +130,10 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutoDriveToFeederLiftBlue();
 		} else if (autoGearRedFeederLiftSelect.get() == false){ //case RED HOPPER SIDE LIFT
 			autonomousCommand = new AutoDriveToFeederLiftRed();
+		} else if (autoDriveToBaseLineAndReverseRed.get() == false){ //case RED CROSS BASELINE AND REVERSE
+			autonomousCommand = new AutoCrossBaseLineAndReverseRed();
+		} else if (autoDriveToBaseLineAndReverseBlue.get() == false){
+			autonomousCommand = new AutoCrossBaseLineAndReverseBlue();
 		}
 		else { // case jumper elsewhere
 			autonomousCommand = null;
