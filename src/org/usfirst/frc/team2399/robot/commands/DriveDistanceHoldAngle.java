@@ -44,9 +44,9 @@ public class DriveDistanceHoldAngle extends Command {
     protected void initialize() {
     	driveTrain.resetLeftPosition();
     	driveTrain.resetRightPosition();
+    	driveTrain.setSpeedControlMode();
     	driveTrain.resetDriveTrainGyro();
     	timer.start();
-    	driveTrain.setSpeedControlMode();
     	
     }
 
@@ -73,6 +73,8 @@ public class DriveDistanceHoldAngle extends Command {
     	//MAKE THIS IN CORRECT UNITS
     	driveTrain.setLeftSpeedWithAngle(Utility.inchesPerSecondToGearboxRPM(currentVelocity));
     	driveTrain.setRightSpeedWithAngle(Utility.inchesPerSecondToGearboxRPM(currentVelocity));
+    	
+    	driveTrain.putAngleOnSmartDashboard();
     	}
 
     // Make this return true when this Command no longer needs to run execute()
