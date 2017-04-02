@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends PIDSubsystem {
 	
@@ -34,7 +35,8 @@ public class DriveTrain extends PIDSubsystem {
 	private static double anglePConstant = RobotMap.DRIVE_ANGLE_P;
 	private static double angleIConstant = RobotMap.DRIVE_ANGLE_I;
 	private static double angleDConstant = RobotMap.DRIVE_ANGLE_D;
-	public static double angleErrorPConstant = 0.512; //originally 0.02
+	public static double angleErrorPConstant = 15; //with offset, 15.  with weight same
+	public static double angleErrorDConstant = 0.001; //with offset, 0.001.  with weight same
 	public static double incrementConstant = 0.005;
 	
 	private static double rightDistancePConstant = RobotMap.RIGHT_DISTANCE_P;
@@ -351,12 +353,12 @@ public class DriveTrain extends PIDSubsystem {
 	
 	public void setRightSpeedWithAngle(double speed)
 	{
-		driveRightVelocity(speed + (getCurrentYaw() * angleErrorPConstant));
+		driveRightVelocity(speed - (getCurrentYaw() * angleErrorPConstant) + angleErrorDConstant * Navx.getRate());
 	}
 	
 	public void setLeftSpeedWithAngle(double speed)
 	{
-		driveLeftVelocity(speed - (getCurrentYaw() * angleErrorPConstant));
+		driveLeftVelocity(speed + (getCurrentYaw() * angleErrorPConstant) - angleErrorDConstant * Navx.getRate());
 	}
 	/**
 	 * Sets 0 degrees to be where the robot is facing
@@ -430,6 +432,10 @@ public class DriveTrain extends PIDSubsystem {
 	protected double returnPIDInput()
 	{
 		return Navx.getYaw();
+	}
+	
+	public void putAngleOnSmartDashboard() {
+		SmartDashboard.putDouble("angle", Navx.getAngle());
 	}
 	
 	/**
