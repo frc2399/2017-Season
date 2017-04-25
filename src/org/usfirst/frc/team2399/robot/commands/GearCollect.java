@@ -5,6 +5,7 @@ import org.usfirst.frc.team2399.robot.RobotMap;
 import org.usfirst.frc.team2399.robot.subsystems.GearCollector;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Operates gear pneums
@@ -29,6 +30,9 @@ public class GearCollect extends Command {
      */
     protected void initialize() {
     	setTimeout(RobotMap.GEAR_TIMER);
+    	SmartDashboard.putBoolean("In", !open);
+		SmartDashboard.putBoolean("Out", open);
+	
     }
 
     /**
