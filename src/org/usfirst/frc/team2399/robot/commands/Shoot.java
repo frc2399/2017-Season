@@ -32,7 +32,7 @@ public class Shoot extends Command {
      * When the command is run, the shooter is set to this speed
      */
     protected void execute() {
-    	shooter.setShooterSpeed((minSpeed + (maxSpeed - minSpeed) * OI.getShooterThrottle()));
+    	//shooter.setShooterSpeed((minSpeed + (maxSpeed - minSpeed) * OI.getShooterThrottle()));
     }
 
     /**

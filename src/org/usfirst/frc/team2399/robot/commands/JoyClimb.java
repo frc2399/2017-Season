@@ -35,7 +35,7 @@ public class JoyClimb extends Command {
     protected void execute() {
     //	System.out.println("operator joystick y value: " + OI.getShooterY());
     	//System.out.println("abs of operator joystick y" +  Math.abs(OI.modifyJoyOutputWithDeadband(OI.getShooterY())));
-    	climber.setClimberSpeed(Math.abs(OI.modifyJoyOutputWithDeadband(OI.getShooterY())));
+    //	climber.setClimberSpeed(Math.abs(OI.modifyJoyOutputWithDeadband(OI.getClimbY())));
     	
     }
 
