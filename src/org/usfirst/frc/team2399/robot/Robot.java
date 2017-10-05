@@ -176,7 +176,7 @@ public class Robot extends IterativeRobot {
 		 * The key is the String and the value is the information you want to put on the Dashboard
 		 */
 		SmartDashboard.putBoolean("  ", oi.deadOrAlive());
-		SmartDashboard.putNumber("Joy Climb", Math.abs(OI.modifyJoyOutputWithDeadband(OI.getShooterY())));
+//S		SmartDashboard.putNumber("Joy Climb", Math.abs(OI.modifyJoyOutputWithDeadband(OI.getShooterY())));
 		SmartDashboard.putNumber(" ", getRobotTemperature());
 	}
 
